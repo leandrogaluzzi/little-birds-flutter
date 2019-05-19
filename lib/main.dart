@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/widgets/tab_bar_widget.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(LittleBirdsApp());
 
-class MyApp extends StatelessWidget {
+class LittleBirdsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Little Birds'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: TabBarWidget(),
     );
   }
 }
