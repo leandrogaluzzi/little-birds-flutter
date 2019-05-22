@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class NetworkException extends Exception {
   factory NetworkException([var message]) => NetworkException(message);
@@ -23,22 +22,16 @@ class NetworkProvider {
       if (response == null || response.body == null) {
         throw NetworkException('Bad Response');
       }
-
+      
       int statusCode = response.statusCode;
       if (statusCode < 200 || statusCode >= 300) {
         throw NetworkException('Request error: $statusCode');
       }
 
-      dynamic jsonResponse = json.decode(response.body);
-
-      if (jsonResponse == null) {
-        throw NetworkException('Error Decoding');
-      }
-
-      return jsonResponse;
+      return response.body;
     } catch (e) {
-      print(e.toString());
-      return null;
+      print('Exception Network Provider:/n${e.toString()}');
+      throw NetworkException(e.toString());
     }
   }
 }
