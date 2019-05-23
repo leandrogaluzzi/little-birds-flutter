@@ -13,22 +13,19 @@ class ThronesException extends Exception {
 class ThronesAPI {
   ThronesAPI({
     @required this.network,
-  });
+  }) : assert(network != null);
 
   final NetworkProvider network;
 
   Future<List<CardItem>> getAllCards() async {
-    final url = allCardsURL;
-
     try {
-      String response = await network.get(url);
-      List<dynamic> list = json.decode(response);
+      String response = await network.get(allCardsURL);
+      List<dynamic> list = await json.decode(response);
       List<CardItem> cards =
           list.map((item) => CardItem.fromJson(item)).toList();
       return cards;
-    } on Exception catch (e) {
-      print('Exception Thrones API:/n${e.toString()}');
-      throw ThronesException(e.toString());
+    } catch (e) {
+      throw ThronesException(e);
     }
   }
 }
