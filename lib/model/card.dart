@@ -60,31 +60,11 @@ class CardItem {
         imageUrl = json['image_url'];
 
     CardType cardType() {
-      switch (typeCode) {
-        case 'agenda': return CardType.agenda;
-        case 'attachment': return CardType.attachment;
-        case 'character': return CardType.character;
-        case 'event': return CardType.event;
-        case 'location': return CardType.location;
-        case 'plot': return CardType.plot;
-        case 'title': return CardType.title;
-        default: return CardType.unknown;
-      }
+      return getCardType(typeCode);
     }
 
     Faction faction() {
-      switch (typeCode) {
-        case 'baratheon': return Faction.baratheon;
-        case 'greyjoy': return Faction.greyjoy;
-        case 'lannister': return Faction.lannister;
-        case 'martell': return Faction.martell;
-        case 'neutral': return Faction.neutral;
-        case 'stark': return Faction.stark;
-        case 'targaryen': return Faction.targaryen;
-        case 'thenightswatch': return Faction.theNightsWatch;
-        case 'tyrell': return Faction.tyrell;
-        default: return Faction.neutral;
-      }
+      return getFaction(factionCode);
     }
 
 }
