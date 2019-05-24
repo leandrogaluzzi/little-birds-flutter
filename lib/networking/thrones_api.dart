@@ -49,7 +49,7 @@ Future<List<Deck>> getDecks(DateTime date) async {
 
     String year = date.year.toString();
     String month = date.month.toString().padLeft(2,'0');
-    String day = "20"; //date.day.toString();
+    String day = date.day.toString();
 
     String dateString = '$year-$month-$day';
 

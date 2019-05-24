@@ -10,7 +10,7 @@ enum Faction {
   tyrell
 }
 
-Faction faction(String string) {
+Faction getFaction(String string) {
       switch (string) {
         case 'baratheon': return Faction.baratheon;
         case 'greyjoy': return Faction.greyjoy;
