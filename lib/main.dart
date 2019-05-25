@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/widgets/tab_bar_widget.dart';
+import 'package:little_birds/screens/main_screen.dart';
 
 void main() => runApp(LittleBirdsApp());
 
@@ -8,7 +8,7 @@ class LittleBirdsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TabBarWidget(),
+      home: MainScreen(),
     );
   }
 }
