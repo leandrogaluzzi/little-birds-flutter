@@ -12,7 +12,8 @@ class NetworkProvider {
   final http.BaseClient client;
   final String baseUrl;
 
-  Future<String> get(String url, {Map<String, String> headers, Map<String, String> parameters}) async {
+  Future<String> get(String url,
+      {Map<String, String> headers, Map<String, String> parameters}) async {
     String fullUrl = baseUrl + url;
     http.Response response = await client.get(fullUrl, headers: headers);
     return response.body;
