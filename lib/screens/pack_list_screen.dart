@@ -40,6 +40,18 @@ class _PackListScreenState extends State<PackListScreen> {
     );
   }
 
+  List<Pack> _reorderPacks(List<Pack> packs) {
+    List<Pack> reorderedPacks = packs;
+    reorderedPacks.sort((a,b) {
+      if (a.cyclePosition != b.cyclePosition) {
+        return b.cyclePosition.compareTo(a.cyclePosition);
+      } else {
+        return b.position.compareTo(a.position);
+      }
+    });
+    return reorderedPacks;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +68,7 @@ class _PackListScreenState extends State<PackListScreen> {
               return _widgetLoading();
             case ConnectionState.done:
               if (snapshot.hasError) return _widgetError(error: snapshot.error);
-              return _widgetList(packs: snapshot.data);
+              return _widgetList(packs: _reorderPacks(snapshot.data));
           }
           return null;
         },
