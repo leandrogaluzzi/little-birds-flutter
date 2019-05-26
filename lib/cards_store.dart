@@ -12,6 +12,16 @@ class CardsStore extends InheritedWidget {
 
   final List<CardItem> cards;
 
+  static CardsStore of(BuildContext context) {
+    return context.inheritFromWidgetOfExactType(CardsStore) as CardsStore;
+  }
+
+  List<CardItem> getCardsAlphabetically() {
+    final sortedCarted = cards;
+    sortedCarted.sort((a, b) => a.name.compareTo(b.name));
+    return sortedCarted;
+  }
+
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return false;
