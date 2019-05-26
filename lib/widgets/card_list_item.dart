@@ -19,8 +19,7 @@ class CardListItem extends StatelessWidget {
   final CardListItemMode mode;
 
   final TextStyle _textStyleName = TextStyle(
-    fontSize: 16.0,
-    fontWeight: FontWeight.bold,
+    fontSize: 18.0,
     color: Colors.black,
   );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 
 class CardListScreen extends StatefulWidget {
@@ -15,15 +16,8 @@ class _CardListScreenState extends State<CardListScreen> {
       appBar: AppBar(
         title: Text('Cards'),
       ),
-      body: ListView.builder(
-        itemCount: cards.length,
-        itemExtent: 55.0,
-        itemBuilder: (BuildContext context, int index) {
-          return CardListItem(
-            card: cards[index],
-            mode: CardListItemMode.list,
-          );
-        },
+      body: CardList(
+        cards: cards,
       ),
     );
   }

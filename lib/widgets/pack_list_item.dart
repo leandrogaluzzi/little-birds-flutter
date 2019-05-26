@@ -11,12 +11,12 @@ class PackListItem extends StatelessWidget {
 
   final Pack pack;
 
-  TextStyle _textStyleName = TextStyle(
+  final TextStyle _textStyleName = TextStyle(
     fontSize: 20.0,
     color: Colors.black,
   );
 
-  TextStyle _textStyleText = TextStyle(
+  final TextStyle _textStyleText = TextStyle(
     fontSize: 14.0,
     color: kColorGrayText,
   );
