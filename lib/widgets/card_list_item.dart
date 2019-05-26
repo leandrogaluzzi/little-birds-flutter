@@ -33,15 +33,13 @@ class CardListItem extends StatelessWidget {
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
-  
+
   Widget _widgetLeft() {
     return Container(
       width: 55.0,
       child: Center(
-        child: Container(
-          height: 35.0,
-          width: 35.0,
-          color: Colors.black,
+        child: Image.asset(
+          card.cardIconName(),
         ),
       ),
     );
@@ -85,8 +83,7 @@ class CardListItem extends StatelessWidget {
       children: [
         _widgetLeft(),
         _widgetMiddle(),
-        if (mode == CardListItemMode.deck)
-          _widgetRight(),
+        if (mode == CardListItemMode.deck) _widgetRight(),
       ],
     );
   }

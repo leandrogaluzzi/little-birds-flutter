@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/screens/main_screen.dart';
 
+/*
+Reminders:
+
+- Firebase - Anaytics
+- Firebase - Ads
+- Local DB for cards
+*/
+
 void main() => runApp(LittleBirdsApp());
 
 class LittleBirdsApp extends StatelessWidget {

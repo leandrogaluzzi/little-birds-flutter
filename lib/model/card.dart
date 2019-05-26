@@ -1,9 +1,7 @@
-
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/faction.dart';
 
 class CardItem {
-  
   final String packCode;
   final String packName;
   final String typeCode;
@@ -12,7 +10,7 @@ class CardItem {
   final String factionName;
   final String code;
   final String name;
-  final int cost; 
+  final int cost;
   final String text;
   final int quantity;
   final int income;
@@ -59,12 +57,15 @@ class CardItem {
         isMultiple = json['is_multiple'],
         imageUrl = json['image_url'];
 
-    CardType cardType() {
-      return getCardType(typeCode);
-    }
+  CardType cardType() {
+    return getCardType(typeCode);
+  }
 
-    Faction faction() {
-      return getFaction(factionCode);
-    }
+  Faction faction() {
+    return getFaction(factionCode);
+  }
 
+  String cardIconName() {
+    return 'assets/icons/$factionCode.png';
+  }
 }
