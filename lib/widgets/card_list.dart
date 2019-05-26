@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
-import 'package:little_birds/model/card.dart';
 
 class CardList extends StatelessWidget {
   CardList({

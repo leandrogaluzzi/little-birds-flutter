@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/screens/pack_screen.dart';
+import 'package:little_birds/cards_store.dart';
 
 class PackListItem extends StatelessWidget {
   PackListItem({
@@ -52,23 +54,41 @@ class PackListItem extends StatelessWidget {
   }
 
   String _getStringNumber() {
-    return pack.known < pack.total ? '${pack.known}/${pack.total} cards' : '${pack.total} cards';
+    return pack.known < pack.total
+        ? '${pack.known}/${pack.total} cards'
+        : '${pack.total} cards';
+  }
+
+  void _onTap(BuildContext context) {
+    final cards = CardsStore.of(context).getCardsWithCode(pack.code);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return PackScreen(
+          title: pack.name,
+          cards: cards,
+        );
+      }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _widgetName(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _widgetText(_getStringCycle()),
-            _widgetText(_getStringNumber()),
-          ],
-        )
-      ],
+    return GestureDetector(
+      onTap: () => _onTap(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _widgetName(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _widgetText(_getStringCycle()),
+              _widgetText(_getStringNumber()),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

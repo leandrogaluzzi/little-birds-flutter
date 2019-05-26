@@ -17,9 +17,14 @@ class CardsStore extends InheritedWidget {
   }
 
   List<CardItem> getCardsAlphabetically() {
-    final sortedCarted = cards;
-    sortedCarted.sort((a, b) => a.name.compareTo(b.name));
-    return sortedCarted;
+    var sortedCards = cards;
+    sortedCards.sort((a, b) => a.name.compareTo(b.name));
+    return sortedCards;
+  }
+
+  List<CardItem> getCardsWithCode(String code) {
+    var filteredCards = cards.where((card) => card.packCode == code).toList();
+    return filteredCards;
   }
 
   @override
