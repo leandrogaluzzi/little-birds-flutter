@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
-import 'package:little_birds/widgets/pack_list_cell.dart';
+import 'package:little_birds/widgets/pack_list_item.dart';
 
 class PackListScreen extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _PackListScreenState extends State<PackListScreen> {
       itemCount: packs.length,
       itemExtent: 70.0,
       itemBuilder: (BuildContext context, int index) {
-        return PackListCell(
+        return PackListItem(
           pack: packs[index],
         );
       },

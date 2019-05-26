@@ -5,7 +5,7 @@ import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
 import 'package:little_birds/screens/card_list_screen.dart';
 
-class TabBarWidget extends StatelessWidget {
+class TabBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [
     TabBarItem.buildItem('Home', 'assets/icons/home.png'),
     TabBarItem.buildItem('Packs', 'assets/icons/packs.png'),

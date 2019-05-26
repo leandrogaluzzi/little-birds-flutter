@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/widgets/card_list_cell.dart';
+import 'package:little_birds/widgets/card_list_item.dart';
 
 class CardListScreen extends StatefulWidget {
   @override
@@ -19,9 +19,9 @@ class _CardListScreenState extends State<CardListScreen> {
         itemCount: cards.length,
         itemExtent: 55.0,
         itemBuilder: (BuildContext context, int index) {
-          return CardListCell(
+          return CardListItem(
             card: cards[index],
-            mode: CardListCellMode.list,
+            mode: CardListItemMode.list,
           );
         },
       ),

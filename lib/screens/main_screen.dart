@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/card.dart';
-import 'package:little_birds/widgets/tab_bar_widget.dart';
+import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _widgetTabs({ @required List<CardItem> cards}) {
     return CardsStore(
       cards: cards,
-      child: TabBarWidget(),
+      child: TabBarComponent(),
     );
   }
 

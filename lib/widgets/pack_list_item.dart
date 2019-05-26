@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/utils/constants.dart';
 
-class PackListCell extends StatelessWidget {
-  PackListCell({
+class PackListItem extends StatelessWidget {
+  PackListItem({
     Key key,
     @required this.pack,
   })  : assert(pack != null),

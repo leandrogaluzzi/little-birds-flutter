@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:little_birds/main.dart';
-import 'package:little_birds/widgets/tab_bar_widget.dart';
+import 'package:little_birds/widgets/tab_bar_component.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
 import 'package:little_birds/screens/card_list_screen.dart';
@@ -14,7 +14,7 @@ void main() {
   testWidgets('App should have a tab bar with 3 items',
       (WidgetTester tester) async {
     await tester.pumpWidget(LittleBirdsApp());
-    expect(find.byType(TabBarWidget), findsOneWidget);
+    expect(find.byType(TabBar), findsOneWidget);
     expect(find.byType(ImageIcon), findsNWidgets(3));
   });
 

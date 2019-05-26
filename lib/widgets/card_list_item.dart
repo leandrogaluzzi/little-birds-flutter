@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
 
-enum CardListCellMode {
+enum CardListItemMode {
   list,
   deck,
 }
 
-class CardListCell extends StatelessWidget {
-  CardListCell({
+class CardListItem extends StatelessWidget {
+  CardListItem({
     Key key,
     @required this.card,
     @required this.mode,
@@ -16,7 +16,7 @@ class CardListCell extends StatelessWidget {
         super(key: key);
 
   final CardItem card;
-  final CardListCellMode mode;
+  final CardListItemMode mode;
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 16.0,
@@ -86,7 +86,7 @@ class CardListCell extends StatelessWidget {
       children: [
         _widgetLeft(),
         _widgetMiddle(),
-        if (mode == CardListCellMode.deck)
+        if (mode == CardListItemMode.deck)
           _widgetRight(),
       ],
     );
