@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/screens/pack_screen.dart';
-import 'package:little_birds/cards_store.dart';
 
 class PackListItem extends StatelessWidget {
   PackListItem({
@@ -14,10 +12,6 @@ class PackListItem extends StatelessWidget {
 
   final Pack pack;
   final VoidCallback onTap;
-  /*final Function({
-    @required BuildContext context,
-    @required Pack pack,
-  }) onTap;*/
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 20.0,

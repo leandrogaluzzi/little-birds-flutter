@@ -11,12 +11,15 @@ class CardListItem extends StatelessWidget {
     Key key,
     @required this.card,
     @required this.mode,
+    @required this.onTap,
   })  : assert(card != null),
         assert(mode != null),
+        assert(onTap != null),
         super(key: key);
 
   final CardItem card;
   final CardListItemMode mode;
+  final VoidCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 18.0,
@@ -78,13 +81,16 @@ class CardListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _widgetLeft(),
-        _widgetMiddle(),
-        if (mode == CardListItemMode.deck) _widgetRight(),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _widgetLeft(),
+          _widgetMiddle(),
+          if (mode == CardListItemMode.deck) _widgetRight(),
+        ],
+      ),
     );
   }
 }
