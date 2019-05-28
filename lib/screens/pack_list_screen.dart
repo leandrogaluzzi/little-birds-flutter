@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
+import 'package:little_birds/screens/pack_screen.dart';
+import 'package:little_birds/cards_store.dart';
 
 class PackListScreen extends StatefulWidget {
   @override
@@ -16,6 +18,19 @@ class _PackListScreenState extends State<PackListScreen> {
     ThronesService thronesService = ThronesService();
     _packs = thronesService.getPacks();
     super.initState();
+  }
+
+  void _onPackSelected({BuildContext context, Pack pack}) {
+    final cards = CardsStore.of(context).getCardsWithCode(pack.code);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return PackScreen(
+          title: pack.name,
+          cards: cards,
+        );
+      }),
+    );
   }
 
   Widget _widgetLoading() {
@@ -33,8 +48,12 @@ class _PackListScreenState extends State<PackListScreen> {
       itemCount: packs.length,
       itemExtent: 70.0,
       itemBuilder: (BuildContext context, int index) {
+        final pack = packs[index];
         return PackListItem(
-          pack: packs[index],
+          pack: pack,
+          onTap: () {
+            _onPackSelected(context: context, pack: pack);
+          }
         );
       },
     );

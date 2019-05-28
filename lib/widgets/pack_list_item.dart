@@ -8,10 +8,16 @@ class PackListItem extends StatelessWidget {
   PackListItem({
     Key key,
     @required this.pack,
+    @required this.onTap,
   })  : assert(pack != null),
         super(key: key);
 
   final Pack pack;
+  final VoidCallback onTap;
+  /*final Function({
+    @required BuildContext context,
+    @required Pack pack,
+  }) onTap;*/
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 20.0,
@@ -59,23 +65,10 @@ class PackListItem extends StatelessWidget {
         : '${pack.total} cards';
   }
 
-  void _onTap(BuildContext context) {
-    final cards = CardsStore.of(context).getCardsWithCode(pack.code);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (BuildContext context) {
-        return PackScreen(
-          title: pack.name,
-          cards: cards,
-        );
-      }),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _onTap(context),
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
