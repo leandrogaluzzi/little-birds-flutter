@@ -47,16 +47,26 @@ class ThronesAPI {
   Future<List<Deck>> getDecks({DateTime date}) async {
     String year = date.year.toString();
     String month = date.month.toString().padLeft(2, '0');
-    String day = date.day.toString();
+    String day = date.day.toString().padLeft(2, '0');
 
     String dateString = '$year-$month-$day';
 
     String url = _decksURL + dateString;
+  
     try {
       String response = await network.get(url);
       List<dynamic> list = await json.decode(response);
       List<Deck> decks = list.map((item) => Deck.fromJson(item)).toList();
       return decks;
+    } on NetworkException catch (e) {
+      switch (e.code) {
+        case 500:
+          return [];
+          break;
+        default:
+          throw ThronesException(e);
+          break;
+      }
     } catch (e) {
       throw ThronesException(e);
     }

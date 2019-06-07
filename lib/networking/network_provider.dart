@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+class NetworkException extends Exception {
+  factory NetworkException({int code}) => NetworkException(code: code);
+  final int code;
+}
+
 class NetworkProvider {
   NetworkProvider({
     @required this.client,
@@ -16,6 +21,10 @@ class NetworkProvider {
       {Map<String, String> headers, Map<String, String> parameters}) async {
     String fullUrl = baseUrl + url;
     http.Response response = await client.get(fullUrl, headers: headers);
-    return response.body;
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw NetworkException(code: response.statusCode);
+    }
   }
 }
