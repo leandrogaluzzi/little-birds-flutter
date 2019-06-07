@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/widgets/home_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<List<Deck>> _buildDecks() async {
-    final decks = await _getDecks([], DateTime.now());
+    final decks = await _getDecks([], DateTime.now().add(Duration(days: -1)));
     return decks;
   }
 
@@ -32,6 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return _getDecks(decks, newDate);
   }
 
+  void _onDeckSelected({BuildContext context, Deck deck}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return DeckScreen(
+          deck: deck,
+        );
+      }),
+    );
+  }
+
   Widget _widgetLoading() {
     return Center(
       child: CircularProgressIndicator(),
@@ -40,6 +53,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _widgetError({Error error}) {
     return Container(color: Colors.red);
+  }
+
+  Widget _widgetList({@required List<Deck> decks}) {
+    return ListView.builder(
+      itemCount: decks.length,
+      itemExtent: 70.0,
+      itemBuilder: (BuildContext context, int index) {
+        final deck = decks[index];
+        return HomeListItem(
+          deck: deck,
+          onTap: () {
+            _onDeckSelected(deck: deck);
+          }
+        );
+      },
+    );
   }
 
   @override
@@ -58,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return _widgetLoading();
             case ConnectionState.done:
               if (snapshot.hasError) return _widgetError(error: snapshot.error);
-              return Container(color: Colors.red);
+              return _widgetList(decks: snapshot.data);
           }
           return null;
         },
