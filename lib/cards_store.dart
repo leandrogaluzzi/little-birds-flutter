@@ -16,19 +16,20 @@ class CardsStore extends InheritedWidget {
     return context.inheritFromWidgetOfExactType(CardsStore) as CardsStore;
   }
 
+  @override
+  bool updateShouldNotify(InheritedWidget oldWidget) {
+    return false;
+  }
+
   List<CardItem> getCardsAlphabetically() {
     var sortedCards = cards;
     sortedCards.sort((a, b) => a.name.compareTo(b.name));
     return sortedCards;
   }
 
-  List<CardItem> getCardsWithCode(String code) {
-    var filteredCards = cards.where((card) => card.packCode == code).toList();
+  List<CardItem> getCardsWithPackCode(String packCode) {
+    var filteredCards =
+        cards.where((card) => card.packCode == packCode).toList();
     return filteredCards;
-  }
-
-  @override
-  bool updateShouldNotify(InheritedWidget oldWidget) {
-    return false;
   }
 }

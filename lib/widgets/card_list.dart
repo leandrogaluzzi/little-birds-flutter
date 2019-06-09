@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
-import 'package:little_birds/screens/card_screen.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 
 class CardList extends StatelessWidget {
   CardList({
     Key key,
     @required this.cards,
+    @required this.onTap,
   })  : assert(cards != null),
         super(key: key);
 
   final List<CardItem> cards;
-
-  void _onCardSelected({BuildContext context, card: CardItem}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (BuildContext context) {
-        return CardScreen(
-          card: card,
-        );
-      }),
-    );
-  }
+  final CardCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +23,7 @@ class CardList extends StatelessWidget {
         return CardListItem(
           card: card,
           mode: CardListItemMode.list,
-          onTap: () {
-            _onCardSelected(context: context, card: card);
-          },
+          onTap: onTap,
         );
       },
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
@@ -21,15 +22,17 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   void _onPackSelected({BuildContext context, Pack pack}) {
-    final cards = CardsStore.of(context).getCardsWithCode(pack.code);
+    final cards = CardsStore.of(context).getCardsWithPackCode(pack.code);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (BuildContext context) {
-        return PackScreen(
-          title: pack.name,
-          cards: cards,
-        );
-      }),
+      CupertinoPageRoute(
+          fullscreenDialog: true,
+          builder: (BuildContext context) {
+            return PackScreen(
+              title: pack.name,
+              cards: cards,
+            );
+          }),
     );
   }
 
@@ -44,16 +47,23 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   Widget _widgetList({@required List<Pack> packs}) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: packs.length,
-      itemExtent: 70.0,
       itemBuilder: (BuildContext context, int index) {
         final pack = packs[index];
         return PackListItem(
-          pack: pack,
-          onTap: () {
-            _onPackSelected(context: context, pack: pack);
-          }
+            pack: pack,
+            onTap: () {
+              _onPackSelected(context: context, pack: pack);
+            });
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 12.0),
+          child: Container(
+            height: 1,
+            color: Colors.blueGrey[100],
+          ),
         );
       },
     );
@@ -61,7 +71,7 @@ class _PackListScreenState extends State<PackListScreen> {
 
   List<Pack> _reorderPacks(List<Pack> packs) {
     List<Pack> reorderedPacks = packs;
-    reorderedPacks.sort((a,b) {
+    reorderedPacks.sort((a, b) {
       if (a.cyclePosition != b.cyclePosition) {
         return b.cyclePosition.compareTo(a.cyclePosition);
       } else {

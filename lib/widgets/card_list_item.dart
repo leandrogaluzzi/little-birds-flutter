@@ -6,6 +6,8 @@ enum CardListItemMode {
   deck,
 }
 
+typedef CardCallback = void Function(CardItem card);
+
 class CardListItem extends StatelessWidget {
   CardListItem({
     Key key,
@@ -19,7 +21,7 @@ class CardListItem extends StatelessWidget {
 
   final CardItem card;
   final CardListItemMode mode;
-  final VoidCallback onTap;
+  final CardCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 18.0,
@@ -82,7 +84,9 @@ class CardListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        onTap(card);
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

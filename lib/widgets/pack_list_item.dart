@@ -14,12 +14,12 @@ class PackListItem extends StatelessWidget {
   final VoidCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
-    fontSize: 20.0,
+    fontSize: 22.0,
     color: Colors.black,
   );
 
   final TextStyle _textStyleText = TextStyle(
-    fontSize: 14.0,
+    fontSize: 16.0,
     color: kColorGrayText,
   );
 
@@ -61,20 +61,23 @@ class PackListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _widgetName(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              _widgetText(_getStringCycle()),
-              _widgetText(_getStringNumber()),
-            ],
-          )
-        ],
+    return Container(
+      height: 80.0,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _widgetName(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _widgetText(_getStringCycle()),
+                _widgetText(_getStringNumber()),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

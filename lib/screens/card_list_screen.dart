@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/model/card.dart';
 import 'package:little_birds/widgets/card_list.dart';
+
+import 'card_screen.dart';
 
 class CardListScreen extends StatefulWidget {
   @override
@@ -8,6 +11,18 @@ class CardListScreen extends StatefulWidget {
 }
 
 class _CardListScreenState extends State<CardListScreen> {
+
+void _onCardSelected({BuildContext context, card: CardItem}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return CardScreen(
+          card: card,
+        );
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cards = CardsStore.of(context).getCardsAlphabetically();
@@ -17,6 +32,9 @@ class _CardListScreenState extends State<CardListScreen> {
       ),
       body: CardList(
         cards: cards,
+        onTap: (CardItem card) {
+          _onCardSelected(context: context, card: card);
+        },
       ),
     );
   }
