@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
+
+import '../cards_store.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -52,17 +55,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetError({Error error}) {
+    print(error);
     return Container(color: Colors.red);
   }
 
   Widget _widgetList({@required List<Deck> decks}) {
     return ListView.builder(
       itemCount: decks.length,
-      itemExtent: 70.0,
       itemBuilder: (BuildContext context, int index) {
+        final cards = CardsStore.of(context).getCardsAlphabetically();
         final deck = decks[index];
+        final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
         return HomeListItem(
-          deck: deck,
+          viewModel: viewModel,
           onTap: () {
             _onDeckSelected(deck: deck);
           }
