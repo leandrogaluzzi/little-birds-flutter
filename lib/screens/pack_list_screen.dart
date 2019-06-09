@@ -48,24 +48,16 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   Widget _widgetList({@required List<Pack> packs}) {
-    return ListView.separated(
+    return ListView.builder(
       itemCount: packs.length,
       itemBuilder: (BuildContext context, int index) {
         final pack = packs[index];
         return PackListItem(
             pack: pack,
+            index: index,
             onTap: () {
               _onPackSelected(context: context, pack: pack);
             });
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 12.0),
-          child: Container(
-            height: 1,
-            color: Colors.blueGrey[100],
-          ),
-        );
       },
     );
   }

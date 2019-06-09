@@ -6,11 +6,14 @@ class PackListItem extends StatelessWidget {
   PackListItem({
     Key key,
     @required this.pack,
+    @required this.index,
     @required this.onTap,
   })  : assert(pack != null),
+        assert(index != null),
         super(key: key);
 
   final Pack pack;
+  final int index;
   final VoidCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
@@ -62,6 +65,7 @@ class PackListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
       height: 80.0,
       child: RawMaterialButton(
         onPressed: onTap,
