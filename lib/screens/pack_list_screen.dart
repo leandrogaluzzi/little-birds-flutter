@@ -26,13 +26,14 @@ class _PackListScreenState extends State<PackListScreen> {
     Navigator.push(
       context,
       CupertinoPageRoute(
-          fullscreenDialog: true,
-          builder: (BuildContext context) {
-            return PackScreen(
-              title: pack.name,
-              cards: cards,
-            );
-          }),
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          return PackScreen(
+            title: pack.name,
+            cards: cards,
+          );
+        },
+      ),
     );
   }
 

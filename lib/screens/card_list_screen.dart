@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/card.dart';
@@ -11,15 +12,17 @@ class CardListScreen extends StatefulWidget {
 }
 
 class _CardListScreenState extends State<CardListScreen> {
-
-void _onCardSelected({BuildContext context, card: CardItem}) {
+  void _onCardSelected({BuildContext context, card: CardItem}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (BuildContext context) {
-        return CardScreen(
-          card: card,
-        );
-      }),
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          return CardScreen(
+            card: card,
+          );
+        },
+      ),
     );
   }
 
