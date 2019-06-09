@@ -13,14 +13,17 @@ class CardListItem extends StatelessWidget {
     Key key,
     @required this.card,
     @required this.mode,
+    @required this.index,
     @required this.onTap,
   })  : assert(card != null),
         assert(mode != null),
+        assert(index != null),
         assert(onTap != null),
         super(key: key);
 
   final CardItem card;
   final CardListItemMode mode;
+  final int index;
   final CardCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
@@ -83,17 +86,20 @@ class CardListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onTap(card);
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _widgetLeft(),
-          _widgetMiddle(),
-          if (mode == CardListItemMode.deck) _widgetRight(),
-        ],
+    return Container(
+      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
+      child: RawMaterialButton(
+        onPressed: () {
+          onTap(card);
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _widgetLeft(),
+            _widgetMiddle(),
+            if (mode == CardListItemMode.deck) _widgetRight(),
+          ],
+        ),
       ),
     );
   }

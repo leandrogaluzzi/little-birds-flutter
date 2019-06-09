@@ -23,6 +23,7 @@ class CardList extends StatelessWidget {
         return CardListItem(
           card: card,
           mode: CardListItemMode.list,
+          index: index,
           onTap: onTap,
         );
       },

@@ -63,8 +63,8 @@ class PackListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80.0,
-      child: GestureDetector(
-        onTap: onTap,
+      child: RawMaterialButton(
+        onPressed: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
