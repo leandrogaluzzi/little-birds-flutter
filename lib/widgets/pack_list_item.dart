@@ -19,11 +19,7 @@ class PackListItem extends StatelessWidget {
   final TextStyle _textStyleName = TextStyle(
     fontSize: 22.0,
     color: Colors.black,
-  );
-
-  final TextStyle _textStyleText = TextStyle(
-    fontSize: 16.0,
-    color: kColorGrayText,
+    fontWeight: FontWeight.bold,
   );
 
   Widget _widgetName() {
@@ -46,7 +42,7 @@ class PackListItem extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: _textStyleText,
+          style: kTextStyleGreySmall,
         ),
       ),
     );

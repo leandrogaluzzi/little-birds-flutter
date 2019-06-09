@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
+import 'package:little_birds/utils/constants.dart';
 
 enum CardListItemMode {
   list,
@@ -29,11 +30,7 @@ class CardListItem extends StatelessWidget {
   final TextStyle _textStyleName = TextStyle(
     fontSize: 18.0,
     color: Colors.black,
-  );
-
-  final TextStyle _textStyleType = TextStyle(
-    fontSize: 15.0,
-    color: Color.fromRGBO(132, 132, 132, 1.0),
+    fontWeight: FontWeight.bold,
   );
 
   final TextStyle _textStyleQuantity = TextStyle(
@@ -65,7 +62,7 @@ class CardListItem extends StatelessWidget {
           ),
           Text(
             card.typeName,
-            style: _textStyleType,
+            style: kTextStyleGreySmall,
           ),
         ],
       ),

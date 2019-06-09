@@ -1,7 +1,8 @@
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/model/card_type.dart';
-
 import 'package:little_birds/model/deck.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:little_birds/utils/utils.dart';
 
 class HomeListItemViewModel {
   HomeListItemViewModel({
@@ -19,6 +20,16 @@ class HomeListItemViewModel {
 
   String getFactionName() {
     return deck.factionName;
+  }
+
+  String getIconName() {
+    return deck.cardIconName();
+  }
+
+  String getTime() {
+    final date = DateTime.parse(deck.dateCreation);
+    final string = timeago.format(date);
+    return capitalize(string);
   }
 
   String getAgendas() {
@@ -55,6 +66,6 @@ class HomeListItemViewModel {
       }
     });
 
-    return '$characters Characters - $locations Locations - $attachments Attachments - $events Events';
+    return '$characters Characters - $events Events\n$locations Locations - $attachments Attachments ';
   }
 }

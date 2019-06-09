@@ -54,4 +54,8 @@ class Deck {
     return getFaction(factionCode);
   }
 
+  String cardIconName() {
+    return 'assets/icons/$factionCode.png';
+  }
+
 }
