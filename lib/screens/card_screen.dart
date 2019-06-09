@@ -38,9 +38,12 @@ class CardScreen extends StatelessWidget {
 
   Widget _widgetImage() {
     return Container(
+      height: card.cardType() == CardType.plot ? null : 425.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Image.network(card.imageUrl),
+        child: Image.network(
+          card.imageUrl,
+        ),
       ),
     );
   }
@@ -178,7 +181,6 @@ class CardScreen extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               if (card.imageUrl != null) _widgetImage(),
               _widgetHouse(),
