@@ -32,11 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
       return decks;
     }
     List<Deck> newDecks = await _thronesService.getDecks(date);
-      decks.addAll(newDecks);
+    decks.addAll(newDecks);
     DateTime newDate = date.add(Duration(days: -1));
     return _getDecks(decks, newDate);
   }
-
+  
   void _onDeckSelected({BuildContext context, Deck deck}) {
     Navigator.push(
       context,
@@ -60,19 +60,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetList({@required List<Deck> decks}) {
-    return ListView.builder(
-      itemCount: decks.length,
-      itemBuilder: (BuildContext context, int index) {
-        final cards = CardsStore.of(context).getCardsAlphabetically();
-        final deck = decks[index];
-        final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
-        return HomeListItem(
-          viewModel: viewModel,
-          onTap: () {
-            _onDeckSelected(deck: deck);
-          }
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: () => _buildDecks(),
+      child: ListView.builder(
+        itemCount: decks.length,
+        itemBuilder: (BuildContext context, int index) {
+          final cards = CardsStore.of(context).getCardsAlphabetically();
+          final deck = decks[index];
+          final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
+          return HomeListItem(
+              viewModel: viewModel,
+              onTap: () {
+                _onDeckSelected(deck: deck);
+              });
+        },
+      ),
     );
   }
 
