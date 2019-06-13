@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/utils/style.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 
 const double kPadding = 7.0;
@@ -17,7 +17,7 @@ class HomeListItem extends StatelessWidget {
 
   Widget _getRowName() {
     return Container(
-      color: Colors.yellow,
+      color: viewModel.getFactionColor(),
       child: Row(
         children: <Widget>[
           Container(
@@ -40,6 +40,7 @@ class HomeListItem extends StatelessWidget {
                 maxLines: 3,
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: viewModel.getFactionTextColor(),
                 ),
               ),
             ),
@@ -97,12 +98,12 @@ class HomeListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
+    return RawMaterialButton(
+      onPressed: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 12.0,
-          vertical: 6.0,
+          horizontal: 16.0,
+          vertical: 8.0,
         ),
         child: Container(
           color: Colors.white,

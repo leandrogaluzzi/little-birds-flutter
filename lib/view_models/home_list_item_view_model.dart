@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
+import 'package:little_birds/model/faction.dart' as faction;
 
 class HomeListItemViewModel {
   HomeListItemViewModel({
@@ -20,6 +22,14 @@ class HomeListItemViewModel {
 
   String getFactionName() {
     return deck.factionName;
+  }
+
+  Color getFactionColor() {
+    return faction.getFactionColor(faction: deck.faction());
+  }
+
+  Color getFactionTextColor() {
+    return faction.getFactionTextColor(faction: deck.faction());
   }
 
   String getIconName() {

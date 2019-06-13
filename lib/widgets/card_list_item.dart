@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
-import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/utils/style.dart';
 
 enum CardListItemMode {
   list,
