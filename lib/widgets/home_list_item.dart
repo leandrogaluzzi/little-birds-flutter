@@ -32,8 +32,8 @@ class HomeListItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(
                 right: kPadding * 2,
-                top : kPadding * 3,
-                bottom: kPadding * 3,
+                top : kPadding * 2,
+                bottom: kPadding * 2,
               ),
               child: Text(
                 viewModel.getName(),
