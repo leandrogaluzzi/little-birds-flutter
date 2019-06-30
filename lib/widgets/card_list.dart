@@ -17,7 +17,6 @@ class CardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: cards.length,
-      itemExtent: 65.0,
       itemBuilder: (BuildContext context, int index) {
         final card = cards[index];
         return CardListItem(

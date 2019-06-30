@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
-import 'package:little_birds/utils/style.dart';
+import 'package:little_birds/utils/constants.dart';
 
 enum CardListItemMode {
   list,
@@ -28,7 +28,7 @@ class CardListItem extends StatelessWidget {
   final CardCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
-    fontSize: 18.0,
+    fontSize: 16.0,
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
@@ -39,12 +39,18 @@ class CardListItem extends StatelessWidget {
     color: Colors.black,
   );
 
+  final TextStyle kTextStyleType = TextStyle(
+  fontSize: 16.0,
+  color: kColorGrayText,
+);
+
   Widget _widgetLeft() {
     return Container(
       width: 55.0,
       child: Center(
         child: Image.asset(
           card.cardIconName(),
+          height: 25.0,
         ),
       ),
     );
@@ -62,7 +68,7 @@ class CardListItem extends StatelessWidget {
           ),
           Text(
             card.typeName,
-            style: kTextStyleGreySmall,
+            style: kTextStyleType,
           ),
         ],
       ),
@@ -84,6 +90,7 @@ class CardListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 55.0,
       color: index % 2 == 0 ? Colors.white : Colors.grey[200],
       child: RawMaterialButton(
         onPressed: () {
