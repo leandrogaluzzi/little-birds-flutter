@@ -14,6 +14,32 @@ class CardListScreen extends StatefulWidget {
 
 class _CardListScreenState extends State<CardListScreen> {
   bool _isSearching = false;
+  final _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.addListener(_updateContent);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearching = !_isSearching;
+    });
+  }
+
+  void _updateContent() {
+    print(_textController.text);
+    setState(() {
+      
+    });
+  }
 
   void _onCardSelected({BuildContext context, card: CardItem}) {
     Navigator.push(
@@ -28,16 +54,11 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
-  void _toggleSearch() {
-    setState(() {
-      _isSearching = !_isSearching;
-    });
-  }
-
   Widget _getButtonSearch() {
     return IconButton(
       icon: Icon(Icons.search, color: Colors.white),
       onPressed: () {
+        _textController.clear();
         _toggleSearch();
       },
     );
@@ -46,9 +67,7 @@ class _CardListScreenState extends State<CardListScreen> {
   Widget _getButtonFilter() {
     return IconButton(
       icon: Icon(Icons.filter_list, color: Colors.white),
-      onPressed: () {
-
-      },
+      onPressed: () {},
     );
   }
 
@@ -56,7 +75,24 @@ class _CardListScreenState extends State<CardListScreen> {
     return IconButton(
       icon: Icon(Icons.close, color: Colors.white),
       onPressed: () {
+        
         _toggleSearch();
+      },
+    );
+  }
+
+  Widget _getSearchField() {
+    return TextField(
+      controller: _textController,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        hintText: 'Search Cards',
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+      ),
+      onChanged: (String text) {
+
       },
     );
   }
@@ -67,10 +103,9 @@ class _CardListScreenState extends State<CardListScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: _isSearching ? _getButtonCancelSearch() : null,
-        title: _isSearching ? null : Text('Cards'),
+        title: _isSearching ? _getSearchField() : Text('Cards'),
         actions: <Widget>[
-          if (!_isSearching)
-            _getButtonSearch(),
+          if (!_isSearching) _getButtonSearch(),
           _getButtonFilter(),
         ],
       ),
