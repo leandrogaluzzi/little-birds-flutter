@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/screens/image_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/model/card_type.dart';
@@ -14,13 +15,31 @@ class CardScreen extends StatelessWidget {
 
   final CardScreenViewModel viewModel;
 
-  Widget _widgetImage() {
+  void _onImageSelected({BuildContext context}) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          final imageScreen = ImageScreen(url: viewModel.card.imageUrl);
+          return imageScreen;
+        },
+      ),
+    );
+  }
+
+  Widget _widgetImage({BuildContext context}) {
     return Container(
       height: viewModel.card.cardType() == CardType.plot ? null : 425.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Image.network(
-          viewModel.card.imageUrl,
+      child: RawMaterialButton(
+        onPressed: () {
+          _onImageSelected(context: context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Image.network(
+            viewModel.card.imageUrl,
+          ),
         ),
       ),
     );
@@ -160,12 +179,13 @@ class CardScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView(
             children: <Widget>[
-              if (viewModel.card.imageUrl != null) _widgetImage(),
+              if (viewModel.card.imageUrl != null) _widgetImage(context: context),
               _widgetHouse(),
               _widgetInfo(),
               if (viewModel.card.traits.isNotEmpty) _widgetTraits(),
               _widgetText(),
-              if (viewModel.card.cardType() == CardType.character) _widgetIcons(),
+              if (viewModel.card.cardType() == CardType.character)
+                _widgetIcons(),
               if (viewModel.card.flavor != null) _widgetFlavor(),
               _widgetPack(),
             ],
