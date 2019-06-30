@@ -3,46 +3,24 @@ import 'package:little_birds/model/card.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/view_models/card_screen_view_model.dart';
 
 class CardScreen extends StatelessWidget {
   CardScreen({
     Key key,
-    @required this.card,
-  })  : assert(card != null),
+    @required this.viewModel,
+  })  : assert(viewModel != null),
         super(key: key);
 
-  final CardItem card;
-
-  String _getInfoString() {
-    switch (card.cardType()) {
-      case CardType.plot:
-        return '${card.typeName}. Income: ${card.income ?? 0}. Initiative: ${card.initiative ?? 0} Claim: ${card.claim ?? 0}. Reserve: ${card.reserve ?? 0}. Plot deck limit: ${card.deckLimit ?? 0}.';
-        break;
-      case CardType.character:
-        return '${card.typeName}. Cost: ${card.cost ?? 0}. STR: ${card.strength ?? 0}';
-        break;
-      case CardType.attachment:
-      case CardType.location:
-      case CardType.event:
-        return '${card.typeName}. Cost: ${card.cost ?? 0}';
-        break;
-      default:
-        return card.typeName;
-        break;
-    }
-  }
-
-  String _getPackString() {
-    return '${card.packName} #${card.code.substring(card.code.length - 2)}';
-  }
+  final CardScreenViewModel viewModel;
 
   Widget _widgetImage() {
     return Container(
-      height: card.cardType() == CardType.plot ? null : 425.0,
+      height: viewModel.card.cardType() == CardType.plot ? null : 425.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Image.network(
-          card.imageUrl,
+          viewModel.card.imageUrl,
         ),
       ),
     );
@@ -56,12 +34,12 @@ class CardScreen extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0),
               child: Image.asset(
-                card.cardIconName(),
+                viewModel.card.cardIconName(),
               ),
             ),
           ),
           Text(
-            card.factionName,
+            viewModel.card.factionName,
             style: TextStyle(
               fontSize: 17.0,
             ),
@@ -76,7 +54,7 @@ class CardScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5.0),
         child: Text(
-          _getInfoString(),
+          viewModel.getInfoString(),
           style: TextStyle(
             fontSize: 17.0,
           ),
@@ -90,7 +68,7 @@ class CardScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5.0),
         child: Text(
-          card.traits,
+          viewModel.card.traits,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 17.0,
@@ -105,7 +83,7 @@ class CardScreen extends StatelessWidget {
   Widget _widgetText() {
     return Container(
       child: Html(
-        data: '<center>${card.text}</center>',
+        data: '<center>${viewModel.card.text}</center>',
         padding: EdgeInsets.symmetric(vertical: 0.0),
         defaultTextStyle: TextStyle(
           fontSize: 17.0,
@@ -125,15 +103,15 @@ class CardScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Opacity(
-                opacity: card.isMilitary ? 1.0 : 0.1,
+                opacity: viewModel.card.isMilitary ? 1.0 : 0.1,
                 child: Image.asset('assets/icons/military.png'),
               ),
               Opacity(
-                opacity: card.isIntrigue ? 1.0 : 0.1,
+                opacity: viewModel.card.isIntrigue ? 1.0 : 0.1,
                 child: Image.asset('assets/icons/intrigue.png'),
               ),
               Opacity(
-                opacity: card.isPower ? 1.0 : 0.1,
+                opacity: viewModel.card.isPower ? 1.0 : 0.1,
                 child: Image.asset('assets/icons/power.png'),
               ),
             ],
@@ -146,7 +124,7 @@ class CardScreen extends StatelessWidget {
   Widget _widgetFlavor() {
     return Container(
       child: Html(
-        data: '<center>${card.flavor}</center>',
+        data: '<center>${viewModel.card.flavor}</center>',
         padding: EdgeInsets.all(0.0),
         defaultTextStyle: TextStyle(
           fontSize: 15.0,
@@ -163,7 +141,7 @@ class CardScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.0),
         child: Text(
-          _getPackString(),
+          viewModel.getPackString(),
           style: TextStyle(
             fontSize: 15.0,
           ),
@@ -176,19 +154,19 @@ class CardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(card.name),
+          title: Text(viewModel.card.name),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView(
             children: <Widget>[
-              if (card.imageUrl != null) _widgetImage(),
+              if (viewModel.card.imageUrl != null) _widgetImage(),
               _widgetHouse(),
               _widgetInfo(),
-              if (card.traits.isNotEmpty) _widgetTraits(),
+              if (viewModel.card.traits.isNotEmpty) _widgetTraits(),
               _widgetText(),
-              if (card.cardType() == CardType.character) _widgetIcons(),
-              if (card.flavor != null) _widgetFlavor(),
+              if (viewModel.card.cardType() == CardType.character) _widgetIcons(),
+              if (viewModel.card.flavor != null) _widgetFlavor(),
               _widgetPack(),
             ],
           ),

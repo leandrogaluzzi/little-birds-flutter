@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
+import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 
 import 'card_screen.dart';
@@ -20,9 +21,8 @@ void _onCardSelected({BuildContext context, card: CardItem}) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (BuildContext context) {
-        return CardScreen(
-          card: card,
-        );
+        final viewModel = CardScreenViewModel(card: card);
+        return CardScreen(viewModel: viewModel);
       }),
     );
   }
