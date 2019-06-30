@@ -15,6 +15,7 @@ class CardListScreen extends StatefulWidget {
 class _CardListScreenState extends State<CardListScreen> {
   bool _isSearching = false;
   final _textController = TextEditingController();
+  final _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -35,10 +36,7 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   void _updateContent() {
-    print(_textController.text);
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   void _onCardSelected({BuildContext context, card: CardItem}) {
@@ -54,11 +52,11 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
-  Widget _getButtonSearch() {
+  Widget _getButtonSearch({BuildContext context}) {
     return IconButton(
       icon: Icon(Icons.search, color: Colors.white),
       onPressed: () {
-        _textController.clear();
+        FocusScope.of(context).requestFocus(_focusNode);
         _toggleSearch();
       },
     );
@@ -75,7 +73,7 @@ class _CardListScreenState extends State<CardListScreen> {
     return IconButton(
       icon: Icon(Icons.close, color: Colors.white),
       onPressed: () {
-        
+        _textController.clear();
         _toggleSearch();
       },
     );
@@ -83,17 +81,21 @@ class _CardListScreenState extends State<CardListScreen> {
 
   Widget _getSearchField() {
     return TextField(
+      focusNode: _focusNode,
       controller: _textController,
       style: TextStyle(color: Colors.white),
+      autofocus: true,
       decoration: InputDecoration(
+        hintStyle: TextStyle(color: Colors.white),
         hintText: 'Search Cards',
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
       ),
-      onChanged: (String text) {
-
-      },
+      onChanged: (String text) {},
     );
   }
 
@@ -105,7 +107,7 @@ class _CardListScreenState extends State<CardListScreen> {
         leading: _isSearching ? _getButtonCancelSearch() : null,
         title: _isSearching ? _getSearchField() : Text('Cards'),
         actions: <Widget>[
-          if (!_isSearching) _getButtonSearch(),
+          if (!_isSearching) _getButtonSearch(context: context),
           _getButtonFilter(),
         ],
       ),
