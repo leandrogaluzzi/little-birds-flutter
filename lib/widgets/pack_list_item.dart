@@ -17,7 +17,7 @@ class PackListItem extends StatelessWidget {
   final VoidCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
-    fontSize: 22.0,
+    fontSize: 16.0,
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
@@ -25,7 +25,10 @@ class PackListItem extends StatelessWidget {
   Widget _widgetName() {
     return Container(
       child: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.0,
+          vertical: 8.0,
+        ),
         child: Text(
           pack.name,
           style: _textStyleName,
@@ -62,7 +65,7 @@ class PackListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: index % 2 == 0 ? Colors.white : Colors.grey[200],
-      height: 80.0,
+      height: 60.0,
       child: RawMaterialButton(
         onPressed: onTap,
         child: Column(
