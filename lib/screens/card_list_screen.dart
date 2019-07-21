@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 
@@ -39,7 +39,7 @@ class _CardListScreenState extends State<CardListScreen> {
     setState(() {});
   }
 
-  void _onCardSelected({BuildContext context, card: CardItem}) {
+  void _onCardSelected({BuildContext context, card: ThronesCard}) {
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -113,7 +113,7 @@ class _CardListScreenState extends State<CardListScreen> {
       ),
       body: CardList(
         cards: cards,
-        onTap: (CardItem card) {
+        onTap: (ThronesCard card) {
           _onCardSelected(context: context, card: card);
         },
       ),

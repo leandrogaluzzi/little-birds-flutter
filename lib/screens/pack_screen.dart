@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 
@@ -14,10 +14,10 @@ class PackScreen extends StatelessWidget {
         assert(cards != null),
         super(key: key);
 
-  final List<CardItem> cards;
+  final List<ThronesCard> cards;
   final String title;
 
-void _onCardSelected({BuildContext context, card: CardItem}) {
+void _onCardSelected({BuildContext context, card: ThronesCard}) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (BuildContext context) {
@@ -35,7 +35,7 @@ void _onCardSelected({BuildContext context, card: CardItem}) {
       ),
       body: CardList(
         cards: cards,
-        onTap: (CardItem card) {
+        onTap: (ThronesCard card) {
           _onCardSelected(context: context, card: card);
         },
       ),

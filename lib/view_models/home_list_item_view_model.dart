@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -14,7 +14,7 @@ class HomeListItemViewModel {
         assert(cards != null);
 
   final ThronesDeck deck;
-  final List<CardItem> cards;
+  final List<ThronesCard> cards;
 
   String getName() {
     return deck.name;

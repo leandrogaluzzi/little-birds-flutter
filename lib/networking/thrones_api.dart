@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'network_provider.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'dart:convert';
@@ -21,12 +21,12 @@ class ThronesAPI {
 
   final NetworkProvider network;
 
-  Future<List<CardItem>> getCards() async {
+  Future<List<ThronesCard>> getCards() async {
     try {
       String response = await network.get(_cardsURL);
       List<dynamic> list = await json.decode(response);
-      List<CardItem> cards =
-          list.map((item) => CardItem.fromJson(item)).toList();
+      List<ThronesCard> cards =
+          list.map((item) => ThronesCard.fromJson(item)).toList();
       return cards;
     } catch (e) {
       throw ThronesException(e);

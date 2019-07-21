@@ -1,7 +1,7 @@
 import 'network_provider.dart';
 import 'thrones_api.dart';
 import 'package:http/http.dart' as http;
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
@@ -17,7 +17,7 @@ class ThronesService {
 
   ThronesAPI _thronesAPI;
 
-  Future<List<CardItem>> getCards() async {
+  Future<List<ThronesCard>> getCards() async {
     return _thronesAPI.getCards();
   }
 

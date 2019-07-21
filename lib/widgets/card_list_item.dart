@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/utils/constants.dart';
 
 enum CardListItemMode {
@@ -7,7 +7,7 @@ enum CardListItemMode {
   deck,
 }
 
-typedef CardCallback = void Function(CardItem card);
+typedef CardCallback = void Function(ThronesCard card);
 
 class CardListItem extends StatelessWidget {
   CardListItem({
@@ -22,7 +22,7 @@ class CardListItem extends StatelessWidget {
         assert(onTap != null),
         super(key: key);
 
-  final CardItem card;
+  final ThronesCard card;
   final CardListItemMode mode;
   final int index;
   final CardCallback onTap;

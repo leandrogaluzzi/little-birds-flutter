@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/networking/thrones_service.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     return Container(color: Colors.red);
   }
 
-  Widget _widgetTabs({ @required List<CardItem> cards}) {
+  Widget _widgetTabs({ @required List<ThronesCard> cards}) {
     return CardsStore(
       cards: cards,
       child: TabBarComponent(),
@@ -38,9 +38,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CardItem>>(
+    return FutureBuilder<List<ThronesCard>>(
       future: _cards,
-      builder: (BuildContext context, AsyncSnapshot<List<CardItem>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<ThronesCard>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.active:

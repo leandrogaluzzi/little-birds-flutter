@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 
 class CardList extends StatelessWidget {
@@ -10,7 +10,7 @@ class CardList extends StatelessWidget {
   })  : assert(cards != null),
         super(key: key);
 
-  final List<CardItem> cards;
+  final List<ThronesCard> cards;
   final CardCallback onTap;
 
   @override

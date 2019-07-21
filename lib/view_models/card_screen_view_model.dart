@@ -1,12 +1,12 @@
 import 'package:little_birds/model/card_type.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 
 class CardScreenViewModel {
   CardScreenViewModel({
     this.card,
   }) : assert(card != null);
 
-  final CardItem card;
+  final ThronesCard card;
 
   String getInfoString() {
     switch (card.cardType()) {

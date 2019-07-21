@@ -1,7 +1,7 @@
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/faction.dart';
 
-class CardItem {
+class ThronesCard {
   final String packCode;
   final String packName;
   final String typeCode;
@@ -29,7 +29,7 @@ class CardItem {
   final bool isMultiple;
   final String imageUrl;
 
-  CardItem.fromJson(Map<String, dynamic> json)
+  ThronesCard.fromJson(Map<String, dynamic> json)
       : packCode = json['pack_code'],
         packName = json['pack_name'],
         typeCode = json['type_code'],

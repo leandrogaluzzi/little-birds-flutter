@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card.dart';
+import 'package:little_birds/model/thrones_card.dart';
 
 class CardsStore extends InheritedWidget {
   CardsStore({
@@ -10,7 +10,7 @@ class CardsStore extends InheritedWidget {
         assert(child != null),
         super(key: key, child: child);
 
-  final List<CardItem> cards;
+  final List<ThronesCard> cards;
 
   static CardsStore of(BuildContext context) {
     return context.inheritFromWidgetOfExactType(CardsStore) as CardsStore;
@@ -21,13 +21,13 @@ class CardsStore extends InheritedWidget {
     return false;
   }
 
-  List<CardItem> getCardsAlphabetically() {
+  List<ThronesCard> getCardsAlphabetically() {
     var sortedCards = cards;
     sortedCards.sort((a, b) => a.name.compareTo(b.name));
     return sortedCards;
   }
 
-  List<CardItem> getCardsWithPackCode(String packCode) {
+  List<ThronesCard> getCardsWithPackCode(String packCode) {
     var filteredCards =
         cards.where((card) => card.packCode == packCode).toList();
     return filteredCards;
