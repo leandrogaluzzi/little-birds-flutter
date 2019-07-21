@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/model/type.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
@@ -59,16 +59,16 @@ class HomeListItemViewModel {
     deck.slots.forEach((slot) {
       final card = cards.firstWhere((card) => card.code == slot.code);
       switch (card.cardType()) {
-        case CardType.character:
+        case Type.character:
           characters = characters + slot.quantity;
           break;
-        case CardType.location:
+        case Type.location:
           locations = locations + slot.quantity;
           break;
-        case CardType.attachment:
+        case Type.attachment:
           attachments = attachments + slot.quantity;
           break;
-        case CardType.event:
+        case Type.event:
           events = events + slot.quantity;
           break;
         default:

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/screens/image_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/model/type.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 
 class CardScreen extends StatelessWidget {
@@ -30,7 +30,7 @@ class CardScreen extends StatelessWidget {
 
   Widget _widgetImage({BuildContext context}) {
     return Container(
-      height: viewModel.card.cardType() == CardType.plot ? null : 425.0,
+      height: viewModel.card.cardType() == Type.plot ? null : 425.0,
       child: RawMaterialButton(
         onPressed: () {
           _onImageSelected(context: context);
@@ -184,7 +184,7 @@ class CardScreen extends StatelessWidget {
               _widgetInfo(),
               if (viewModel.card.traits.isNotEmpty) _widgetTraits(),
               _widgetText(),
-              if (viewModel.card.cardType() == CardType.character)
+              if (viewModel.card.cardType() == Type.character)
                 _widgetIcons(),
               if (viewModel.card.flavor != null) _widgetFlavor(),
               _widgetPack(),

@@ -1,4 +1,4 @@
-import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/model/type.dart';
 import 'package:little_birds/model/faction.dart';
 
 class ThronesCard {
@@ -57,7 +57,7 @@ class ThronesCard {
         isMultiple = json['is_multiple'],
         imageUrl = json['image_url'];
 
-  CardType cardType() {
+  Type cardType() {
     return getCardType(typeCode);
   }
 
