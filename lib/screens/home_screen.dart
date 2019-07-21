@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<List<ThronesDeck>> _buildDecks() async {
-    final decks = await _getDecks([], DateTime.now().add(Duration(days: -1)));
+    final decks = await _getDecks([], DateTime.now());
     return decks;
   }
 
