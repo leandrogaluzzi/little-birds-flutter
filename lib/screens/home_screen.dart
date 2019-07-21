@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 
@@ -40,13 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
+    var viewModel = DeckScreenViewModel(deck: deck);
     Navigator.push(
       context,
       CupertinoPageRoute(
         fullscreenDialog: true,
         builder: (BuildContext context) {
           return DeckScreen(
-            deck: deck,
+            viewModel: viewModel,
           );
         },
       ),
