@@ -3,7 +3,7 @@ import 'thrones_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/model/thrones_deck.dart';
 
 class ThronesService {
   ThronesService() {
@@ -25,7 +25,7 @@ class ThronesService {
     return _thronesAPI.getPacks();
   }
 
-  Future<List<Deck>> getDecks(DateTime date) async {
+  Future<List<ThronesDeck>> getDecks(DateTime date) async {
     return _thronesAPI.getDecks(date: date);
   }
 }

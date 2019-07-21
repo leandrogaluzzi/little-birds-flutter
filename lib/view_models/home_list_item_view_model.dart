@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/model/card_type.dart';
-import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/model/thrones_deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
 import 'package:little_birds/model/faction.dart' as faction;
@@ -13,7 +13,7 @@ class HomeListItemViewModel {
   })  : assert(deck != null),
         assert(cards != null);
 
-  final Deck deck;
+  final ThronesDeck deck;
   final List<CardItem> cards;
 
   String getName() {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'network_provider.dart';
 import 'package:little_birds/model/card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/model/thrones_deck.dart';
 import 'dart:convert';
 
 const baseURL = 'https://thronesdb.com';
@@ -44,7 +44,7 @@ class ThronesAPI {
     }
   }
 
-  Future<List<Deck>> getDecks({DateTime date}) async {
+  Future<List<ThronesDeck>> getDecks({DateTime date}) async {
     String year = date.year.toString();
     String month = date.month.toString().padLeft(2, '0');
     String day = date.day.toString().padLeft(2, '0');
@@ -56,7 +56,7 @@ class ThronesAPI {
     try {
       String response = await network.get(url);
       List<dynamic> list = await json.decode(response);
-      List<Deck> decks = list.map((item) => Deck.fromJson(item)).toList();
+      List<ThronesDeck> decks = list.map((item) => ThronesDeck.fromJson(item)).toList();
       return decks;
     } on NetworkException catch (e) {
       switch (e.code) {

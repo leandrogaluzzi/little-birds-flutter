@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/networking/thrones_service.dart';
-import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<List<Deck>> _decks;
+  Future<List<ThronesDeck>> _decks;
   ThronesService _thronesService = ThronesService();
 
   @override
@@ -22,22 +22,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  Future<List<Deck>> _buildDecks() async {
+  Future<List<ThronesDeck>> _buildDecks() async {
     final decks = await _getDecks([], DateTime.now().add(Duration(days: -1)));
     return decks;
   }
 
-  Future<List<Deck>> _getDecks(List<Deck> decks, DateTime date) async {
+  Future<List<ThronesDeck>> _getDecks(List<ThronesDeck> decks, DateTime date) async {
     if (decks.length > 10) {
       return decks;
     }
-    List<Deck> newDecks = await _thronesService.getDecks(date);
+    List<ThronesDeck> newDecks = await _thronesService.getDecks(date);
     decks.addAll(newDecks);
     DateTime newDate = date.add(Duration(days: -1));
     return _getDecks(decks, newDate);
   }
   
-  void _onDeckSelected({BuildContext context, Deck deck}) {
+  void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (BuildContext context) {
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(color: Colors.red);
   }
 
-  Widget _widgetList({@required List<Deck> decks}) {
+  Widget _widgetList({@required List<ThronesDeck> decks}) {
     return RefreshIndicator(
       onRefresh: () => _buildDecks(),
       child: ListView.builder(
@@ -84,9 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: FutureBuilder<List<Deck>>(
+      body: FutureBuilder<List<ThronesDeck>>(
         future: _decks,
-        builder: (BuildContext context, AsyncSnapshot<List<Deck>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<ThronesDeck>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:

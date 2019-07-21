@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/deck.dart';
+import 'package:little_birds/model/thrones_deck.dart';
 
 class DeckScreen extends StatelessWidget {
   DeckScreen({
@@ -8,7 +8,7 @@ class DeckScreen extends StatelessWidget {
   })  : assert(deck != null),
         super(key: key);
 
-  final Deck deck;
+  final ThronesDeck deck;
 
   @override
   Widget build(BuildContext context) {

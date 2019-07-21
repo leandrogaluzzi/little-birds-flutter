@@ -1,8 +1,8 @@
 import 'package:little_birds/model/deck_slot.dart';
 import 'package:little_birds/model/faction.dart';
 
-class Deck {
-  Deck(
+class ThronesDeck {
+  ThronesDeck(
       {this.agendas,
       this.dateCreation,
       this.dateUpdate,
@@ -25,7 +25,7 @@ class Deck {
   final List<DeckSlot> slots;
   final int userId;
 
-  factory Deck.fromJson(Map<String, dynamic> json) {
+  factory ThronesDeck.fromJson(Map<String, dynamic> json) {
     final jsonAgendas = json['agendas'];
     List<String> agendas = List<String>.from(jsonAgendas);
 
@@ -37,7 +37,7 @@ class Deck {
       deckSlots.add(deckSlot);
     });
 
-    return Deck(
+    return ThronesDeck(
         agendas: agendas,
         dateCreation: json['date_creation'],
         dateUpdate: json['date_update'],
