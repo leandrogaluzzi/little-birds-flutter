@@ -73,7 +73,7 @@ class CardScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5.0),
         child: Text(
-          viewModel.getInfoString(),
+          viewModel.details(),
           style: TextStyle(
             fontSize: 17.0,
           ),
@@ -160,7 +160,7 @@ class CardScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.0),
         child: Text(
-          viewModel.getPackString(),
+          viewModel.pack(),
           style: TextStyle(
             fontSize: 15.0,
           ),

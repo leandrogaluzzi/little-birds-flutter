@@ -8,7 +8,7 @@ class CardScreenViewModel {
 
   final ThronesCard card;
 
-  String getInfoString() {
+  String details() {
     switch (card.cardType()) {
       case Type.plot:
         return '${card.typeName}. Income: ${card.income ?? 0}. Initiative: ${card.initiative ?? 0} Claim: ${card.claim ?? 0}. Reserve: ${card.reserve ?? 0}. Plot deck limit: ${card.deckLimit ?? 0}.';
@@ -27,8 +27,9 @@ class CardScreenViewModel {
     }
   }
 
-  String getPackString() {
-    return '${card.packName} #${card.code.substring(card.code.length - 2)}';
+  String pack() {
+    String packNumber = '#${card.code.substring(card.code.length - 2)}';
+    return '${card.packName} $packNumber';
   }
 
 }

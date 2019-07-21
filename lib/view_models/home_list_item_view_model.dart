@@ -16,33 +16,33 @@ class HomeListItemViewModel {
   final ThronesDeck deck;
   final List<ThronesCard> cards;
 
-  String getName() {
+  String name() {
     return deck.name;
   }
 
-  String getFactionName() {
+  String factionName() {
     return deck.factionName;
   }
 
-  Color getFactionColor() {
+  Color factionColor() {
     return faction.getFactionColor(faction: deck.faction());
   }
 
-  Color getFactionTextColor() {
+  Color factionTextColor() {
     return faction.getFactionTextColor(faction: deck.faction());
   }
 
-  String getIconName() {
+  String iconName() {
     return deck.cardIconName();
   }
 
-  String getTime() {
+  String time() {
     final date = DateTime.parse(deck.dateCreation);
     final string = timeago.format(date);
     return capitalize(string);
   }
 
-  String getAgendas() {
+  String agendas() {
     List<String> agendas = deck.agendas.map((code) {
       final card = cards.firstWhere((card) => card.code == code);
       return card.name;
@@ -50,7 +50,7 @@ class HomeListItemViewModel {
     return agendas.join(', ');
   }
 
-  String getInfo() {
+  String details() {
     int characters = 0;
     int locations = 0;
     int attachments = 0;

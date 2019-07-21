@@ -17,14 +17,14 @@ class HomeListItem extends StatelessWidget {
 
   Widget _getRowName() {
     return Container(
-      color: viewModel.getFactionColor(),
+      color: viewModel.factionColor(),
       child: Row(
         children: <Widget>[
           Container(
             width: 50,
             child: Center(
               child: Image.asset(
-                viewModel.getIconName(),
+                viewModel.iconName(),
               ),
             ),
           ),
@@ -36,11 +36,11 @@ class HomeListItem extends StatelessWidget {
                 bottom: kPadding * 2,
               ),
               child: Text(
-                viewModel.getName(),
+                viewModel.name(),
                 maxLines: 3,
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: viewModel.getFactionTextColor(),
+                  color: viewModel.factionTextColor(),
                 ),
               ),
             ),
@@ -58,11 +58,11 @@ class HomeListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              viewModel.getFactionName(),
+              viewModel.factionName(),
               style: kTextStyleBlackSmall,
             ),
             Text(
-              viewModel.getTime(),
+              viewModel.time(),
               style: kTextStyleBlackSmall,
             ),
           ],
@@ -76,7 +76,7 @@ class HomeListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kPadding),
         child: Text(
-          viewModel.getAgendas(),
+          viewModel.agendas(),
           style: kTextStyleBlackSmall,
         ),
       ),
@@ -88,7 +88,7 @@ class HomeListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(kPadding),
         child: Text(
-          viewModel.getInfo(),
+          viewModel.details(),
           textAlign: TextAlign.center,
           style: kTextStyleBlackSmall,
         ),
