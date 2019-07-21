@@ -1,4 +1,4 @@
-class Pack {
+class ThronesPack {
   final String name;
   final String code;
   final int position;
@@ -7,7 +7,7 @@ class Pack {
   final int known;
   final int total;
 
-  Pack.fromJson(Map<String, dynamic> json)
+  ThronesPack.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         code = json['code'],
         position = json['position'],

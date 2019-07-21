@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/pack.dart';
+import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
@@ -21,7 +21,7 @@ class _PackListScreenState extends State<PackListScreen> {
     super.initState();
   }
 
-  void _onPackSelected({BuildContext context, Pack pack}) {
+  void _onPackSelected({BuildContext context, ThronesPack pack}) {
     final cards = CardsStore.of(context).getCardsWithPackCode(pack.code);
     Navigator.push(
       context,
@@ -47,7 +47,7 @@ class _PackListScreenState extends State<PackListScreen> {
     return Container(color: Colors.red);
   }
 
-  Widget _widgetList({@required List<Pack> packs}) {
+  Widget _widgetList({@required List<ThronesPack> packs}) {
     return ListView.builder(
       itemCount: packs.length,
       itemBuilder: (BuildContext context, int index) {
@@ -62,8 +62,8 @@ class _PackListScreenState extends State<PackListScreen> {
     );
   }
 
-  List<Pack> _reorderPacks(List<Pack> packs) {
-    List<Pack> reorderedPacks = packs;
+  List<ThronesPack> _reorderPacks(List<ThronesPack> packs) {
+    List<ThronesPack> reorderedPacks = packs;
     reorderedPacks.sort((a, b) {
       if (a.cyclePosition != b.cyclePosition) {
         return b.cyclePosition.compareTo(a.cyclePosition);
@@ -80,9 +80,9 @@ class _PackListScreenState extends State<PackListScreen> {
       appBar: AppBar(
         title: Text('Packs'),
       ),
-      body: FutureBuilder<List<Pack>>(
+      body: FutureBuilder<List<ThronesPack>>(
         future: _packs,
-        builder: (BuildContext context, AsyncSnapshot<List<Pack>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<ThronesPack>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:

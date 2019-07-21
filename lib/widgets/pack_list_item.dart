@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/pack.dart';
+import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/utils/style.dart';
 
 class PackListItem extends StatelessWidget {
@@ -12,7 +12,7 @@ class PackListItem extends StatelessWidget {
         assert(index != null),
         super(key: key);
 
-  final Pack pack;
+  final ThronesPack pack;
   final int index;
   final VoidCallback onTap;
 
