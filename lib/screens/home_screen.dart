@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
@@ -27,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return decks;
   }
 
-  Future<List<ThronesDeck>> _getDecks(List<ThronesDeck> decks, DateTime date) async {
+  Future<List<ThronesDeck>> _getDecks(
+      List<ThronesDeck> decks, DateTime date) async {
     if (decks.length > 10) {
       return decks;
     }
@@ -36,15 +38,18 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime newDate = date.add(Duration(days: -1));
     return _getDecks(decks, newDate);
   }
-  
+
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (BuildContext context) {
-        return DeckScreen(
-          deck: deck,
-        );
-      }),
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          return DeckScreen(
+            deck: deck,
+          );
+        },
+      ),
     );
   }
 
@@ -69,10 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
           final deck = decks[index];
           final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
           return HomeListItem(
-              viewModel: viewModel,
-              onTap: () {
-                _onDeckSelected(deck: deck);
-              });
+            viewModel: viewModel,
+            onTap: () {
+              _onDeckSelected(context: context, deck: deck);
+            },
+          );
         },
       ),
     );
@@ -86,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: FutureBuilder<List<ThronesDeck>>(
         future: _decks,
-        builder: (BuildContext context, AsyncSnapshot<List<ThronesDeck>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<ThronesDeck>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:
