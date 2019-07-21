@@ -1,4 +1,4 @@
-import 'package:little_birds/model/deck_slot.dart';
+import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/faction.dart';
 
 class ThronesDeck {
@@ -22,7 +22,7 @@ class ThronesDeck {
   final String factionName;
   final int id;
   final String name;
-  final List<DeckSlot> slots;
+  final List<Slot> slots;
   final int userId;
 
   factory ThronesDeck.fromJson(Map<String, dynamic> json) {
@@ -31,9 +31,9 @@ class ThronesDeck {
 
     final jsonSlots = json['slots'];
     Map<String, int> slots = Map<String, int>.from(jsonSlots);
-    List<DeckSlot> deckSlots = [];
+    List<Slot> deckSlots = [];
     slots.forEach((key, value) {
-      DeckSlot deckSlot = DeckSlot(code: key, quantity: value);
+      Slot deckSlot = Slot(code: key, quantity: value);
       deckSlots.add(deckSlot);
     });
 
