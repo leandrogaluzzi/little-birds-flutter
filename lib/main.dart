@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/screens/main_screen.dart';
 
 /*
-Reminders:
+TODO:
 
+- Instagram Visual
 - CardScreen - Placeholder Image
+- CardScreen - Fix or Replace library
+- Filter
+- Search
+- Make Search bar permanent
+- Home Layout
+- Home Infinite Scroll
+- Deck Screen
+- Main Screen
 - Firebase - Anaytics
 - Firebase - Ads
-- Local DB for cards
+- Unit Tests
+- Widget Tests
+- Local DB for cards (future)
 */
 
 void main() => runApp(LittleBirdsApp());
