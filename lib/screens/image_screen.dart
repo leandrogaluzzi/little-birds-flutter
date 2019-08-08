@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zoomable_image/zoomable_image.dart';
+//import 'package:zoomable_image/zoomable_image.dart';
 
 class ImageScreen extends StatelessWidget {
   ImageScreen({
@@ -12,14 +12,15 @@ class ImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Dismissible(
+    return Container();
+      /*child: Dismissible(
         onDismissed: (DismissDirection direction) {
           Navigator.of(context).pop();
         },
         key: Key('ImageScreen'),
         direction: DismissDirection.vertical,
-        child: ZoomableImage(
+        child: Container(),
+        ZoomableImage(
           NetworkImage(url),
           maxScale: 3.0,
           minScale: 1.0,
@@ -28,6 +29,6 @@ class ImageScreen extends StatelessWidget {
           },
         ),
       ),
-    );
+    );*/
   }
 }

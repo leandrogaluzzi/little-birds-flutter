@@ -6,8 +6,7 @@ import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
-
-import '../cards_store.dart';
+import 'package:little_birds/cards_store.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -41,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
-    var viewModel = DeckScreenViewModel(deck: deck);
+    final cardsStore = CardsStore.of(context);
+    final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
     Navigator.push(
       context,
       CupertinoPageRoute(

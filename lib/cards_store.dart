@@ -32,4 +32,9 @@ class CardsStore extends InheritedWidget {
         cards.where((card) => card.packCode == packCode).toList();
     return filteredCards;
   }
+
+  /*List<ThronesCard> getCardsWithCodes(List<String> codes) {
+    
+  }*/
+
 }
