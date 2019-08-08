@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:little_birds/utils/constants.dart';
-
 enum Faction {
   baratheon,
   greyjoy,
@@ -35,40 +32,5 @@ Faction getFaction(String string) {
       return Faction.tyrell;
     default:
       return Faction.neutral;
-  }
-}
-
-Color getFactionColor({faction: Faction}) {
-  switch (faction) {
-    case Faction.baratheon:
-      return kColorBaratheon;
-    case Faction.greyjoy:
-      return kColorGreyjoy;
-    case Faction.lannister:
-      return kColorLannister;
-    case Faction.martell:
-      return kColorMartell;
-    case Faction.stark:
-      return kColorStark;
-    case Faction.targaryen:
-      return kColorTargaryen;
-    case Faction.theNightsWatch:
-      return kColorTheNightsWatch;
-    case Faction.tyrell:
-      return kColorTyrell;
-    default:
-      return Colors.transparent;
-  }
-}
-
-Color getFactionTextColor({faction: Faction}) {
-  switch (faction) {
-    case Faction.targaryen:
-    case Faction.lannister:
-    case Faction.theNightsWatch:
-    case Faction.greyjoy:
-      return Colors.white;
-    default:
-      return Colors.black;
   }
 }

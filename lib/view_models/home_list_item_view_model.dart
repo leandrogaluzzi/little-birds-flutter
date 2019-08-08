@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/model/faction.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/type.dart';
 import 'package:little_birds/model/thrones_deck.dart';
+import 'package:little_birds/utils/constants.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
-import 'package:little_birds/model/faction.dart' as faction;
 
 class HomeListItemViewModel {
   HomeListItemViewModel({
@@ -23,15 +24,7 @@ class HomeListItemViewModel {
   String factionName() {
     return deck.factionName;
   }
-
-  Color factionColor() {
-    return faction.getFactionColor(faction: deck.faction());
-  }
-
-  Color factionTextColor() {
-    return faction.getFactionTextColor(faction: deck.faction());
-  }
-
+  
   String iconName() {
     return deck.cardIconName();
   }
@@ -77,5 +70,40 @@ class HomeListItemViewModel {
     });
 
     return '$characters Characters - $events Events\n$locations Locations - $attachments Attachments ';
+  }
+
+  Color factionColor() {
+    switch (deck.faction()) {
+      case Faction.baratheon:
+        return kColorBaratheon;
+      case Faction.greyjoy:
+        return kColorGreyjoy;
+      case Faction.lannister:
+        return kColorLannister;
+      case Faction.martell:
+        return kColorMartell;
+      case Faction.stark:
+        return kColorStark;
+      case Faction.targaryen:
+        return kColorTargaryen;
+      case Faction.theNightsWatch:
+        return kColorTheNightsWatch;
+      case Faction.tyrell:
+        return kColorTyrell;
+      default:
+        return Colors.transparent;
+    }
+  }
+
+  Color factionTextColor() {
+    switch (deck.faction()) {
+      case Faction.targaryen:
+      case Faction.lannister:
+      case Faction.theNightsWatch:
+      case Faction.greyjoy:
+        return Colors.white;
+      default:
+        return Colors.black;
+    }
   }
 }
