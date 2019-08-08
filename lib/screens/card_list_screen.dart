@@ -54,7 +54,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   Widget _getButtonSearch({BuildContext context}) {
     return IconButton(
-      icon: Icon(Icons.search, color: Colors.white),
+      icon: Icon(Icons.search),
       onPressed: () {
         FocusScope.of(context).requestFocus(_focusNode);
         _toggleSearch();
@@ -64,7 +64,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   Widget _getButtonFilter() {
     return IconButton(
-      icon: Icon(Icons.filter_list, color: Colors.white),
+      icon: Icon(Icons.filter_list),
       onPressed: () {},
     );
   }

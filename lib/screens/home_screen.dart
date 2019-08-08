@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Little Birds'),
       ),
       body: FutureBuilder<List<ThronesDeck>>(
         future: _decks,

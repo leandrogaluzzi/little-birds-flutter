@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/screens/main_screen.dart';
+import 'package:little_birds/utils/themes.dart';
 
 /*
 TODO:
 
+- Theme
 - Instagram Visual
+- Find fonts
+- Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
 - CardScreen - Fix or Replace library
 - Filter
@@ -29,6 +33,7 @@ class LittleBirdsApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainScreen(),
+      theme: Themes.app(),
     );
   }
 }
