@@ -5,7 +5,6 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Theme
 - Instagram Visual
 - Find fonts
 - Main Screen error feedback when loading cards

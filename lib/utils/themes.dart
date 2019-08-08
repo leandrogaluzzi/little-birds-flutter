@@ -5,7 +5,7 @@ class Themes {
   static ThemeData app() {
     final ThemeData light = ThemeData.light();
     return light.copyWith(
-      //appBarTheme: _appBar(),
+      appBarTheme: _appBar(),
       //tabBarTheme: _tabBar(),
       primaryIconTheme: _icon(),
       primaryColor: kColorYellowLittleBirds,
@@ -23,13 +23,13 @@ class Themes {
     );
   }
 
-  /*static AppBarTheme _appBar() {
+  static AppBarTheme _appBar() {
     return AppBarTheme(
-      iconTheme: _icon(),
+      brightness: Brightness.light,
     );
   }
 
-  static TabBarTheme _tabBar() {
+  /*static TabBarTheme _tabBar() {
     return TabBarTheme();
   }*/
 
