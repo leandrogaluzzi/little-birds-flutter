@@ -1,10 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-class NetworkException extends Exception {
-  factory NetworkException({int code}) => NetworkException(code: code);
-  final int code;
-}
+import 'package:little_birds/networking/network_exception.dart';
 
 class NetworkProvider {
   NetworkProvider({
@@ -20,11 +18,30 @@ class NetworkProvider {
   Future<String> get(String url,
       {Map<String, String> headers, Map<String, String> parameters}) async {
     String fullUrl = baseUrl + url;
-    http.Response response = await client.get(fullUrl, headers: headers);
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw NetworkException(code: response.statusCode);
+    try {
+      http.Response response = await client
+          .get(fullUrl, headers: headers)
+          .timeout(Duration(seconds: 10));
+      return _responseString(response: response);
+    } on SocketException {
+      throw SocketException;
+    }
+  }
+
+  String _responseString({http.Response response}) {
+    switch (response.statusCode) {
+      case 200:
+        return response.body;
+      case 400:
+        throw BadRequestException(response.body.toString());
+      case 401:
+      case 403:
+        throw UnauthorisedException(response.body.toString());
+      case 500:
+        throw ServerErrorException(response.body.toString());
+      default:
+        throw FetchDataException(
+            'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
     }
   }
 }

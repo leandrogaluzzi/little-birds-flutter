@@ -30,7 +30,7 @@ class _FilterComponentState extends State<FilterComponent> {
     );
   }*/
 
-  Widget _titleFactions() {
+  /*Widget _titleFactions() {
     return Container(
       height: 60,
       color: Colors.grey,
@@ -53,7 +53,7 @@ class _FilterComponentState extends State<FilterComponent> {
       height: 60,
       color: Colors.white,
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

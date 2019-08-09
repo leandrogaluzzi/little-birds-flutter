@@ -1,18 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'network_provider.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'dart:convert';
+import 'package:little_birds/networking/network_exception.dart';
+import 'package:little_birds/networking/network_provider.dart';
 
 const baseURL = 'https://thronesdb.com';
 const _cardsURL = '/api/public/cards/';
 const _packsURL = '/api/public/packs/';
 const _decksURL = '/api/public/decklists/by_date/';
-
-class ThronesException extends Exception {
-  factory ThronesException([var message]) => ThronesException(message);
-}
 
 class ThronesAPI {
   ThronesAPI({
@@ -23,24 +20,25 @@ class ThronesAPI {
 
   Future<List<ThronesCard>> getCards() async {
     try {
-      String response = await network.get(_cardsURL);
-      List<dynamic> list = await json.decode(response);
+      String responseString = await network.get(_cardsURL);
+      List<dynamic> list = await json.decode(responseString);
       List<ThronesCard> cards =
           list.map((item) => ThronesCard.fromJson(item)).toList();
       return cards;
     } catch (e) {
-      throw ThronesException(e);
+      throw Exception(e);
     }
   }
 
   Future<List<ThronesPack>> getPacks() async {
     try {
-      String response = await network.get(_packsURL);
-      List<dynamic> list = await json.decode(response);
-      List<ThronesPack> packs = list.map((item) => ThronesPack.fromJson(item)).toList();
+      String responseString = await network.get(_packsURL);
+      List<dynamic> list = await json.decode(responseString);
+      List<ThronesPack> packs =
+          list.map((item) => ThronesPack.fromJson(item)).toList();
       return packs;
     } catch (e) {
-      throw ThronesException(e);
+      throw Exception(e);
     }
   }
 
@@ -52,23 +50,17 @@ class ThronesAPI {
     String dateString = '$year-$month-$day';
 
     String url = _decksURL + dateString;
-  
+
     try {
-      String response = await network.get(url);
-      List<dynamic> list = await json.decode(response);
-      List<ThronesDeck> decks = list.map((item) => ThronesDeck.fromJson(item)).toList();
+      String responseString = await network.get(url);
+      List<dynamic> list = await json.decode(responseString);
+      List<ThronesDeck> decks =
+          list.map((item) => ThronesDeck.fromJson(item)).toList();
       return decks;
-    } on NetworkException catch (e) {
-      switch (e.code) {
-        case 500:
-          return [];
-          break;
-        default:
-          throw ThronesException(e);
-          break;
-      }
+    } on ServerErrorException {
+      return [];
     } catch (e) {
-      throw ThronesException(e);
+      throw Exception(e);
     }
   }
 }
