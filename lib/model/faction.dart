@@ -50,8 +50,7 @@ class Faction {
     }
   }
 
-  @override
-  String toString() {
+  String toCode() {
     return const <int, String>{
       0: 'baratheon',
       1: 'greyjoy',
@@ -62,6 +61,20 @@ class Faction {
       6: 'targaryen',
       7: 'thenightswatch',
       8: 'tyrell',
+    }[_index];
+  }
+
+  String toString() {
+    return const <int, String>{
+      0: 'Baratheon',
+      1: 'Greyjoy',
+      2: 'Lannister',
+      3: 'Martell',
+      4: 'Neutral',
+      5: 'Stark',
+      6: 'Targaryen',
+      7: 'The Night\'s Watch',
+      8: 'Tyrell',
     }[_index];
   }
 }

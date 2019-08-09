@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/widgets/factions_horizontal_scroller.dart';
+import 'package:little_birds/widgets/faction_grid.dart';
 
 class FilterComponent extends StatefulWidget {
   @override
@@ -9,7 +9,12 @@ class FilterComponent extends StatefulWidget {
 }
 
 class _FilterComponentState extends State<FilterComponent> {
-  Widget _header() {
+  /*Widget _header() {
+    return SliverPersistentHeader(
+      delegate: SliverPersistentHeader(delegate: ,);
+      ,
+    )
+
     return Container(
       height: 60,
       color: kColorYellowLittleBirds,
@@ -23,17 +28,17 @@ class _FilterComponentState extends State<FilterComponent> {
         ),
       ),
     );
-  }
+  }*/
 
   Widget _titleFactions() {
-    return FactionsHorizontalScroller();
+    return Container(
+      height: 60,
+      color: Colors.grey,
+    );
   }
 
   Widget _factions() {
-    return Container(
-      height: 60,
-      color: Colors.white,
-    );
+    return FactionGrid();
   }
 
   Widget _titleTypes() {
@@ -53,14 +58,13 @@ class _FilterComponentState extends State<FilterComponent> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          _header(),
-          _titleFactions(),
-          _factions(),
-          _titleTypes(),
-          _types(),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          //_header(),
+          //_titleFactions(),
+          //_factions(),
+          //_titleTypes(),
+          //_types(),
         ],
       ),
     );
