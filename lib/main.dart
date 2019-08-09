@@ -18,9 +18,9 @@ TODO:
 - Deck Screen
 - Main Screen
 - Firebase - Anaytics
-- Firebase - Ads
 - Unit Tests
 - Widget Tests
+- Firebase - Ads (future)
 - Local DB for cards (future)
 */
 

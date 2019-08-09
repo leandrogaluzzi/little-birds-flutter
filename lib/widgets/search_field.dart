@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
+typedef SearchCallback = void Function(String text);
+
 class SearchField extends StatelessWidget {
   SearchField({
-    this.controller,
-    this.focus,
-  })  : assert(controller != null),
-        assert(focus != null);
+    this.onChanged,
+    this.onSubmitted,
+  }) : assert(onSubmitted != null);
 
-  final TextEditingController controller;
-  final FocusNode focus;
+  final SearchCallback onChanged;
+  final VoidCallback onSubmitted;
 
   Widget _icon() {
     return Container(
@@ -33,10 +34,11 @@ class SearchField extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(top: 20.0),
           child: TextField(
-            focusNode: focus,
-            controller: controller,
             style: TextStyle(color: Colors.black),
             autofocus: false,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.search,
+            autocorrect: false,
             decoration: InputDecoration(
               hintStyle: TextStyle(color: Colors.black),
               hintText: 'Search Cards',
@@ -45,7 +47,12 @@ class SearchField extends StatelessWidget {
               disabledBorder: _border(),
               enabledBorder: _border(),
             ),
-            onChanged: (String text) {},
+            onChanged: (String text) {
+              onChanged(text);
+            },
+            onSubmitted: (String text) {
+              onSubmitted();
+            },
           ),
         ),
       ),

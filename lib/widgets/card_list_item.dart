@@ -42,9 +42,9 @@ class CardListItem extends StatelessWidget {
   );
 
   final TextStyle kTextStyleType = TextStyle(
-  fontSize: 16.0,
-  color: kColorGrayText,
-);
+    fontSize: 16.0,
+    color: kColorGrayText,
+  );
 
   Widget _widgetLeft() {
     return Container(

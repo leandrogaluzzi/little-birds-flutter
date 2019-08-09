@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/screens/card_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/search_field.dart';
-
-import 'card_screen.dart';
 
 class CardListScreen extends StatefulWidget {
   @override
@@ -15,23 +14,9 @@ class CardListScreen extends StatefulWidget {
 }
 
 class _CardListScreenState extends State<CardListScreen> {
-  final _textController = TextEditingController();
-  final _focusNode = FocusNode();
-
   @override
   void initState() {
     super.initState();
-    _textController.addListener(_updateContent);
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
-
-  void _updateContent() {
-    setState(() {});
   }
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
@@ -47,10 +32,20 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
-  Widget _searchField() {
+  void _onTextSubmitted({BuildContext context}) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+  }
+
+  void _onTextChanged({String text}) {}
+
+  Widget _searchField({BuildContext context}) {
     return SearchField(
-      controller: _textController,
-      focus: _focusNode,
+      onChanged: (String text) {
+        _onTextChanged(text: text);
+      },
+      onSubmitted: () {
+        _onTextSubmitted(context: context);
+      },
     );
   }
 
@@ -73,7 +68,7 @@ class _CardListScreenState extends State<CardListScreen> {
     final cards = CardsStore.of(context).getCardsAlphabetically();
     return Scaffold(
       appBar: AppBar(
-        title: _searchField(),
+        title: _searchField(context: context),
       ),
       body: CardList(
         cards: cards,
