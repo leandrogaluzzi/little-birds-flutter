@@ -62,7 +62,7 @@ class ThronesCard {
   }
 
   Faction faction() {
-    return getFaction(factionCode);
+    return Faction.code(factionCode);
   }
 
   String cardIconName() {
