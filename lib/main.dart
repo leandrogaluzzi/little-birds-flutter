@@ -5,15 +5,13 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Instagram Visual
 - Find fonts
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
 - CardScreen - Fix or Replace library
 - Filter
-- Search
 - Make Search bar permanent
-- Home Layout
+- Home Deck Cell
 - Home Infinite Scroll
 - Deck Screen
 - Main Screen

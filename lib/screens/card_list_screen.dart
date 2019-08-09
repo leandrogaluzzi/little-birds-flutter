@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
@@ -15,10 +16,18 @@ class CardListScreen extends StatefulWidget {
 
 class _CardListScreenState extends State<CardListScreen> {
   String query;
+  bool isKeyboardVisible = false;
 
   @override
   void initState() {
     super.initState();
+
+    KeyboardVisibilityNotification().addNewListener(
+      onChange: (bool visible) {
+        isKeyboardVisible = visible;
+        setState(() {});
+      },
+    );
   }
 
   List<ThronesCard> _cards() {
@@ -89,7 +98,7 @@ class _CardListScreenState extends State<CardListScreen> {
           _onCardSelected(context: context, card: card);
         },
       ),
-      floatingActionButton: _filterButton(),
+      floatingActionButton: isKeyboardVisible ? null : _filterButton(),
     );
   }
 }
