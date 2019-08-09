@@ -5,16 +5,29 @@ import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
 import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/view_models/card_list_screen_view_model.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/search_field.dart';
 
 class CardListScreen extends StatefulWidget {
+  CardListScreen({
+    @required this.viewModel,
+  }) : assert(viewModel != null);
+
+  final CardListScreenViewModel viewModel;
+
   @override
-  _CardListScreenState createState() => _CardListScreenState();
+  _CardListScreenState createState() =>
+      _CardListScreenState(viewModel: viewModel);
 }
 
 class _CardListScreenState extends State<CardListScreen> {
+  _CardListScreenState({
+    @required this.viewModel,
+  }) : assert(viewModel != null);
+
+  final CardListScreenViewModel viewModel;
   String query;
   bool isKeyboardVisible = false;
 
@@ -28,14 +41,6 @@ class _CardListScreenState extends State<CardListScreen> {
         setState(() {});
       },
     );
-  }
-
-  List<ThronesCard> _cards() {
-    if (query == null || query == '') {
-      return CardsStore.of(context).getCardsAlphabetically();
-    } else {
-      return CardsStore.of(context).getCardsWithQuery(query);
-    }
   }
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
@@ -87,7 +92,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cards = _cards();
+    final cards = viewModel.cards(query: query);
     return Scaffold(
       appBar: AppBar(
         title: _searchField(context: context),
