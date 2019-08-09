@@ -12,6 +12,17 @@ class Type {
   static const title = Type._(6);
   static const unknown = Type._(7);
 
+  static const List<Type> values = <Type>[
+    agenda,
+    attachment,
+    character,
+    event,
+    location,
+    plot,
+    title,
+    unknown,
+  ];
+
   static Type code(String code) {
     switch (code) {
       case 'agenda':
