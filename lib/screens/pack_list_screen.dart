@@ -53,11 +53,12 @@ class _PackListScreenState extends State<PackListScreen> {
       itemBuilder: (BuildContext context, int index) {
         final pack = packs[index];
         return PackListItem(
-            pack: pack,
-            index: index,
-            onTap: () {
-              _onPackSelected(context: context, pack: pack);
-            });
+          pack: pack,
+          index: index,
+          onTap: () {
+            _onPackSelected(context: context, pack: pack);
+          },
+        );
       },
     );
   }
@@ -82,7 +83,8 @@ class _PackListScreenState extends State<PackListScreen> {
       ),
       body: FutureBuilder<List<ThronesPack>>(
         future: _packs,
-        builder: (BuildContext context, AsyncSnapshot<List<ThronesPack>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<ThronesPack>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:

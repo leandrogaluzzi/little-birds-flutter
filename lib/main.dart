@@ -10,14 +10,13 @@ TODO:
 - CardScreen - Placeholder Image
 - CardScreen - Fix or Replace library
 - Filter
-- Make Search bar permanent
 - Home Deck Cell
 - Home Infinite Scroll
 - Deck Screen
 - Main Screen
 - Firebase - Anaytics
-- Unit Tests
-- Widget Tests
+- Unit Tests (future)
+- Widget Tests (future)
 - Firebase - Ads (future)
 - Local DB for cards (future)
 */
