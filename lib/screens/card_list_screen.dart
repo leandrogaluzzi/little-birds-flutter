@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
+import 'package:little_birds/widgets/search_field.dart';
 
 import 'card_screen.dart';
 
@@ -13,7 +15,6 @@ class CardListScreen extends StatefulWidget {
 }
 
 class _CardListScreenState extends State<CardListScreen> {
-  bool _isSearching = false;
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
@@ -27,12 +28,6 @@ class _CardListScreenState extends State<CardListScreen> {
   void dispose() {
     _textController.dispose();
     super.dispose();
-  }
-
-  void _toggleSearch() {
-    setState(() {
-      _isSearching = !_isSearching;
-    });
   }
 
   void _updateContent() {
@@ -52,50 +47,24 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
-  Widget _getButtonSearch({BuildContext context}) {
-    return IconButton(
-      icon: Icon(Icons.search),
-      onPressed: () {
-        FocusScope.of(context).requestFocus(_focusNode);
-        _toggleSearch();
-      },
-    );
-  }
-
-  Widget _getButtonFilter() {
-    return IconButton(
-      icon: Icon(Icons.filter_list),
-      onPressed: () {},
-    );
-  }
-
-  Widget _getButtonCancelSearch() {
-    return IconButton(
-      icon: Icon(Icons.close, color: Colors.white),
-      onPressed: () {
-        _textController.clear();
-        _toggleSearch();
-      },
-    );
-  }
-
-  Widget _getSearchField() {
-    return TextField(
-      focusNode: _focusNode,
+  Widget _searchField() {
+    return SearchField(
       controller: _textController,
-      style: TextStyle(color: Colors.white),
-      autofocus: true,
-      decoration: InputDecoration(
-        hintStyle: TextStyle(color: Colors.white),
-        hintText: 'Search Cards',
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+      focus: _focusNode,
+    );
+  }
+
+  Widget _filterButton() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 100.0),
+      child: FloatingActionButton(
+        child: Icon(
+          Icons.filter_list,
+          color: Colors.black,
         ),
-        disabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
+        onPressed: () {},
+        backgroundColor: kColorYellowLittleBirds,
       ),
-      onChanged: (String text) {},
     );
   }
 
@@ -104,12 +73,7 @@ class _CardListScreenState extends State<CardListScreen> {
     final cards = CardsStore.of(context).getCardsAlphabetically();
     return Scaffold(
       appBar: AppBar(
-        leading: _isSearching ? _getButtonCancelSearch() : null,
-        title: _isSearching ? _getSearchField() : Text('Cards'),
-        actions: <Widget>[
-          if (!_isSearching) _getButtonSearch(context: context),
-          _getButtonFilter(),
-        ],
+        title: _searchField(),
       ),
       body: CardList(
         cards: cards,
@@ -117,6 +81,7 @@ class _CardListScreenState extends State<CardListScreen> {
           _onCardSelected(context: context, card: card);
         },
       ),
+      floatingActionButton: _filterButton(),
     );
   }
 }
