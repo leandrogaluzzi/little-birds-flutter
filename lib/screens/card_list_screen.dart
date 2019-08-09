@@ -8,6 +8,7 @@ import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/card_list_screen_view_model.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
+import 'package:little_birds/widgets/filter_component.dart';
 import 'package:little_birds/widgets/search_field.dart';
 
 class CardListScreen extends StatefulWidget {
@@ -56,6 +57,15 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
+  void _showFilterWidget(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return FilterComponent();
+      },
+    );
+  }
+
   void _onTextSubmitted({BuildContext context}) {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
@@ -76,7 +86,7 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
-  Widget _filterButton() {
+  Widget _filterButton(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 80.0),
       child: FloatingActionButton(
@@ -84,7 +94,9 @@ class _CardListScreenState extends State<CardListScreen> {
           Icons.filter_list,
           color: Colors.black,
         ),
-        onPressed: () {},
+        onPressed: () {
+          _showFilterWidget(context);
+        },
         backgroundColor: kColorYellowLittleBirds,
       ),
     );
@@ -103,7 +115,7 @@ class _CardListScreenState extends State<CardListScreen> {
           _onCardSelected(context: context, card: card);
         },
       ),
-      floatingActionButton: isKeyboardVisible ? null : _filterButton(),
+      floatingActionButton: isKeyboardVisible ? null : _filterButton(context),
     );
   }
 }
