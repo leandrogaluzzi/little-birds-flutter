@@ -58,7 +58,7 @@ class ThronesCard {
         imageUrl = json['image_url'];
 
   Type cardType() {
-    return getCardType(typeCode);
+    return Type.code(typeCode);
   }
 
   Faction faction() {
