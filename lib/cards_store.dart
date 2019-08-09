@@ -33,6 +33,13 @@ class CardsStore extends InheritedWidget {
     return filteredCards;
   }
 
+  List<ThronesCard> getCardsWithQuery(String query) {
+    var filteredCards = cards
+        .where((card) => card.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return filteredCards;
+  }
+
   /*List<ThronesCard> getCardsWithCodes(List<String> codes) {
     
   }*/

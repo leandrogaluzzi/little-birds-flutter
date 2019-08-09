@@ -14,9 +14,19 @@ class CardListScreen extends StatefulWidget {
 }
 
 class _CardListScreenState extends State<CardListScreen> {
+  String query;
+
   @override
   void initState() {
     super.initState();
+  }
+
+  List<ThronesCard> _cards() {
+    if (query == null || query == '') {
+      return CardsStore.of(context).getCardsAlphabetically();
+    } else {
+      return CardsStore.of(context).getCardsWithQuery(query);
+    }
   }
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
@@ -36,7 +46,10 @@ class _CardListScreenState extends State<CardListScreen> {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
 
-  void _onTextChanged({String text}) {}
+  void _onTextChanged({String text}) {
+    query = text;
+    setState(() {});
+  }
 
   Widget _searchField({BuildContext context}) {
     return SearchField(
@@ -51,7 +64,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   Widget _filterButton() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 100.0),
+      padding: EdgeInsets.only(bottom: 80.0),
       child: FloatingActionButton(
         child: Icon(
           Icons.filter_list,
@@ -65,7 +78,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cards = CardsStore.of(context).getCardsAlphabetically();
+    final cards = _cards();
     return Scaffold(
       appBar: AppBar(
         title: _searchField(context: context),
