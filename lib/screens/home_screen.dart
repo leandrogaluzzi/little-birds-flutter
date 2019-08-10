@@ -5,38 +5,33 @@ import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
+import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/cards_store.dart';
 
 class HomeScreen extends StatefulWidget {
+  HomeScreen({
+    @required this.viewModel,
+  }) : assert(viewModel != null);
+
+  final HomeScreenViewModel viewModel;
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState(viewModel: viewModel);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  _HomeScreenState({
+    @required this.viewModel,
+  }) : assert(viewModel != null);
+
+  final HomeScreenViewModel viewModel;
   Future<List<ThronesDeck>> _decks;
-  ThronesService _thronesService = ThronesService();
 
   @override
   void initState() {
-    _decks = _buildDecks();
+    _decks = viewModel.decks();
     super.initState();
-  }
-
-  Future<List<ThronesDeck>> _buildDecks() async {
-    final decks = await _getDecks([], DateTime.now());
-    return decks;
-  }
-
-  Future<List<ThronesDeck>> _getDecks(
-      List<ThronesDeck> decks, DateTime date) async {
-    if (decks.length > 10) {
-      return decks;
-    }
-    List<ThronesDeck> newDecks = await _thronesService.getDecks(date);
-    decks.addAll(newDecks);
-    DateTime newDate = date.add(Duration(days: -1));
-    return _getDecks(decks, newDate);
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
@@ -68,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _widgetList({@required List<ThronesDeck> decks}) {
     return RefreshIndicator(
-      onRefresh: () => _buildDecks(),
+      onRefresh: () => viewModel.decks(),
       child: ListView.builder(
         itemCount: decks.length,
         itemBuilder: (BuildContext context, int index) {

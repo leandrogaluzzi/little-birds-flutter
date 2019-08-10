@@ -33,7 +33,7 @@ class HomeListItem extends StatelessWidget {
               viewModel.name(),
               maxLines: 3,
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

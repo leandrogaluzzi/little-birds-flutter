@@ -6,6 +6,7 @@ import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
 import 'package:little_birds/screens/card_list_screen.dart';
 import 'package:little_birds/view_models/card_list_screen_view_model.dart';
+import 'package:little_birds/view_models/home_screen_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [
@@ -15,7 +16,7 @@ class TabBarComponent extends StatelessWidget {
   ];
 
   HomeScreen _homeScreen() {
-    return HomeScreen();
+    return HomeScreen(viewModel: HomeScreenViewModel());
   }
 
   PackListScreen _packListScreen() {

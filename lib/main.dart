@@ -10,7 +10,6 @@ TODO:
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
 - Filter
-- Home Deck Cell
 - Home Infinite Scroll
 - Deck Screen
 - Main Screen
