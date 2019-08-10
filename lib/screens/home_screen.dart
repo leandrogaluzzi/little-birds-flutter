@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
@@ -26,14 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }) : assert(viewModel != null);
 
   final HomeScreenViewModel viewModel;
-  Future<List<ThronesDeck>> _decks;
+  Future<List<ThronesDeck>> _decksFuture;
+  List<ThronesDeck> _decks;
   ScrollController _controller;
 
   @override
   void initState() {
-    _decks = viewModel.decks();
+    _decksFuture = viewModel.decks();
     _startScrollController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_scrollListener);
+    super.dispose();
   }
 
   void _startScrollController() {
@@ -44,10 +50,26 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollListener() {
     if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
-      setState(() {
-        print("reach the bottom");
-      });
+      _loadMoreDecks();
     }
+  }
+
+  void _loadMoreDecks() async {
+    final newDecks = await viewModel.moreDecks();
+    print(newDecks.length);
+    setState(() {
+      _decks.addAll(newDecks);
+      print(_decks.length);
+    });
+  }
+
+  Future<void> _refreshDecks() async {
+    final decks = await viewModel.decks();
+    print(decks.length);
+    setState(() {
+      _decks = decks;
+      print(_decks.length);
+    });
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
@@ -77,15 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(color: Colors.red);
   }
 
-  Widget _widgetList({@required List<ThronesDeck> decks}) {
+  Widget _widgetList() {
     return RefreshIndicator(
-      onRefresh: () => viewModel.decks(),
+      onRefresh: () {
+        return _refreshDecks();
+      },
       child: ListView.builder(
         controller: _controller,
-        itemCount: decks.length,
+        itemCount: _decks.length,
         itemBuilder: (BuildContext context, int index) {
           final cards = CardsStore.of(context).getCardsAlphabetically();
-          final deck = decks[index];
+          final deck = _decks[index];
           final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
           return HomeListItem(
             viewModel: viewModel,
@@ -106,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Little Birds'),
       ),
       body: FutureBuilder<List<ThronesDeck>>(
-        future: _decks,
+        future: _decksFuture,
         builder:
             (BuildContext context, AsyncSnapshot<List<ThronesDeck>> snapshot) {
           switch (snapshot.connectionState) {
@@ -116,7 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
               return _widgetLoading();
             case ConnectionState.done:
               if (snapshot.hasError) return _widgetError(error: snapshot.error);
-              return _widgetList(decks: snapshot.data);
+              _decks = snapshot.data;
+              return _widgetList();
           }
           return null;
         },
