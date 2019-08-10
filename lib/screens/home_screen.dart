@@ -27,11 +27,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final HomeScreenViewModel viewModel;
   Future<List<ThronesDeck>> _decks;
+  ScrollController _controller;
 
   @override
   void initState() {
     _decks = viewModel.decks();
+    _startScrollController();
     super.initState();
+  }
+
+  void _startScrollController() {
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      setState(() {
+        print("reach the bottom");
+      });
+    }
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
@@ -65,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return RefreshIndicator(
       onRefresh: () => viewModel.decks(),
       child: ListView.builder(
+        controller: _controller,
         itemCount: decks.length,
         itemBuilder: (BuildContext context, int index) {
           final cards = CardsStore.of(context).getCardsAlphabetically();
