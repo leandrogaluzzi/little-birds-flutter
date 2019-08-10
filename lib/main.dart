@@ -16,6 +16,8 @@ TODO:
 - Main Screen
 - Firebase - Anaytics
 - Image Screen animation
+- Transitions
+- Config CodeMagic.io
 - Unit Tests (future)
 - Widget Tests (future)
 - Firebase - Ads (future)

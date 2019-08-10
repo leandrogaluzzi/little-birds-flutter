@@ -77,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
           return HomeListItem(
             viewModel: viewModel,
+            index: index,
             onTap: () {
               _onDeckSelected(context: context, deck: deck);
             },

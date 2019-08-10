@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/utils/style.dart';
+import 'package:little_birds/utils/constants.dart';
 
 class PackListItem extends StatelessWidget {
   PackListItem({
@@ -45,7 +45,10 @@ class PackListItem extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: kTextStyleGreySmall,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: kColorGrayText,
+          ),
         ),
       ),
     );

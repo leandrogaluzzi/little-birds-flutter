@@ -1,47 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/utils/style.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 
-const double kPadding = 7.0;
+const double kSmallPadding = 7.0;
+const double kPadding = 12.0;
+
+final TextStyle _kTextStyleBlackSmall = TextStyle(
+  fontSize: 18.0,
+  color: Colors.black,
+);
 
 class HomeListItem extends StatelessWidget {
   HomeListItem({
     Key key,
     @required this.viewModel,
+    @required this.index,
     @required this.onTap,
   })  : assert(viewModel != null),
         super(key: key);
 
   final HomeListItemViewModel viewModel;
   final VoidCallback onTap;
+  final int index;
 
   Widget _getRowName() {
     return Container(
-      color: viewModel.factionColor(),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                viewModel.iconName(),
-              ),
-            ),
-          ),
+          Container(child: Center(child: Image.asset(viewModel.iconName()))),
+          Container(width: kPadding),
           Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: kPadding * 2,
-                top : kPadding * 2,
-                bottom: kPadding * 2,
-              ),
-              child: Text(
-                viewModel.name(),
-                maxLines: 3,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: viewModel.factionTextColor(),
-                ),
+            child: Text(
+              viewModel.name(),
+              maxLines: 3,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -53,17 +46,17 @@ class HomeListItem extends StatelessWidget {
   Widget _getRowFaction() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(kPadding),
+        padding: const EdgeInsets.all(0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
               viewModel.factionName(),
-              style: kTextStyleBlackSmall,
+              style: _kTextStyleBlackSmall,
             ),
             Text(
               viewModel.time(),
-              style: kTextStyleBlackSmall,
+              style: _kTextStyleBlackSmall,
             ),
           ],
         ),
@@ -74,10 +67,10 @@ class HomeListItem extends StatelessWidget {
   Widget _getRowAgenda() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kPadding),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Text(
           viewModel.agendas(),
-          style: kTextStyleBlackSmall,
+          style: _kTextStyleBlackSmall,
         ),
       ),
     );
@@ -86,11 +79,11 @@ class HomeListItem extends StatelessWidget {
   Widget _getRowInfo() {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(kPadding),
+        padding: const EdgeInsets.all(0),
         child: Text(
           viewModel.details(),
           textAlign: TextAlign.center,
-          style: kTextStyleBlackSmall,
+          style: _kTextStyleBlackSmall,
         ),
       ),
     );
@@ -100,19 +93,19 @@ class HomeListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-          vertical: 8.0,
-        ),
-        child: Container(
-          color: Colors.white,
+      child: Container(
+        color: index % 2 == 0 ? Colors.white : Colors.grey[200],
+        child: Padding(
+          padding: const EdgeInsets.all(kPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               _getRowName(),
+              Container(height: kPadding),
               _getRowFaction(),
+              Container(height: kSmallPadding),
               _getRowAgenda(),
+              Container(height: kSmallPadding),
               _getRowInfo(),
             ],
           ),
