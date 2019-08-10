@@ -9,13 +9,13 @@ TODO:
 - Find fonts
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
-- CardScreen - Fix or Replace library
 - Filter
 - Home Deck Cell
 - Home Infinite Scroll
 - Deck Screen
 - Main Screen
 - Firebase - Anaytics
+- Image Screen animation
 - Unit Tests (future)
 - Widget Tests (future)
 - Firebase - Ads (future)
