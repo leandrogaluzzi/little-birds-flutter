@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/widgets/faction_grid.dart';
 
 class FilterComponent extends StatefulWidget {
   @override

@@ -11,6 +11,10 @@ const _cardsURL = '/api/public/cards/';
 const _packsURL = '/api/public/packs/';
 const _decksURL = '/api/public/decklists/by_date/';
 
+class ThronesError extends NetworkError {
+  ThronesError([message]) : super(message);
+}
+
 class ThronesAPI {
   ThronesAPI({
     @required this.network,
@@ -25,8 +29,8 @@ class ThronesAPI {
       List<ThronesCard> cards =
           list.map((item) => ThronesCard.fromJson(item)).toList();
       return cards;
-    } catch (e) {
-      throw Exception(e);
+    } on NetworkError {
+      throw ThronesError();
     }
   }
 
@@ -37,8 +41,8 @@ class ThronesAPI {
       List<ThronesPack> packs =
           list.map((item) => ThronesPack.fromJson(item)).toList();
       return packs;
-    } catch (e) {
-      throw Exception(e);
+    } on NetworkError {
+      throw ThronesError();
     }
   }
 
@@ -57,10 +61,10 @@ class ThronesAPI {
       List<ThronesDeck> decks =
           list.map((item) => ThronesDeck.fromJson(item)).toList();
       return decks;
-    } on ServerErrorException {
+    } on ServerError {
       return [];
-    } catch (e) {
-      throw Exception(e);
+    } on NetworkError {
+      throw ThronesError();
     }
   }
 }

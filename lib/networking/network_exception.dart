@@ -1,5 +1,5 @@
-class NetworkException implements Exception {
-  NetworkException([this._message, this._prefix]);
+class NetworkError implements Error {
+  NetworkError([this._message, this._prefix]);
 
   final String _message;
   final String _prefix;
@@ -7,21 +7,28 @@ class NetworkException implements Exception {
   String toString() {
     return '$_prefix$_message';
   }
+
+  @override
+  StackTrace get stackTrace => null;
 }
 
-class FetchDataException extends NetworkException {
-  FetchDataException([String message])
+class FetchDataError extends NetworkError {
+  FetchDataError([String message])
       : super(message, "Error During Communication: ");
 }
 
-class BadRequestException extends NetworkException {
-  BadRequestException([message]) : super(message, "Invalid Request: ");
+class BadRequestError extends NetworkError {
+  BadRequestError([message]) : super(message, "Invalid Request: ");
 }
 
-class UnauthorisedException extends NetworkException {
-  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+class UnauthorisedError extends NetworkError {
+  UnauthorisedError([message]) : super(message, "Unauthorised: ");
 }
 
-class ServerErrorException extends NetworkException {
-  ServerErrorException([message]) : super(message, "Server Error: ");
+class ServerError extends NetworkError {
+  ServerError([message]) : super(message, "Server Error: ");
+}
+
+class NoConnectionException extends NetworkError {
+  NoConnectionException([message]) : super(message, "No Internet Connection: ");
 }

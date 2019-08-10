@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:little_birds/screens/main_screen.dart';
 import 'package:little_birds/utils/themes.dart';
 
@@ -26,6 +27,7 @@ void main() => runApp(LittleBirdsApp());
 class LittleBirdsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainScreen(),

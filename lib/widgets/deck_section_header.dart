@@ -9,7 +9,8 @@ class DeckSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();/*SliverPersistentHeader(
+    return Container();
+    /*SliverPersistentHeader(
       pinned: false,
       floating: false,
       delegate: _DeckSectionHeaderDelegate(text: text),
@@ -17,12 +18,12 @@ class DeckSectionHeader extends StatelessWidget {
   }
 }
 
-class _DeckSectionHeaderDelegate extends SliverPersistentHeaderDelegate {
-  /*_DeckSectionHeaderDelegate({
+/*class _DeckSectionHeaderDelegate extends SliverPersistentHeaderDelegate {
+  _DeckSectionHeaderDelegate({
     @required this.text,
   }) : assert(text != null);
 
-  final String text;*/
+  final String text;
 
   @override
   Widget build(
@@ -50,4 +51,4 @@ class _DeckSectionHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return false;
   }
-}
+}*/

@@ -21,10 +21,10 @@ class NetworkProvider {
     try {
       http.Response response = await client
           .get(fullUrl, headers: headers)
-          .timeout(Duration(seconds: 10));
+          .timeout(Duration(seconds: 20));
       return _responseString(response: response);
     } on SocketException {
-      throw SocketException;
+      throw NoConnectionException();
     }
   }
 
@@ -33,14 +33,14 @@ class NetworkProvider {
       case 200:
         return response.body;
       case 400:
-        throw BadRequestException(response.body.toString());
+        throw BadRequestError(response.body.toString());
       case 401:
       case 403:
-        throw UnauthorisedException(response.body.toString());
+        throw UnauthorisedError(response.body.toString());
       case 500:
-        throw ServerErrorException(response.body.toString());
+        throw ServerError(response.body.toString());
       default:
-        throw FetchDataException(
+        throw FetchDataError(
             'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
     }
   }
