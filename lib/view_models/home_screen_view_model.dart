@@ -9,14 +9,22 @@ class HomeScreenViewModel {
   Future<void> loadDecks() async {
     _date = DateTime.now();
     decks = await _getDecks([], _date);
+    _sort(deck: decks);
     return;
   }
 
   Future<void> moreDecks() async {
     final newDate = _previousDay(fromDate: _date);
     final newDecks = await _getDecks([], newDate);
+    _sort(deck: newDecks);
     decks.addAll(newDecks);
     return;
+  }
+
+  void _sort({List<ThronesDeck> deck}) {
+    deck.sort((deckA, deckB) {
+      return deckB.dateCreation.compareTo(deckA.dateCreation);
+    });
   }
 
   Future<List<ThronesDeck>> _getDecks(

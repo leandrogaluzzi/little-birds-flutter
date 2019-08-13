@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeScreenViewModel viewModel;
   Future<void> _decksFuture;
   ScrollController _controller;
-  bool isLoading = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -50,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _scrollListener() {
+    if (_isLoading) {
+      return;
+    }
     if (_controller.offset >=
             _controller.position.maxScrollExtent - _heightLoading &&
         !_controller.position.outOfRange) {
@@ -58,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _loadMoreDecks() async {
+    _isLoading = true;
     await viewModel.moreDecks();
     setState(() {});
   }
@@ -136,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _isLoading = false;
     return Scaffold(
       appBar: AppBar(
         title: Text('Little Birds'),
