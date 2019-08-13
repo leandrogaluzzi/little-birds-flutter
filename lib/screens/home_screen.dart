@@ -63,8 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  Future<void> _test() async {}
-
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
     final cardsStore = CardsStore.of(context);
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
@@ -133,15 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           return null;
         },
-      ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 100),
-        child: FloatingActionButton(
-          onPressed: () {
-            setState(() {});
-          },
-          child: Text('A'),
-        ),
       ),
     );
   }
