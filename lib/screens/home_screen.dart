@@ -8,6 +8,8 @@ import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/cards_store.dart';
 
+double _heightLoading = 75;
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({
     @required this.viewModel,
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeScreenViewModel viewModel;
   Future<void> _decksFuture;
   ScrollController _controller;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -47,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _scrollListener() {
-    if (_controller.offset >= _controller.position.maxScrollExtent &&
+    if (_controller.offset >=
+            _controller.position.maxScrollExtent - _heightLoading &&
         !_controller.position.outOfRange) {
       _loadMoreDecks();
     }
@@ -89,23 +93,42 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(color: Colors.red);
   }
 
+  Widget _widgetListItem({BuildContext context, int index}) {
+    final cards = CardsStore.of(context).getCardsAlphabetically();
+    final deck = this.viewModel.decks[index];
+    final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
+    return HomeListItem(
+      viewModel: viewModel,
+      index: index,
+      onTap: () {
+        _onDeckSelected(context: context, deck: deck);
+      },
+    );
+  }
+
+  Widget _widgetLoadingMore({int index}) {
+    return Container(
+      height: _heightLoading,
+      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
   Widget _widgetList() {
+    final count = viewModel.decks.length;
     return RefreshIndicator(
       onRefresh: _refreshDecks,
       child: ListView.builder(
         controller: _controller,
-        itemCount: viewModel.decks.length,
+        itemCount: count + 1,
         itemBuilder: (BuildContext context, int index) {
-          final cards = CardsStore.of(context).getCardsAlphabetically();
-          final deck = this.viewModel.decks[index];
-          final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
-          return HomeListItem(
-            viewModel: viewModel,
-            index: index,
-            onTap: () {
-              _onDeckSelected(context: context, deck: deck);
-            },
-          );
+          if (index == count) {
+            return _widgetLoadingMore(index: index);
+          } else {
+            return _widgetListItem(context: context, index: index);
+          }
         },
       ),
     );
