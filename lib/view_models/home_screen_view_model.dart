@@ -4,17 +4,19 @@ import 'package:little_birds/networking/thrones_service.dart';
 class HomeScreenViewModel {
   ThronesService _thronesService = ThronesService();
   DateTime _date = DateTime.now();
+  List<ThronesDeck> decks = [];
 
-  Future<List<ThronesDeck>> decks() async {
+  Future<void> loadDecks() async {
     _date = DateTime.now();
-    final decks = await _getDecks([], _date);
-    return decks;
+    decks = await _getDecks([], _date);
+    return;
   }
 
-  Future<List<ThronesDeck>> moreDecks() async {
+  Future<void> moreDecks() async {
     final newDate = _previousDay(fromDate: _date);
-    final decks = await _getDecks([], newDate);
-    return decks;
+    final newDecks = await _getDecks([], newDate);
+    decks.addAll(newDecks);
+    return;
   }
 
   Future<List<ThronesDeck>> _getDecks(

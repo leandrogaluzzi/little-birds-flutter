@@ -25,13 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }) : assert(viewModel != null);
 
   final HomeScreenViewModel viewModel;
-  Future<List<ThronesDeck>> _decksFuture;
-  List<ThronesDeck> _decks;
+  Future<void> _decksFuture;
   ScrollController _controller;
 
   @override
   void initState() {
-    _decksFuture = viewModel.decks();
+    _decksFuture = viewModel.loadDecks();
     _startScrollController();
     super.initState();
   }
@@ -55,22 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _loadMoreDecks() async {
-    final newDecks = await viewModel.moreDecks();
-    print(newDecks.length);
-    setState(() {
-      _decks.addAll(newDecks);
-      print(_decks.length);
-    });
+    await viewModel.moreDecks();
+    setState(() {});
   }
 
   Future<void> _refreshDecks() async {
-    final decks = await viewModel.decks();
-    print(decks.length);
-    setState(() {
-      _decks = decks;
-      print(_decks.length);
-    });
+    await viewModel.loadDecks();
+    setState(() {});
   }
+
+  Future<void> _test() async {}
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
     final cardsStore = CardsStore.of(context);
@@ -95,21 +88,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    print(error);
     return Container(color: Colors.red);
   }
 
   Widget _widgetList() {
     return RefreshIndicator(
-      onRefresh: () {
-        return _refreshDecks();
-      },
+      onRefresh: _refreshDecks,
       child: ListView.builder(
         controller: _controller,
-        itemCount: _decks.length,
+        itemCount: viewModel.decks.length,
         itemBuilder: (BuildContext context, int index) {
           final cards = CardsStore.of(context).getCardsAlphabetically();
-          final deck = _decks[index];
+          final deck = this.viewModel.decks[index];
           final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
           return HomeListItem(
             viewModel: viewModel,
@@ -129,10 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Little Birds'),
       ),
-      body: FutureBuilder<List<ThronesDeck>>(
+      body: FutureBuilder<void>(
         future: _decksFuture,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<ThronesDeck>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:
@@ -140,11 +129,19 @@ class _HomeScreenState extends State<HomeScreen> {
               return _widgetLoading();
             case ConnectionState.done:
               if (snapshot.hasError) return _widgetError(error: snapshot.error);
-              _decks = snapshot.data;
               return _widgetList();
           }
           return null;
         },
+      ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 100),
+        child: FloatingActionButton(
+          onPressed: () {
+            setState(() {});
+          },
+          child: Text('A'),
+        ),
       ),
     );
   }
