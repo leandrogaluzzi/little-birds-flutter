@@ -14,6 +14,7 @@ TODO:
 - Main Screen
 - Firebase - Anaytics
 - Image Screen animation
+- CardsStore - improve cards with query
 - Transitions
 - Config CodeMagic.io
 - Unit Tests (future)

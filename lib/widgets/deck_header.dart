@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';
 
 class DeckHeader extends StatelessWidget {
@@ -6,7 +7,7 @@ class DeckHeader extends StatelessWidget {
     @required this.viewModel,
   }) : assert(viewModel != null);
 
-  DeckHeaderViewModel viewModel;
+  final DeckHeaderViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,18 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Widget _info() {
-    return Container();
+    return Container(
+      height: 40,
+      child: Center(
+        child: Text(
+          viewModel.info(),
+          style: TextStyle(
+            fontSize: 16.0,
+            color: kColorGrayText,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _link() {

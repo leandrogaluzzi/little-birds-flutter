@@ -40,8 +40,9 @@ class CardsStore extends InheritedWidget {
     return filteredCards;
   }
 
-  /*List<ThronesCard> getCardsWithCodes(List<String> codes) {
-    
-  }*/
-
+  List<ThronesCard> getCardsWithCodes(List<String> codes) {
+    return cards.where((card) {
+      return codes.contains(card.code) ? true : false;
+    }).toList();
+  }
 }

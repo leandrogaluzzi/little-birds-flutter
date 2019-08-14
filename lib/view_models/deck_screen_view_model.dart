@@ -1,4 +1,5 @@
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/model/thrones_card.dart';
 //import 'package:little_birds/model/slot.dart';
 //import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
@@ -38,11 +39,11 @@ class DeckScreenViewModel {
     return agendas;
   }*/
 
-  /*List<Slot> slots({Type type}) {
+  List<ThronesCard> slots({Type type}) {
     final codes = deck.slots.map((slot) => slot.code).toList();
     final cards = cardsStore.getCardsWithCodes(codes);
     final filteredCards =
         cards.where((card) => card.cardType() == type).toList();
     return filteredCards;
-  }*/
+  }
 }
