@@ -4,10 +4,13 @@ PODS:
     - Flutter
     - Reachability
   - Reachability (3.2)
+  - url_launcher (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - keyboard_visibility (from `.symlinks/plugins/keyboard_visibility/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -18,11 +21,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   keyboard_visibility:
     :path: ".symlinks/plugins/keyboard_visibility/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   keyboard_visibility: 96a24de806fe6823c3ad956c01ba2ec6d056616f
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 

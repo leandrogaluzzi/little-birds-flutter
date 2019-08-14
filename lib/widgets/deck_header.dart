@@ -54,7 +54,6 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   Widget _info() {
     return Container(
-      height: 40,
       child: Center(
         child: Text(
           viewModel.info(),
@@ -67,10 +66,6 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Widget _link() {
-    return Container();
-  }
-
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -79,18 +74,18 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: <Widget>[
           _icon(),
           _name(),
+          Container(height: 10),
           _info(),
-          _link(),
         ],
       ),
     );
   }
 
   @override
-  double get maxExtent => 200;
+  double get maxExtent => 150;
 
   @override
-  double get minExtent => 200;
+  double get minExtent => 150;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

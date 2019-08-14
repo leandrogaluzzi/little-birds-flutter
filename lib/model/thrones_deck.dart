@@ -57,4 +57,8 @@ class ThronesDeck {
   String icon() {
     return 'assets/icons/$factionCode.png';
   }
+
+  String link() {
+    return 'https://thronesdb.com/decklist/view/$id';
+  }
 }

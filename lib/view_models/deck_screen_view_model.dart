@@ -15,6 +15,10 @@ class DeckScreenViewModel {
   final ThronesDeck deck;
   final CardsStore cardsStore;
 
+  String link() {
+    return deck.link();
+  }
+
   String sectionHeaderTitle({Type type}) {
     switch (type) {
       case Type.agenda:

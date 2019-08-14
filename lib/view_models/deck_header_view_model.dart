@@ -53,8 +53,4 @@ class DeckHeaderViewModel {
     });
     return 'Plot: $plotCount - Deck: $deckCount';
   }
-
-  String link() {
-    return '';
-  }
 }
