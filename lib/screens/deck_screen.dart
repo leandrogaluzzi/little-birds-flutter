@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/view_models/deck_header_view_model.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
-import 'package:little_birds/widgets/deck_header.dart';//
+import 'package:little_birds/widgets/deck_header.dart'; //
 //import 'package:little_birds/widgets/deck_section_header.dart';
 import 'package:little_birds/model/type.dart';
 
@@ -15,7 +16,8 @@ class DeckScreen extends StatelessWidget {
   final DeckScreenViewModel viewModel;
 
   Widget _header() {
-    return DeckHeader();
+    final viewModel = DeckHeaderViewModel(deck: this.viewModel.deck);
+    return DeckHeader(viewModel: viewModel);
   }
 
   /*Widget _sectionHeader({Type type}) {
@@ -23,7 +25,7 @@ class DeckScreen extends StatelessWidget {
   }*/
 
   Widget _sectionList({Type type}) {
-    final cards = [];//viewModel.cards(type: type);
+    final cards = []; //viewModel.cards(type: type);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
@@ -33,9 +35,7 @@ class DeckScreen extends StatelessWidget {
             mode: CardListItemMode.deck,
             card: card,
             //count: cards.length,
-            onTap: (card) {
-
-            },
+            onTap: (card) {},
           );
         },
         childCount: cards.length,

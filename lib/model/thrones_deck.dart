@@ -54,7 +54,7 @@ class ThronesDeck {
     return Faction.code(factionCode);
   }
 
-  String cardIconName() {
+  String icon() {
     return 'assets/icons/$factionCode.png';
   }
 }

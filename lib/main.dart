@@ -10,7 +10,6 @@ TODO:
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
 - Filter
-- Home Infinite Scroll UI
 - Deck Screen
 - Main Screen
 - Firebase - Anaytics

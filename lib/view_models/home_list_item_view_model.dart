@@ -23,7 +23,7 @@ class HomeListItemViewModel {
   }
 
   String iconName() {
-    return deck.cardIconName();
+    return deck.icon();
   }
 
   String time() {
