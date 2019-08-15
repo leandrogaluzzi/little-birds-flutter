@@ -82,10 +82,10 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 150;
+  double get maxExtent => 135;
 
   @override
-  double get minExtent => 150;
+  double get minExtent => 135;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {

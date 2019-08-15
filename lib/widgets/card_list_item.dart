@@ -16,7 +16,7 @@ class CardListItem extends StatelessWidget {
     @required this.mode,
     @required this.index,
     @required this.onTap,
-    //this.count,
+    this.count,
   })  : assert(card != null),
         assert(mode != null),
         assert(index != null),
@@ -27,7 +27,7 @@ class CardListItem extends StatelessWidget {
   final CardListItemMode mode;
   final int index;
   final CardCallback onTap;
-  //final int count;
+  final int count;
 
   final TextStyle _textStyleName = TextStyle(
     fontSize: 16.0,
@@ -82,7 +82,7 @@ class CardListItem extends StatelessWidget {
       width: 44.0,
       child: Center(
         child: Text(
-          '0',
+          '$count',
           style: _textStyleQuantity,
         ),
       ),

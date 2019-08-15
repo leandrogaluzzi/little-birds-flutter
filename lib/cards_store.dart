@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/model/card_quantity.dart';
+import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/thrones_card.dart';
 
 class CardsStore extends InheritedWidget {
@@ -40,9 +42,25 @@ class CardsStore extends InheritedWidget {
     return filteredCards;
   }
 
-  List<ThronesCard> getCardsWithCodes(List<String> codes) {
+  List<ThronesCard> _getCardsWithCodes(List<String> codes) {
     return cards.where((card) {
       return codes.contains(card.code) ? true : false;
     }).toList();
+  }
+
+  List<CardQuantity> getCardsQuantityFromSlots(List<Slot> slots) {
+    List<String> codes = slots.map((slot) => slot.code).toList();
+    codes.sort();
+    var cards = _getCardsWithCodes(codes);
+    cards.sort((a, b) => a.code.compareTo(b.code));
+    List<CardQuantity> cardsQuantity = [];
+    for (int i = 0; i < cards.length; i++) {
+      final slot = slots[i];
+      final card = cards[i];
+      CardQuantity cardQuantity =
+          CardQuantity(card: card, quantity: slot.quantity);
+      cardsQuantity.add(cardQuantity);
+    }
+    return cardsQuantity;
   }
 }
