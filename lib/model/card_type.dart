@@ -46,14 +46,14 @@ class CardType {
 
   String toString() {
     return const <int, String>{
-      0: 'agenda',
-      1: 'attachment',
-      2: 'character',
-      3: 'event',
-      4: 'location',
-      5: 'plot',
-      6: 'title',
-      7: 'unknown',
+      0: 'Agenda',
+      1: 'Attachment',
+      2: 'Character',
+      3: 'Event',
+      4: 'Location',
+      5: 'Plot',
+      6: 'Title',
+      7: 'Unknown',
     }[_index];
   }
 }
