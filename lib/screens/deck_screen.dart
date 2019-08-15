@@ -9,7 +9,7 @@ import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
-import 'package:little_birds/model/type.dart';
+import 'package:little_birds/model/card_type.dart';
 
 class DeckScreen extends StatelessWidget {
   DeckScreen({
@@ -44,7 +44,7 @@ class DeckScreen extends StatelessWidget {
     return DeckFooter(url: url);
   }
 
-  Widget _sectionHeader({Type type}) {
+  Widget _sectionHeader({CardType type}) {
     String text = viewModel.sectionHeaderTitle(type: type);
     return Container(
       height: 35,
@@ -77,7 +77,7 @@ class DeckScreen extends StatelessWidget {
     );
   }
 
-  Widget _sectionList({Type type}) {
+  Widget _sectionList({CardType type}) {
     final cards = viewModel.cards(type: type);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -105,12 +105,12 @@ class DeckScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           _header(context),
-          _sectionList(type: Type.agenda),
-          _sectionList(type: Type.plot),
-          _sectionList(type: Type.character),
-          _sectionList(type: Type.attachment),
-          _sectionList(type: Type.location),
-          _sectionList(type: Type.event),
+          _sectionList(type: CardType.agenda),
+          _sectionList(type: CardType.plot),
+          _sectionList(type: CardType.character),
+          _sectionList(type: CardType.attachment),
+          _sectionList(type: CardType.location),
+          _sectionList(type: CardType.event),
           _link(),
         ],
       ),

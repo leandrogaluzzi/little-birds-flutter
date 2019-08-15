@@ -6,7 +6,6 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Find fonts
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
 - Filter
@@ -15,6 +14,7 @@ TODO:
 - Image Screen animation
 - CardsStore - improve cards with query
 - Transitions
+- Tab Icons Color
 - Config CodeMagic.io
 - Unit Tests (future)
 - Widget Tests (future)

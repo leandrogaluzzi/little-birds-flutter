@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/model/type.dart';
+import 'package:little_birds/model/card_type.dart';
 
 class DeckHeaderViewModel {
   DeckHeaderViewModel({
@@ -27,13 +27,13 @@ class DeckHeaderViewModel {
 
   String info() {
     final plotCount = cardsQuantity.fold(0, (total, card) {
-      return card.card.cardType() == Type.plot
+      return card.card.cardType() == CardType.plot
           ? total + card.quantity
           : total + 0;
     });
     final deckCount = cardsQuantity.fold(0, (total, card) {
-      return card.card.cardType() != Type.plot &&
-              card.card.cardType() != Type.agenda
+      return card.card.cardType() != CardType.plot &&
+              card.card.cardType() != CardType.agenda
           ? total + card.quantity
           : total + 0;
     });

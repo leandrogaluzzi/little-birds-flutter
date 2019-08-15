@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
 import 'package:little_birds/utils/constants.dart';
@@ -30,6 +31,7 @@ class _CardListScreenState extends State<CardListScreen> {
   final CardListScreenViewModel viewModel;
   String query;
   bool isKeyboardVisible = false;
+  Filter filter = Filter(factions: [], types: []);
 
   @override
   void initState() {
@@ -57,12 +59,18 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   void _showFilterWidget(BuildContext context) {
-    showModalBottomSheet(
+    Future<Filter> future = showModalBottomSheet<Filter>(
       context: context,
       builder: (context) {
-        return FilterComponent();
+        return FilterComponent(
+          filter: filter,
+        );
       },
     );
+
+    future.then((value) {
+      setState(() {});
+    });
   }
 
   void _onTextSubmitted({BuildContext context}) {
@@ -103,7 +111,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cards = viewModel.cards(query: query);
+    final cards = viewModel.cards(query: query, filter: filter);
     return Scaffold(
       appBar: AppBar(
         title: _searchField(context: context),

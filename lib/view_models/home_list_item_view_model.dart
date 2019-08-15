@@ -1,5 +1,5 @@
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/model/type.dart';
+import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
@@ -49,16 +49,16 @@ class HomeListItemViewModel {
     deck.slots.forEach((slot) {
       final card = cards.firstWhere((card) => card.code == slot.code);
       switch (card.cardType()) {
-        case Type.character:
+        case CardType.character:
           characters = characters + slot.quantity;
           break;
-        case Type.location:
+        case CardType.location:
           locations = locations + slot.quantity;
           break;
-        case Type.attachment:
+        case CardType.attachment:
           attachments = attachments + slot.quantity;
           break;
-        case Type.event:
+        case CardType.event:
           events = events + slot.quantity;
           break;
         default:
