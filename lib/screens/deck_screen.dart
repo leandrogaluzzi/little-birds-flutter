@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/screens/card_screen.dart';
+import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
@@ -15,6 +19,19 @@ class DeckScreen extends StatelessWidget {
         super(key: key);
 
   final DeckScreenViewModel viewModel;
+
+  void _onCardSelected({BuildContext context, card: ThronesCard}) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          final viewModel = CardScreenViewModel(card: card);
+          return CardScreen(viewModel: viewModel);
+        },
+      ),
+    );
+  }
 
   Widget _header(BuildContext context) {
     final viewModel = DeckHeaderViewModel(
@@ -42,7 +59,9 @@ class DeckScreen extends StatelessWidget {
             mode: CardListItemMode.deck,
             card: card.card,
             count: card.quantity,
-            onTap: (card) {},
+            onTap: (card) {
+              _onCardSelected(context: context, card: card);
+            },
           );
         },
         childCount: cards.length,
