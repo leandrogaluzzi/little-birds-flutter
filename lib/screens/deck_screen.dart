@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
@@ -8,7 +9,6 @@ import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
-import 'package:little_birds/widgets/deck_section_header.dart';
 import 'package:little_birds/model/type.dart';
 
 class DeckScreen extends StatelessWidget {
@@ -45,7 +45,36 @@ class DeckScreen extends StatelessWidget {
   }
 
   Widget _sectionHeader({Type type}) {
-    return DeckSectionHeader(text: viewModel.sectionHeaderTitle(type: type));
+    String text = viewModel.sectionHeaderTitle(type: type);
+    return Container(
+      height: 35,
+      color: Colors.grey[500],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            text,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionItem({BuildContext context, CardQuantity card, int index}) {
+    return CardListItem(
+      index: index,
+      mode: CardListItemMode.deck,
+      card: card.card,
+      count: card.quantity,
+      onTap: (card) {
+        _onCardSelected(context: context, card: card);
+      },
+    );
   }
 
   Widget _sectionList({Type type}) {
@@ -53,18 +82,16 @@ class DeckScreen extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          final card = cards[index];
-          return CardListItem(
-            index: index,
-            mode: CardListItemMode.deck,
-            card: card.card,
-            count: card.quantity,
-            onTap: (card) {
-              _onCardSelected(context: context, card: card);
-            },
-          );
+          if (index == 0) {
+            return _sectionHeader(type: type);
+          } else {
+            int correctIndex = index - 1;
+            final card = cards[correctIndex];
+            return _sectionItem(
+                context: context, card: card, index: correctIndex);
+          }
         },
-        childCount: cards.length,
+        childCount: cards.length + 1,
       ),
     );
   }
@@ -78,17 +105,11 @@ class DeckScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           _header(context),
-          _sectionHeader(type: Type.agenda),
           _sectionList(type: Type.agenda),
-          _sectionHeader(type: Type.plot),
           _sectionList(type: Type.plot),
-          _sectionHeader(type: Type.character),
           _sectionList(type: Type.character),
-          _sectionHeader(type: Type.attachment),
           _sectionList(type: Type.attachment),
-          _sectionHeader(type: Type.location),
           _sectionList(type: Type.location),
-          _sectionHeader(type: Type.event),
           _sectionList(type: Type.event),
           _link(),
         ],

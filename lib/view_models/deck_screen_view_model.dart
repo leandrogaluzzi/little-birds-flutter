@@ -1,8 +1,5 @@
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/card_quantity.dart';
-import 'package:little_birds/model/thrones_card.dart';
-//import 'package:little_birds/model/slot.dart';
-//import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/type.dart';
 
@@ -42,19 +39,6 @@ class DeckScreenViewModel {
         return '';
     }
   }
-
-  /*List<ThronesCard> agendas() {
-    final agendas = cardsStore.getCardsWithCodes(deck.agendas);
-    return agendas;
-  }*/
-
-  /*List<ThronesCard> slots({Type type}) {
-    final codes = deck.slots.map((slot) => slot.code).toList();
-    final cards = cardsStore.getCardsWithCodes(codes);
-    final filteredCards =
-        cards.where((card) => card.cardType() == type).toList();
-    return filteredCards;
-  }*/
 
   List<CardQuantity> cards({Type type}) {
     final cardsQuantity = cardsStore.getCardsQuantityFromSlots(deck.slots);
