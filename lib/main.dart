@@ -8,7 +8,6 @@ TODO:
 
 - Main Screen error feedback when loading cards
 - CardScreen - Placeholder Image
-- Filter
 - Main Screen
 - Firebase - Anaytics
 - Image Screen animation

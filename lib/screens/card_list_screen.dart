@@ -29,9 +29,10 @@ class _CardListScreenState extends State<CardListScreen> {
   }) : assert(viewModel != null);
 
   final CardListScreenViewModel viewModel;
-  String query;
-  bool isKeyboardVisible = false;
-  Filter filter = Filter(factions: [], types: []);
+  String _query;
+  bool _isKeyboardVisible = false;
+  Filter _filter = Filter(factions: [], types: []);
+  FilterComponent _filterComponent = FilterComponent();
 
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
     KeyboardVisibilityNotification().addNewListener(
       onChange: (bool visible) {
-        isKeyboardVisible = visible;
+        _isKeyboardVisible = visible;
         setState(() {});
       },
     );
@@ -62,13 +63,13 @@ class _CardListScreenState extends State<CardListScreen> {
     Future<Filter> future = showModalBottomSheet<Filter>(
       context: context,
       builder: (context) {
-        return FilterComponent(
-          filter: filter,
-        );
+        return _filterComponent;
       },
     );
 
     future.then((value) {
+      _filter.factions = _filterComponent.selectedFactions;
+      _filter.types = _filterComponent.selectedTypes;
       setState(() {});
     });
   }
@@ -78,7 +79,7 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   void _onTextChanged({String text}) {
-    query = text;
+    _query = text;
     setState(() {});
   }
 
@@ -111,7 +112,7 @@ class _CardListScreenState extends State<CardListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cards = viewModel.cards(query: query, filter: filter);
+    final cards = viewModel.cards(query: _query, filter: _filter);
     return Scaffold(
       appBar: AppBar(
         title: _searchField(context: context),
@@ -122,7 +123,7 @@ class _CardListScreenState extends State<CardListScreen> {
           _onCardSelected(context: context, card: card);
         },
       ),
-      floatingActionButton: isKeyboardVisible ? null : _filterButton(context),
+      floatingActionButton: _isKeyboardVisible ? null : _filterButton(context),
     );
   }
 }

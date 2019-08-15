@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/faction.dart';
 import 'package:little_birds/model/card_type.dart';
-import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/utils/constants.dart';
 
 class FilterComponent extends StatefulWidget {
-  FilterComponent({
-    @required this.filter,
-  });
-
-  final Filter filter;
+  final List<Faction> selectedFactions = [];
+  final List<CardType> selectedTypes = [];
 
   @override
-  _FilterComponentState createState() => _FilterComponentState(filter: filter);
+  _FilterComponentState createState() => _FilterComponentState();
 }
 
 class _FilterComponentState extends State<FilterComponent> {
-  _FilterComponentState({
-    @required this.filter,
-  });
-
-  Filter filter;
-
   Widget _header() {
     return SliverFixedExtentList(
       itemExtent: 60,
@@ -80,18 +70,29 @@ class _FilterComponentState extends State<FilterComponent> {
   }
 
   Widget _factionItem({Faction faction}) {
-    print(faction.icon());
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset(faction.icon()),
-          Container(height: 5),
-          Text(
-            faction.toString(),
-          ),
-        ],
+    bool isSelected = widget.selectedFactions.contains(faction);
+    return RawMaterialButton(
+      child: Container(
+        color: isSelected ? Colors.grey[300] : Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(faction.icon()),
+            Container(height: 5),
+            Text(
+              faction.toString(),
+            ),
+          ],
+        ),
       ),
+      onPressed: () {
+        if (isSelected) {
+          widget.selectedFactions.remove(faction);
+        } else {
+          widget.selectedFactions.add(faction);
+        }
+        setState(() {});
+      },
     );
   }
 
@@ -107,12 +108,24 @@ class _FilterComponentState extends State<FilterComponent> {
   }
 
   Widget _typeItem({CardType type}) {
-    return Container(
-      child: Center(
-        child: Text(
-          type.toString(),
+    bool isSelected = widget.selectedTypes.contains(type);
+    return RawMaterialButton(
+      child: Container(
+        color: isSelected ? Colors.grey[300] : Colors.white,
+        child: Center(
+          child: Text(
+            type.toString(),
+          ),
         ),
       ),
+      onPressed: () {
+        if (isSelected) {
+          widget.selectedTypes.remove(type);
+        } else {
+          widget.selectedTypes.add(type);
+        }
+        setState(() {});
+      },
     );
   }
 
