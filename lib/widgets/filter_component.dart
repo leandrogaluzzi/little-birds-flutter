@@ -30,14 +30,22 @@ class _FilterComponentState extends State<FilterComponent> {
           Container(
             height: 60,
             color: kColorYellowLittleBirds,
-            child: Center(
-              child: Text(
-                'Filter',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.filter_list,
+                  color: Colors.black,
                 ),
-              ),
+                Container(width: 12.0),
+                Text(
+                  'Filter',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -72,11 +80,17 @@ class _FilterComponentState extends State<FilterComponent> {
   }
 
   Widget _factionItem({Faction faction}) {
+    print(faction.icon());
     return Container(
-      child: Center(
-        child: Text(
-          faction.toString(),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(faction.icon()),
+          Container(height: 5),
+          Text(
+            faction.toString(),
+          ),
+        ],
       ),
     );
   }
@@ -84,7 +98,7 @@ class _FilterComponentState extends State<FilterComponent> {
   Widget _factions() {
     return SliverGrid.count(
       crossAxisCount: 3,
-      childAspectRatio: 3,
+      childAspectRatio: 2,
       children: List.generate(Faction.values.length, (index) {
         var faction = Faction.values[index];
         return _factionItem(faction: faction);

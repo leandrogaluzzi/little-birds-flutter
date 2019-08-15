@@ -77,4 +77,8 @@ class Faction {
       8: 'Tyrell',
     }[_index];
   }
+
+  String icon() {
+    return 'assets/icons/${toCode()}.png';
+  }
 }
