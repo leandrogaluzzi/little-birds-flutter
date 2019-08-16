@@ -17,6 +17,7 @@ dependencies:
   keyboard_visibility: any
   photo_view: ^0.4.2
   url_launcher: ^5.1.2
+  flutter_launcher_icons: "^0.7.2"
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +27,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/launcher/icon.png"
+  image_path_android: "assets/launcher/icon.png"
