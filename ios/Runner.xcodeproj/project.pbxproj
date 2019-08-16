@@ -81,7 +81,6 @@
 				C42D4AE11F968FFBD9539AF5 /* Pods-Runner.release.xcconfig */,
 				54C5724CA7862849B2955334 /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -193,6 +192,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
