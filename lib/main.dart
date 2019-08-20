@@ -6,12 +6,11 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Main Screen error feedback when loading cards
+- Filter safe area
 - Home Error Request
 - Packs Error Request
 - Card List Empty Search/Filter error
 - CardScreen - Placeholder Image
-- Main Screen
 - Firebase - Anaytics
 - Image Screen animation
 - CardsStore - improve cards with query

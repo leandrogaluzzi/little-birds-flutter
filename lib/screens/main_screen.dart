@@ -30,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Text(
               'Loading cards ...',
+              key: Key('loading'),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
@@ -96,8 +97,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _widgetLoading();
-    /*return FutureBuilder<List<ThronesCard>>(
+    return FutureBuilder<List<ThronesCard>>(
       future: _cards,
       builder:
           (BuildContext context, AsyncSnapshot<List<ThronesCard>> snapshot) {
@@ -112,6 +112,6 @@ class _MainScreenState extends State<MainScreen> {
         }
         return null;
       },
-    );*/
+    );
   }
 }

@@ -60,7 +60,7 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   void _showFilterWidget(BuildContext context) {
-    Future<Filter> future = showModalBottomSheet<Filter>(
+    Future<Filter> future = showModalBottomSheet(
       context: context,
       builder: (context) {
         return _filterComponent;
