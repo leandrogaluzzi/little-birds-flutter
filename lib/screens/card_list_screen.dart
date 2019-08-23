@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
@@ -47,6 +48,7 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
+    Analytics.trackCard(card);
     Navigator.push(
       context,
       CupertinoPageRoute(

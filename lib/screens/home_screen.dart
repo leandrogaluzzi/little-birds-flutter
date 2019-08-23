@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/analytics/analytics.dart';
+import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
@@ -61,17 +63,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _loadMoreDecks() async {
+    Analytics.track(event: AnalyticsEvent.home_load_more);
     _isLoading = true;
     await viewModel.moreDecks();
     setState(() {});
   }
 
   Future<void> _refreshDecks() async {
+    Analytics.track(event: AnalyticsEvent.home_refresh);
     await viewModel.loadDecks();
     setState(() {});
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
+    Analytics.trackDeck(deck);
     final cardsStore = CardsStore.of(context);
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
     Navigator.push(

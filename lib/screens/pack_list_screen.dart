@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
@@ -22,6 +23,7 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   void _onPackSelected({BuildContext context, ThronesPack pack}) {
+    Analytics.trackPack(pack);
     final cards = CardsStore.of(context).getCardsWithPackCode(pack.code);
     Navigator.push(
       context,

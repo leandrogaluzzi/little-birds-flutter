@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "140698425383",
+    "firebase_url": "https://little-birds-18712.firebaseio.com",
+    "project_id": "little-birds-18712",
+    "storage_bucket": "little-birds-18712.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140698425383:android:a7de72b615bcc756",
+        "android_client_info": {
+          "package_name": "com.leandrogaluzzi.littlebirds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140698425383-n658pnpakaau7oucukd0kn8cs9ntp2el.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8fSrJ9J_RsqfFj21sZR-UEvi9k2eqE4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140698425383-n658pnpakaau7oucukd0kn8cs9ntp2el.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "140698425383-6ng0ufk3mqbv7f25g0u9cu8kat09e2a7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.leandrogaluzzi.littlebirds"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

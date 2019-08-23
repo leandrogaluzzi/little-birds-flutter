@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/analytics/analytics.dart';
+import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/screens/image_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -16,6 +18,7 @@ class CardScreen extends StatelessWidget {
   final CardScreenViewModel viewModel;
 
   void _onImageSelected({BuildContext context}) {
+    Analytics.track(event: AnalyticsEvent.card_image);
     Navigator.push(
       context,
       CupertinoPageRoute(

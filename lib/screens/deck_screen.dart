@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/analytics/analytics.dart';
+import 'package:little_birds/analytics/analytics_event.dart';
+import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
@@ -11,7 +14,7 @@ import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
 import 'package:little_birds/model/card_type.dart';
 
-class DeckScreen extends StatelessWidget {
+class DeckScreen extends StatelessWidget with AnalyticsScreen {
   DeckScreen({
     Key key,
     @required this.viewModel,
@@ -20,7 +23,11 @@ class DeckScreen extends StatelessWidget {
 
   final DeckScreenViewModel viewModel;
 
+  @override
+  String get screenName => AnalyticsEvent.deck.toString();
+
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
+    Analytics.trackCard(card);
     Navigator.push(
       context,
       CupertinoPageRoute(

@@ -1,4 +1,4 @@
-package com.leandrogaluzzi.littlebirds.little_birds;
+package com.leandrogaluzzi.littlebirds;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
