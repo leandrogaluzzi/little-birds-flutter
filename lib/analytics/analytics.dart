@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
-import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';

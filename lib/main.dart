@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
@@ -10,7 +11,6 @@ import 'package:little_birds/utils/themes.dart';
 TODO:
 
 - Filter safe area
-- Filter Analytics
 - Home Error Request
 - Packs Error Request
 - Card List Empty Search/Filter error
@@ -24,9 +24,14 @@ TODO:
 - Widget Tests (future)
 - Firebase - Ads (future)
 - Local DB for cards (future)
+- Send crash logs to email (future)
 */
 
-void main() => runApp(LittleBirdsApp());
+void main() {
+  Crashlytics.instance.enableInDevMode = true;
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  runApp(LittleBirdsApp());
+}
 
 class LittleBirdsApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
