@@ -25,14 +25,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget _widgetLoading() {
     return RequestLoadingScreen(
       title: 'Loading cards ...',
-      backgroundColor: kColorYellowLittleBirds,
     );
   }
 
   Widget _widgetError({Error error}) {
     return RequestErrorScreen(
       title: 'Error loading cards.',
-      backgroundColor: kColorYellowLittleBirds,
       onPressed: () {
         setState(() {
           _cards = _thronesService.getCards();

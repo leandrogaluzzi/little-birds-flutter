@@ -5,13 +5,11 @@ class RequestErrorScreen extends StatelessWidget {
     Key key,
     this.title,
     this.onPressed,
-    this.backgroundColor,
   })  : assert(title != null),
         assert(onPressed != null),
         super(key: key);
 
   final String title;
-  final Color backgroundColor;
   final VoidCallback onPressed;
 
   Widget _title() {
@@ -52,7 +50,6 @@ class RequestErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
