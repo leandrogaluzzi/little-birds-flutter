@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';

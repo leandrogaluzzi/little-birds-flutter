@@ -10,8 +10,6 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Filter FAB
-- Search Cancel
 - Image Screen animation
 - CardsStore - improve cards with query
 - Transitions
