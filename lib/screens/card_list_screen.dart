@@ -67,6 +67,7 @@ class _CardListScreenState extends State<CardListScreen> {
       builder: (context) {
         return _filterComponent;
       },
+      isScrollControlled: true,
     );
 
     future.then((value) {

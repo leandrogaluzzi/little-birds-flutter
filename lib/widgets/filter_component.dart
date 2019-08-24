@@ -13,29 +13,22 @@ class FilterComponent extends StatefulWidget {
 
 class _FilterComponentState extends State<FilterComponent> {
   Widget _header() {
-    return SliverFixedExtentList(
-      itemExtent: 60,
-      delegate: SliverChildListDelegate(
-        [
-          Container(
-            height: 60,
-            color: kColorYellowLittleBirds,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.filter_list,
-                  color: Colors.black,
-                ),
-                Container(width: 12.0),
-                Text(
-                  'Filter',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+    return Container(
+      height: 50,
+      color: kColorYellowLittleBirds,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.filter_list,
+            color: Colors.black,
+          ),
+          Container(width: 12.0),
+          Text(
+            'Filter',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
@@ -44,88 +37,108 @@ class _FilterComponentState extends State<FilterComponent> {
   }
 
   Widget _title({String title}) {
-    return SliverFixedExtentList(
-      itemExtent: 30,
-      delegate: SliverChildListDelegate(
-        [
-          Container(
-            color: Colors.grey,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+    return Container(
+      height: 30,
+      color: Colors.grey,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _factionItem({Faction faction}) {
     bool isSelected = widget.selectedFactions.contains(faction);
-    return RawMaterialButton(
-      child: Container(
-        color: isSelected ? Colors.grey[300] : Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(faction.icon()),
-            Container(height: 5),
-            Text(
-              faction.toString(),
-            ),
-          ],
+    return Expanded(
+      child: RawMaterialButton(
+        child: Container(
+          height: 60,
+          color: isSelected ? Colors.grey[300] : Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(faction.icon()),
+              Container(height: 5),
+              Text(
+                faction.toString(),
+              ),
+            ],
+          ),
         ),
+        onPressed: () {
+          if (isSelected) {
+            widget.selectedFactions.remove(faction);
+          } else {
+            widget.selectedFactions.add(faction);
+          }
+          setState(() {});
+        },
       ),
-      onPressed: () {
-        if (isSelected) {
-          widget.selectedFactions.remove(faction);
-        } else {
-          widget.selectedFactions.add(faction);
-        }
-        setState(() {});
-      },
     );
   }
 
   Widget _factions() {
-    return SliverGrid.count(
-      crossAxisCount: 3,
-      childAspectRatio: 2,
-      children: List.generate(Faction.values.length, (index) {
-        var faction = Faction.values[index];
-        return _factionItem(faction: faction);
-      }),
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _factionItem(faction: Faction.values[0]),
+            _factionItem(faction: Faction.values[1]),
+            _factionItem(faction: Faction.values[2]),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _factionItem(faction: Faction.values[3]),
+            _factionItem(faction: Faction.values[4]),
+            _factionItem(faction: Faction.values[5]),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _factionItem(faction: Faction.values[6]),
+            _factionItem(faction: Faction.values[7]),
+            _factionItem(faction: Faction.values[8]),
+          ],
+        ),
+      ],
     );
   }
 
   Widget _typeItem({CardType type}) {
     bool isSelected = widget.selectedTypes.contains(type);
-    return RawMaterialButton(
-      child: Container(
-        color: isSelected ? Colors.grey[300] : Colors.white,
-        child: Center(
-          child: Text(
-            type.toString(),
+    return Expanded(
+      child: RawMaterialButton(
+        child: Container(
+          height: 50,
+          color: isSelected ? Colors.grey[300] : Colors.white,
+          child: Center(
+            child: Text(
+              type.toString(),
+            ),
           ),
         ),
+        onPressed: () {
+          if (isSelected) {
+            widget.selectedTypes.remove(type);
+          } else {
+            widget.selectedTypes.add(type);
+          }
+          setState(() {});
+        },
       ),
-      onPressed: () {
-        if (isSelected) {
-          widget.selectedTypes.remove(type);
-        } else {
-          widget.selectedTypes.add(type);
-        }
-        setState(() {});
-      },
     );
   }
 
@@ -134,27 +147,44 @@ class _FilterComponentState extends State<FilterComponent> {
     types.addAll(CardType.values);
     types.remove(CardType.unknown);
 
-    return SliverGrid.count(
-      crossAxisCount: 4,
-      childAspectRatio: 2,
-      children: List.generate(types.length, (index) {
-        var type = types[index];
-        return _typeItem(type: type);
-      }),
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _typeItem(type: types[0]),
+            _typeItem(type: types[1]),
+            _typeItem(type: types[2]),
+            _typeItem(type: types[3]),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _typeItem(type: types[4]),
+            _typeItem(type: types[5]),
+            _typeItem(type: types[6]),
+          ],
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: CustomScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        slivers: <Widget>[
-          _header(),
-          _title(title: 'Factions:'),
-          _factions(),
-          _title(title: 'Types:'),
-          _types(),
+    return Container(
+      child: Wrap(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              _header(),
+              _title(title: 'Factions:'),
+              _factions(),
+              _title(title: 'Types:'),
+              _types(),
+            ],
+          ),
         ],
       ),
     );
