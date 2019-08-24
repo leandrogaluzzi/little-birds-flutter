@@ -113,19 +113,49 @@ class _CardListScreenState extends State<CardListScreen> {
     );
   }
 
+  Widget _cardList(BuildContext context, List<ThronesCard> cards) {
+    return CardList(
+      cards: cards,
+      onTap: (ThronesCard card) {
+        _onCardSelected(context: context, card: card);
+      },
+    );
+  }
+
+  Widget _emptyList() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            'No cards found',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+          Container(height: 12.0),
+          Text(
+            'Please, try again',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    final cards = viewModel.cards(query: _query, filter: _filter);
+    return cards.length > 0 ? _cardList(context, cards) : _emptyList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cards = viewModel.cards(query: _query, filter: _filter);
     return Scaffold(
       appBar: AppBar(
         title: _searchField(context: context),
       ),
-      body: CardList(
-        cards: cards,
-        onTap: (ThronesCard card) {
-          _onCardSelected(context: context, card: card);
-        },
-      ),
+      body: _body(context),
       floatingActionButton: _isKeyboardVisible ? null : _filterButton(context),
     );
   }

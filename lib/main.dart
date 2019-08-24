@@ -10,7 +10,6 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Tab Icons Color
 - Filter FAB
 - Search Cancel
 - Card List Empty Search/Filter error
