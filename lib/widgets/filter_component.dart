@@ -45,7 +45,7 @@ class _FilterComponentState extends State<FilterComponent> {
 
   Widget _title({String title}) {
     return SliverFixedExtentList(
-      itemExtent: 40,
+      itemExtent: 30,
       delegate: SliverChildListDelegate(
         [
           Container(

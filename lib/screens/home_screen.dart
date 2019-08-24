@@ -4,6 +4,7 @@ import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
@@ -148,7 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _isLoading = false;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Little Birds'),
+        title: Text(
+          'Little Birds',
+          key: Keys.home,
+        ),
       ),
       body: FutureBuilder<void>(
         future: _decksFuture,

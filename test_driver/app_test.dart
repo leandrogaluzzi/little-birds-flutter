@@ -4,8 +4,6 @@ import 'package:test/test.dart';
 
 void main() {
   group('Little Birds app', () {
-    final loading = find.byValueKey('loading');
-
     FlutterDriver driver;
 
     setUpAll(() async {
@@ -20,8 +18,15 @@ void main() {
     });
 
     test('loading', () async {
-      await takeScreenshot(driver, 'screenshots/loading.png');
-      expect(await driver.getText(loading), 'Loading cards ...');
+      var key = find.byValueKey('loading');
+      expect(await driver.getText(key), 'Loading cards ...');
+      await takeScreenshot(driver, 'snapshots/loading.png');
+    });
+
+    test('home', () async {
+      var key = find.byValueKey('home');
+      expect(await driver.getText(key), 'Little Birds');
+      await takeScreenshot(driver, 'snapshots/home.png');
     });
   });
 }

@@ -3,6 +3,7 @@ import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Text(
               'Loading cards ...',
-              key: Key('loading'),
+              key: Keys.loading,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
