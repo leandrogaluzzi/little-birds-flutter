@@ -12,7 +12,6 @@ TODO:
 
 - Filter FAB
 - Search Cancel
-- Card List Empty Search/Filter error
 - Image Screen animation
 - CardsStore - improve cards with query
 - Transitions

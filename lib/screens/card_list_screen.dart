@@ -98,18 +98,26 @@ class _CardListScreenState extends State<CardListScreen> {
   }
 
   Widget _filterButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 80.0),
-      child: FloatingActionButton(
-        child: Icon(
-          Icons.filter_list,
+    return IconButton(
+      icon: Icon(Icons.filter_list),
+      onPressed: () {
+        _showFilterWidget(context);
+      },
+    );
+  }
+
+  Widget _cancelButton() {
+    return RawMaterialButton(
+      child: Text(
+        'Cancel',
+        style: TextStyle(
           color: Colors.black,
+          fontSize: 18,
         ),
-        onPressed: () {
-          _showFilterWidget(context);
-        },
-        backgroundColor: kColorYellowLittleBirds,
       ),
+      onPressed: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
     );
   }
 
@@ -153,10 +161,13 @@ class _CardListScreenState extends State<CardListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 5.0,
         title: _searchField(context: context),
+        actions: <Widget>[
+          _isKeyboardVisible ? _cancelButton() : _filterButton(context),
+        ],
       ),
       body: _body(context),
-      floatingActionButton: _isKeyboardVisible ? null : _filterButton(context),
     );
   }
 }
