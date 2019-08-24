@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/analytics/analytics_screen.dart';
@@ -103,6 +104,24 @@ class DeckScreen extends StatelessWidget with AnalyticsScreen {
     );
   }
 
+  /*Widget _description() {
+    print(viewModel.description());
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Html(
+            data: viewModel.description(),
+            padding: EdgeInsets.symmetric(vertical: 0.0),
+            defaultTextStyle: TextStyle(
+              fontSize: 17.0,
+            ),
+          );
+        },
+        childCount: 1,
+      ),
+    );
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +137,7 @@ class DeckScreen extends StatelessWidget with AnalyticsScreen {
           _sectionList(type: CardType.attachment),
           _sectionList(type: CardType.location),
           _sectionList(type: CardType.event),
+          //if (viewModel.description() != null) _description(),
           _link(),
         ],
       ),

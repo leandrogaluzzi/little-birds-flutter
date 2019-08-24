@@ -13,7 +13,6 @@ TODO:
 - Tab Icons Color
 - Filter FAB
 - Search Cancel
-- Deck description
 - Home Error Request
 - Packs Error Request
 - Card List Empty Search/Filter error

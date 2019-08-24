@@ -41,7 +41,7 @@ class ThronesDeck {
         agendas: agendas,
         dateCreation: json['date_creation'],
         dateUpdate: json['date_update'],
-        description: json['description'],
+        description: json['description_md'],
         factionCode: json['faction_code'],
         factionName: json['faction_name'],
         id: json['id'],

@@ -3,7 +3,6 @@ import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
-
 import 'card_screen.dart';
 
 class PackScreen extends StatelessWidget {

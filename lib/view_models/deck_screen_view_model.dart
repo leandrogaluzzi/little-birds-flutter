@@ -47,4 +47,8 @@ class DeckScreenViewModel {
     filteredCardsQuantity.sort((a, b) => a.card.name.compareTo(b.card.name));
     return filteredCardsQuantity;
   }
+
+  /*String description() {
+    return deck.description;
+  }*/
 }
