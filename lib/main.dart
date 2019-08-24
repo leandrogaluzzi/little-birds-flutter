@@ -10,15 +10,16 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Filter safe area
+- Tab Icons Color
+- Filter FAB
+- Search Cancel
+- Deck description
 - Home Error Request
 - Packs Error Request
 - Card List Empty Search/Filter error
-- CardScreen - Placeholder Image
 - Image Screen animation
 - CardsStore - improve cards with query
 - Transitions
-- Tab Icons Color
 - Config CodeMagic.io
 - Unit Tests (future)
 - Widget Tests (future)
