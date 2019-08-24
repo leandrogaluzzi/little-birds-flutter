@@ -3,8 +3,8 @@ import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/screens/request_loading_screen.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
@@ -23,30 +23,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _widgetLoading() {
-    return Scaffold(
-      body: Container(
-        color: kColorYellowLittleBirds,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              'Loading cards ...',
-              key: Keys.loading,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
-            ),
-            Container(
-              height: 100,
-              child: Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return RequestLoadingScreen(
+      title: 'Loading cards ...',
+      backgroundColor: kColorYellowLittleBirds,
     );
   }
 

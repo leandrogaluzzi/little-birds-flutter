@@ -1,48 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/utils/keys.dart';
 
-class RequestErrorScreen extends StatelessWidget {
-  const RequestErrorScreen({
+class RequestLoadingScreen extends StatelessWidget {
+  const RequestLoadingScreen({
     Key key,
     this.title,
-    this.onPressed,
     this.backgroundColor,
   })  : assert(title != null),
-        assert(onPressed != null),
         super(key: key);
 
   final String title;
   final Color backgroundColor;
-  final VoidCallback onPressed;
 
-  Widget _title() {
+  Widget _text() {
     return Text(
       title,
+      key: Keys.loading,
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 18),
     );
   }
 
-  Widget _text() {
-    return Text(
-      'Please, check your internet connection',
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 14),
-    );
-  }
-
-  Widget _button() {
+  Widget _progress() {
     return Container(
       height: 100,
       child: Center(
-        child: RaisedButton(
-          color: Colors.grey[300],
-          child: Text(
-            'Try again',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          onPressed: onPressed,
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
         ),
       ),
     );
@@ -57,10 +41,8 @@ class RequestErrorScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _title(),
-            Container(height: 12.0),
             _text(),
-            _button()
+            _progress(),
           ],
         ),
       ),
