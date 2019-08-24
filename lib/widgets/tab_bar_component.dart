@@ -42,7 +42,7 @@ class TabBarComponent extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         activeColor: Colors.black,
-        inactiveColor: Colors.grey[350],
+        inactiveColor: Colors.grey[500],
         items: _items,
       ),
       tabBuilder: (BuildContext context, int index) {

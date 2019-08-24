@@ -4,7 +4,6 @@ import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/screens/request_loading_screen.dart';
-import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {

@@ -11,7 +11,6 @@ import 'package:little_birds/utils/themes.dart';
 TODO:
 
 - Image Screen animation
-- CardsStore - improve cards with query
 - Transitions
 - Config CodeMagic.io
 - Unit Tests (future)

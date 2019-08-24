@@ -5,7 +5,6 @@ import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
-import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/card_list_screen_view_model.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
