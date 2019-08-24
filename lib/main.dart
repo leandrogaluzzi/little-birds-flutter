@@ -10,10 +10,11 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
+- Home Error Request
 - Tab Icons Color
 - Filter FAB
 - Search Cancel
-- Home Error Request
+
 - Packs Error Request
 - Card List Empty Search/Filter error
 - Image Screen animation

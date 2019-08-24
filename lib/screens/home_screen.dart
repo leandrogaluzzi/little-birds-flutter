@@ -4,6 +4,7 @@ import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
@@ -100,7 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    return Container(color: Colors.red);
+    return RequestErrorScreen(
+      title: 'Error loading decks',
+      onPressed: () {
+        setState(() {
+          _decksFuture = viewModel.loadDecks();
+        });
+      },
+    );
   }
 
   Widget _widgetListItem({BuildContext context, int index}) {

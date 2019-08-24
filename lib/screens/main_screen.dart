@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/networking/thrones_service.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
@@ -50,42 +51,14 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    return Scaffold(
-      body: Container(
-        color: kColorYellowLittleBirds,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              'Error loading cards.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
-            ),
-            Container(height: 12.0),
-            Text(
-              'Please, check your internet connection',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
-            ),
-            Container(
-              height: 100,
-              child: Center(
-                child: RaisedButton(
-                  color: Colors.grey[300],
-                  child:
-                      Text('Try again', style: TextStyle(color: Colors.black)),
-                  onPressed: () {
-                    setState(() {
-                      _cards = _thronesService.getCards();
-                    });
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+    return RequestErrorScreen(
+      title: 'Error loading cards.',
+      backgroundColor: kColorYellowLittleBirds,
+      onPressed: () {
+        setState(() {
+          _cards = _thronesService.getCards();
+        });
+      },
     );
   }
 

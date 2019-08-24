@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
+import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
 import 'package:little_birds/cards_store.dart';
@@ -14,10 +15,10 @@ class PackListScreen extends StatefulWidget {
 
 class _PackListScreenState extends State<PackListScreen> {
   Future _packs;
+  final ThronesService thronesService = ThronesService();
 
   @override
   void initState() {
-    ThronesService thronesService = ThronesService();
     _packs = thronesService.getPacks();
     super.initState();
   }
@@ -46,7 +47,14 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    return Container(color: Colors.red);
+    return RequestErrorScreen(
+      title: 'Error loading packs',
+      onPressed: () {
+        setState(() {
+          _packs = thronesService.getPacks();
+        });
+      },
+    );
   }
 
   Widget _widgetList({@required List<ThronesPack> packs}) {
