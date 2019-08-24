@@ -96,7 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _widgetLoading() {
     return Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+      ),
     );
   }
 
@@ -129,7 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
       height: _heightLoading,
       color: index % 2 == 0 ? Colors.white : Colors.grey[200],
       child: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+        ),
       ),
     );
   }

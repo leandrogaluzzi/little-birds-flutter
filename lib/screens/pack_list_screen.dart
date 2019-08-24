@@ -42,7 +42,9 @@ class _PackListScreenState extends State<PackListScreen> {
 
   Widget _widgetLoading() {
     return Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+      ),
     );
   }
 
