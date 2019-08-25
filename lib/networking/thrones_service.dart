@@ -14,20 +14,21 @@ class ThronesService {
       client: client,
       baseUrl: baseURL,
     );
-    _thronesAPI = ThronesAPI(network: networkProvider);
+
+    _thrones = DefaultThrones(network: networkProvider);
   }
 
-  ThronesAPI _thronesAPI;
+  DefaultThrones _thrones;
 
   Future<List<ThronesCard>> getCards() async {
-    return _thronesAPI.getCards();
+    return _thrones.getCards();
   }
 
   Future<List<ThronesPack>> getPacks() async {
-    return _thronesAPI.getPacks();
+    return _thrones.getPacks();
   }
 
   Future<List<ThronesDeck>> getDecks(DateTime date) async {
-    return _thronesAPI.getDecks(date: date);
+    return _thrones.getDecks(date: date);
   }
 }
