@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DeckFooter extends StatelessWidget {
   DeckFooter({
+    Key key,
     @required this.url,
   }) : assert(url != null);
 

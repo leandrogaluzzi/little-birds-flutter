@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/analytics/analytics_screen.dart';

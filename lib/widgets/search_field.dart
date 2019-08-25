@@ -4,6 +4,7 @@ typedef SearchCallback = void Function(String text);
 
 class SearchField extends StatelessWidget {
   SearchField({
+    Key key,
     this.onChanged,
     this.onSubmitted,
   }) : assert(onSubmitted != null);

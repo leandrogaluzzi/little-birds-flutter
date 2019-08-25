@@ -13,8 +13,10 @@ import 'package:little_birds/widgets/search_field.dart';
 
 class CardListScreen extends StatefulWidget {
   CardListScreen({
+    Key key,
     @required this.viewModel,
-  }) : assert(viewModel != null);
+  })  : assert(viewModel != null),
+        super(key: key);
 
   final CardListScreenViewModel viewModel;
 

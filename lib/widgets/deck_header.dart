@@ -4,6 +4,7 @@ import 'package:little_birds/view_models/deck_header_view_model.dart';
 
 class DeckHeader extends StatelessWidget {
   DeckHeader({
+    Key key,
     @required this.viewModel,
   }) : assert(viewModel != null);
 

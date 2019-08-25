@@ -30,6 +30,9 @@ class PackScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    cards.sort((a, b) {
+      return b.code.compareTo(a.code);
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

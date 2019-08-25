@@ -16,6 +16,7 @@ double _heightLoading = 75;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
+    Key key,
     @required this.viewModel,
   }) : assert(viewModel != null);
 

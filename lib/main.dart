@@ -13,11 +13,12 @@ TODO:
 - Image Screen animation
 - Transitions
 - Config CodeMagic.io
-- Unit Tests (future)
-- Widget Tests (future)
-- Firebase - Ads (future)
-- Local DB for cards (future)
-- Send crash logs to email (future)
+- Show pack in card cell
+- Unit Tests
+- Widget Tests
+- Firebase - Ads
+- Local DB for cards
+- Send crash logs to email
 */
 
 void main() {
