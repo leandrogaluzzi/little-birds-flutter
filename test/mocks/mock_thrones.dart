@@ -8,12 +8,20 @@ import 'package:little_birds/networking/thrones_api.dart';
 class MockThrones extends Thrones {
   @override
   Future<List<ThronesCard>> getCards() async {
-    return null;
+    final file = new File('test/jsons/cards.json');
+    final List<dynamic> jsonMap = json.decode(await file.readAsString());
+    final List<ThronesCard> cards =
+        jsonMap.map((item) => ThronesCard.fromJson(item)).toList();
+    return cards;
   }
 
   @override
   Future<List<ThronesDeck>> getDecks({DateTime date}) async {
-    return null;
+    final file = new File('test/jsons/decks.json');
+    final List<dynamic> jsonMap = json.decode(await file.readAsString());
+    final List<ThronesDeck> decks =
+        jsonMap.map((item) => ThronesDeck.fromJson(item)).toList();
+    return decks;
   }
 
   @override
