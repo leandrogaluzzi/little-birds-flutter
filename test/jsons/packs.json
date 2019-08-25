@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Core Set",
+        "code": "Core",
+        "position": 1,
+        "cycle_position": 1,
+        "available": "2015-10-08",
+        "known": 211,
+        "total": 211,
+        "url": "https:\/\/thronesdb.com\/set\/Core"
+    },
+    {
+        "name": "Taking the Black",
+        "code": "TtB",
+        "position": 1,
+        "cycle_position": 2,
+        "available": "2015-12-09",
+        "known": 20,
+        "total": 20,
+        "url": "https:\/\/thronesdb.com\/set\/TtB"
+    },
+    {
+        "name": "The Road to Winterfell",
+        "code": "TRtW",
+        "position": 2,
+        "cycle_position": 2,
+        "available": "2016-01-29",
+        "known": 20,
+        "total": 20,
+        "url": "https:\/\/thronesdb.com\/set\/TRtW"
+    },
+    {
+        "name": "The King's Peace",
+        "code": "TKP",
+        "position": 3,
+        "cycle_position": 2,
+        "available": "2016-02-25",
+        "known": 20,
+        "total": 20,
+        "url": "https:\/\/thronesdb.com\/set\/TKP"
+    },
+    {
+        "name": "No Middle Ground",
+        "code": "NMG",
+        "position": 4,
+        "cycle_position": 2,
+        "available": "2016-03-24",
+        "known": 20,
+        "total": 20,
+        "url": "https:\/\/thronesdb.com\/set\/NMG"
+    },
+    {
+        "name": "Wolves of the North",
+        "code": "WotN",
+        "position": 1,
+        "cycle_position": 3,
+        "available": "2016-04-07",
+        "known": 52,
+        "total": 52,
+        "url": "https:\/\/thronesdb.com\/set\/WotN"
+    }
+]
