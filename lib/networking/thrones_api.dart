@@ -6,7 +6,6 @@ import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/networking/network_exception.dart';
 import 'package:little_birds/networking/network_provider.dart';
 
-const baseURL = 'https://thronesdb.com';
 const _cardsURL = '/api/public/cards/';
 const _packsURL = '/api/public/packs/';
 const _decksURL = '/api/public/decklists/by_date/';

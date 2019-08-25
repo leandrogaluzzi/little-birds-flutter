@@ -5,10 +5,12 @@ import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
+const baseURL = 'https://thronesdb.com';
+
 class ThronesService {
   ThronesService() {
     http.Client client = http.Client();
-    NetworkProvider networkProvider = NetworkProvider(
+    final networkProvider = DefaultNetworkProvider(
       client: client,
       baseUrl: baseURL,
     );

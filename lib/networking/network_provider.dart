@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_birds/networking/network_exception.dart';
 
-class NetworkProvider {
-  NetworkProvider({
+abstract class NetworkProvider {
+  Future<String> get(String url,
+      {Map<String, String> headers, Map<String, String> parameters});
+}
+
+class DefaultNetworkProvider extends NetworkProvider {
+  DefaultNetworkProvider({
     @required this.client,
     @required this.baseUrl,
   })  : assert(client != null),
@@ -15,6 +20,7 @@ class NetworkProvider {
   final http.BaseClient client;
   final String baseUrl;
 
+  @override
   Future<String> get(String url,
       {Map<String, String> headers, Map<String, String> parameters}) async {
     String fullUrl = baseUrl + url;
