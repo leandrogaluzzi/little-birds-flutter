@@ -83,8 +83,6 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Reachability (3.2)
-  - url_launcher (0.0.1):
-    - Flutter
 
 DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -92,7 +90,6 @@ DEPENDENCIES:
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - keyboard_visibility (from `.symlinks/plugins/keyboard_visibility/ios`)
-  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -122,16 +119,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   keyboard_visibility:
     :path: ".symlinks/plugins/keyboard_visibility/ios"
-  url_launcher:
-    :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: a2b5951f30ff38fd3b3bdae9c7d340f940fd3c51
   firebase_analytics: 32e04b548ece5c04c9798cbf393a7884f0b21951
-  firebase_core: b3b02d0b5e9d01aab5e50ba7cbcf84c73cb6883c
-  firebase_crashlytics: 8493272a94ea1144fc0b4a25b98e0fc3ea2dab1f
+  firebase_core: ae55ea92448ec8675d325da4db22cf3b4d58a54d
+  firebase_crashlytics: 6b8e7358dbac1359c1e29e0796adf48eddef99c9
   FirebaseAnalytics: 48414ae5cbf6976d8a2f7177e0466540e5ab33ce
   FirebaseCore: 8c9e08bce0c72a3affd83927d8184cf244918bc8
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
@@ -145,7 +140,6 @@ SPEC CHECKSUMS:
   keyboard_visibility: 96a24de806fe6823c3ad956c01ba2ec6d056616f
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 
