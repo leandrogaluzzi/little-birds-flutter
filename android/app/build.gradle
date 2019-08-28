@@ -42,20 +42,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        release {
-            storeFile file("little-birds.jks")
-            storePassword System.getenv("UPLOAD_KEY_PASSWORD")
-            keyAlias little-birds
-            keyPassword System.getenv("UPLOAD_KEY_PASSWORD")
-        }
-    }
-
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
 }
