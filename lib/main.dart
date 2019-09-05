@@ -12,8 +12,8 @@ TODO:
 
 - Image Screen animation
 - Transitions
-- Config CodeMagic.io
 - Show pack in card cell
+- Error can't open url
 - Unit Tests
 - Widget Tests
 - Firebase - Ads

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/utils/constants.dart';
-//import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DeckFooter extends StatelessWidget {
   DeckFooter({
@@ -28,7 +28,9 @@ class _DeckFooterDelegate extends SliverPersistentHeaderDelegate {
   final String url;
 
   _openURL(String url) async {
-    //await launch(url);
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 
   @override
