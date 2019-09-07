@@ -61,7 +61,7 @@ class _FilterComponentState extends State<FilterComponent> {
     return Expanded(
       child: RawMaterialButton(
         child: Container(
-          height: 60,
+          height: 70,
           color: isSelected ? Colors.grey[300] : Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +183,7 @@ class _FilterComponentState extends State<FilterComponent> {
                 _title(title: 'Factions:'),
                 _factions(),
                 _title(title: 'Types:'),
-                _types()
+                _types(),
               ],
             ),
           ],
