@@ -70,6 +70,7 @@ class _FilterComponentState extends State<FilterComponent> {
               Container(height: 5),
               Text(
                 faction.toString(),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
