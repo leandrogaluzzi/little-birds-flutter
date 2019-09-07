@@ -157,15 +157,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _title() {
+    return Image.asset('assets/icons/littlebirds.png');
+  }
+
   @override
   Widget build(BuildContext context) {
     _isLoading = false;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Little Birds',
-          key: Keys.home,
-        ),
+        title: _title(),
       ),
       body: FutureBuilder<void>(
         future: _decksFuture,
