@@ -172,20 +172,22 @@ class _FilterComponentState extends State<FilterComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Wrap(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              _header(),
-              _title(title: 'Factions:'),
-              _factions(),
-              _title(title: 'Types:'),
-              _types(),
-            ],
-          ),
-        ],
+    return SafeArea(
+      child: Container(
+        child: Wrap(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                _header(),
+                _title(title: 'Factions:'),
+                _factions(),
+                _title(title: 'Types:'),
+                _types()
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
