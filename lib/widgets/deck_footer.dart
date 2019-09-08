@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/utils/keys.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DeckFooter extends StatelessWidget {
@@ -39,6 +40,7 @@ class _DeckFooterDelegate extends SliverPersistentHeaderDelegate {
     return Container(
       child: Center(
         child: RaisedButton(
+          key: Keys.moreInfoButton,
           color: kColorYellowLittleBirds,
           onPressed: () => _openURL(url),
           child: Text('More on ThronesDB'),

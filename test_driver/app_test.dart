@@ -17,16 +17,36 @@ void main() {
       }
     });
 
-    test('loading', () async {
-      var key = find.byValueKey('loading');
-      expect(await driver.getText(key), 'Loading cards ...');
-      await takeScreenshot(driver, 'snapshots/loading.png');
+    test('check flutter driver health', () async {
+      Health health = await driver.checkHealth();
+      print(health.status);
     });
 
-    test('home', () async {
-      var key = find.byValueKey('home');
-      expect(await driver.getText(key), 'Little Birds');
-      await takeScreenshot(driver, 'snapshots/home.png');
+    test('Open first tyrell deck and scroll to more info button', () async {
+      final homeList = find.byValueKey('home_list');
+      final deck = find.byValueKey('tyrell');
+      final title = find.byValueKey('deck_title');
+      final deckList = find.byValueKey('deck_list');
+      final moreInfo = find.byValueKey('more_info_button');
+
+      await driver.scrollUntilVisible(
+        homeList,
+        deck,
+        dyScroll: -200.0,
+      );
+
+      await driver.tap(deck);
+
+      expect(
+        await driver.getText(title),
+        'Deck',
+      );
+
+      await driver.scrollUntilVisible(
+        deckList,
+        moreInfo,
+        dyScroll: -300.0,
+      );
     });
   });
 }

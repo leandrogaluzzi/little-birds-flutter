@@ -6,6 +6,7 @@ import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
+import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
@@ -125,9 +126,13 @@ class DeckScreen extends StatelessWidget with AnalyticsScreen {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Deck'),
+        title: Text(
+          'Deck',
+          key: Keys.deckTitle,
+        ),
       ),
       body: CustomScrollView(
+        key: Keys.deckList,
         slivers: <Widget>[
           _header(context),
           _sectionList(type: CardType.agenda),

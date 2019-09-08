@@ -5,6 +5,7 @@ import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
@@ -118,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final deck = this.viewModel.decks[index];
     final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
     return HomeListItem(
+      key: Key(deck.faction().toCode()),
       viewModel: viewModel,
       index: index,
       onTap: () {
@@ -143,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return RefreshIndicator(
       onRefresh: _refreshDecks,
       child: ListView.builder(
+        key: Keys.homeList,
         controller: _controller,
         itemCount: count + 1,
         itemBuilder: (BuildContext context, int index) {

@@ -14,6 +14,7 @@ TODO:
 - Transitions
 - Show pack in card cell
 - Error can't open url
+- Add faction name to deck screen
 - Test NoConnectionError
 - Test TimeoutError
 - Unit Tests
