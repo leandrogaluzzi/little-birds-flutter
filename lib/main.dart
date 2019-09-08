@@ -14,6 +14,8 @@ TODO:
 - Transitions
 - Show pack in card cell
 - Error can't open url
+- Test NoConnectionError
+- Test TimeoutError
 - Unit Tests
 - Widget Tests
 - Firebase - Ads

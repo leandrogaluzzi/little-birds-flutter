@@ -29,6 +29,10 @@ class ServerError extends NetworkError {
   ServerError([message]) : super(message, "Server Error: ");
 }
 
-class NoConnectionException extends NetworkError {
-  NoConnectionException([message]) : super(message, "No Internet Connection: ");
+class NoConnectionError extends NetworkError {
+  NoConnectionError([message]) : super(message, "No Internet Connection: ");
+}
+
+class TimeoutError extends NetworkError {
+  TimeoutError([message]) : super(message, "Timeout: ");
 }

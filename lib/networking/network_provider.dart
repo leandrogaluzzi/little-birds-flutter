@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +30,9 @@ class DefaultNetworkProvider extends NetworkProvider {
           .timeout(Duration(seconds: 20));
       return _responseString(response: response);
     } on SocketException {
-      throw NoConnectionException();
+      throw NoConnectionError();
+    } on TimeoutException {
+      throw TimeoutError();
     }
   }
 
