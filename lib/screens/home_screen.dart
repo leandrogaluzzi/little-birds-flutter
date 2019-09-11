@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
+import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
@@ -15,13 +16,16 @@ import 'package:little_birds/cards_store.dart';
 
 double _heightLoading = 75;
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget with AnalyticsScreen {
   HomeScreen({
     Key key,
     @required this.viewModel,
   }) : assert(viewModel != null);
 
   final HomeScreenViewModel viewModel;
+
+  @override
+  String get screenName => 'Home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState(viewModel: viewModel);
@@ -94,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
-    Ads.showInterestial();
+    Ads.showInterestial(context);
   }
 
   Widget _widgetLoading() {

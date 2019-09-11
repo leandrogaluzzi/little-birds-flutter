@@ -61,7 +61,7 @@ class _CardListScreenState extends State<CardListScreen> {
         },
       ),
     );
-    Ads.showInterestial();
+    Ads.showInterestial(context);
   }
 
   void _showFilterWidget(BuildContext context) {

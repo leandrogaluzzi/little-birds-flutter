@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/analytics/analytics.dart';
-import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
@@ -25,7 +24,7 @@ class DeckScreen extends StatelessWidget with AnalyticsScreen {
   final DeckScreenViewModel viewModel;
 
   @override
-  String get screenName => AnalyticsEvent.deck.toString();
+  String get screenName => 'Deck';
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) {
     Analytics.trackCard(card);
