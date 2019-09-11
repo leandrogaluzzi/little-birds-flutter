@@ -64,9 +64,11 @@ class CardListItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            card.name,
-            style: _textStyleName,
+          FittedBox(
+            child: Text(
+              card.name,
+              style: _textStyleName,
+            ),
           ),
           Text(
             card.typeName,

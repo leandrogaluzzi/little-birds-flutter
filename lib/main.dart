@@ -12,7 +12,6 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
-- Deck screen, card name two lines
 - Image Screen animation
 - Transitions
 - Show pack in card cell
