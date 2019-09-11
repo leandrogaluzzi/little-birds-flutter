@@ -54,6 +54,7 @@ void main() {
     expect(
         networkProvider.get('test'), throwsA(TypeMatcher<UnauthorisedError>()));
   });
+
   test('Test response 403', () {
     final mockResponse = 'response';
     http.Response response = http.Response(mockResponse, 403);
@@ -82,6 +83,7 @@ void main() {
 
     expect(networkProvider.get('test'), throwsA(TypeMatcher<ServerError>()));
   });
+
   test('Test different response', () {
     final mockResponse = 'response';
     http.Response response = http.Response(mockResponse, 999);
