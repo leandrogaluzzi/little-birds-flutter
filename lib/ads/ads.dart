@@ -1,6 +1,7 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class Ads {
   static String appIdIOS = 'ca-app-pub-8070624639061262~8541487815';
@@ -25,13 +26,14 @@ class Ads {
   );
 
   static InterstitialAd _interestitial(BuildContext context) {
-    final unitId = Theme.of(context).platform == TargetPlatform.iOS
+    final releaseUnitId = Theme.of(context).platform == TargetPlatform.iOS
         ? Ads.adUnitIdIOS
         : Ads.adUnitIdAndroid;
 
+    final unitId = kReleaseMode ? releaseUnitId : InterstitialAd.testAdUnitId;
+
     return InterstitialAd(
         adUnitId: unitId,
-        //adUnitId: InterstitialAd.testAdUnitId,
         targetingInfo: _targetingInfo,
         listener: (MobileAdEvent event) {
           print("InterstitialAd event is $event");
