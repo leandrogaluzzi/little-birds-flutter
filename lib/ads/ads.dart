@@ -19,7 +19,7 @@ class Ads {
       'lcg',
       'tcg',
     ],
-    contentUrl: 'https://thronesdb.com',
+    contentUrl: 'https://www.thronesdb.com',
     childDirected: false,
     testDevices: <String>[],
   );
@@ -30,10 +30,8 @@ class Ads {
         : Ads.adUnitIdAndroid;
 
     return InterstitialAd(
-        // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-        // https://developers.google.com/admob/android/test-ads
-        // https://developers.google.com/admob/ios/test-ads
-        adUnitId: unitId,
+        //adUnitId: unitId,
+        adUnitId: InterstitialAd.testAdUnitId,
         targetingInfo: _targetingInfo,
         listener: (MobileAdEvent event) {
           print("InterstitialAd event is $event");
