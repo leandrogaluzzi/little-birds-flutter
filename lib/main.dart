@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -10,6 +11,9 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
+- Fix Ads data
+- Add Screen names
+- Deck screen, card name two lines
 - Image Screen animation
 - Transitions
 - Show pack in card cell
@@ -40,6 +44,8 @@ class LittleBirdsApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     analytics.logEvent(name: AnalyticsEvent.filter.toString());
+    FirebaseAdMob.instance
+        .initialize(appId: 'ca-app-pub-8070624639061262~8541487815');
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/networking/thrones_service.dart';
@@ -23,10 +24,10 @@ class _PackListScreenState extends State<PackListScreen> {
     super.initState();
   }
 
-  void _onPackSelected({BuildContext context, ThronesPack pack}) {
+  void _onPackSelected({BuildContext context, ThronesPack pack}) async {
     Analytics.trackPack(pack);
     final cards = CardsStore.of(context).getCardsWithPackCode(pack.code);
-    Navigator.push(
+    await Navigator.push(
       context,
       CupertinoPageRoute(
         fullscreenDialog: true,
@@ -38,6 +39,7 @@ class _PackListScreenState extends State<PackListScreen> {
         },
       ),
     );
+    Ads.showInterestial();
   }
 
   Widget _widgetLoading() {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
 import 'package:little_birds/model/thrones_deck.dart';
@@ -78,11 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  void _onDeckSelected({BuildContext context, ThronesDeck deck}) {
+  void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     Analytics.trackDeck(deck);
     final cardsStore = CardsStore.of(context);
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
-    Navigator.push(
+    await Navigator.push(
       context,
       CupertinoPageRoute(
         fullscreenDialog: true,
@@ -93,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+    Ads.showInterestial();
   }
 
   Widget _widgetLoading() {
