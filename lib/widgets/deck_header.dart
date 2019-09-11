@@ -29,7 +29,6 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   Widget _icon() {
     return Container(
-      height: 60,
       child: Center(
         child: Image.asset(viewModel.icon()),
       ),
@@ -86,12 +85,14 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _icon(),
+          SizedBox(height: 5),
           _name(),
-          Container(height: 10),
+          SizedBox(height: 5),
           _faction(),
-          Container(height: 5),
+          SizedBox(height: 5),
           _info(),
         ],
       ),

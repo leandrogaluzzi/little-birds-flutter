@@ -18,9 +18,7 @@ TODO:
 - Error can't open url
 - Test NoConnectionError
 - Test TimeoutError
-- Unit Tests
 - Widget Tests
-- Firebase - Ads
 - Local DB for cards
 - Send crash logs to email
 */
