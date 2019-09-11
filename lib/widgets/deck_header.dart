@@ -89,9 +89,9 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: <Widget>[
           _icon(),
           _name(),
-          Container(height: 5),
+          Container(height: 10),
           _faction(),
-          Container(height: 3),
+          Container(height: 5),
           _info(),
         ],
       ),
