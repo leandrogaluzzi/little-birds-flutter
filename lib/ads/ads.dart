@@ -30,8 +30,8 @@ class Ads {
         : Ads.adUnitIdAndroid;
 
     return InterstitialAd(
-        //adUnitId: unitId,
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: unitId,
+        //adUnitId: InterstitialAd.testAdUnitId,
         targetingInfo: _targetingInfo,
         listener: (MobileAdEvent event) {
           print("InterstitialAd event is $event");
