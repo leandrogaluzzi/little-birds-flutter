@@ -7,94 +7,97 @@ import 'package:http/http.dart' as http;
 String _baseUrl = 'mock.url';
 
 void main() {
-  test('Test response 200', () async {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 200);
+  group('Network provider tests', () {
+    test('Test response 200', () async {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 200);
 
-    final client = MockClient((request) async {
-      return response;
+      final client = MockClient((request) async {
+        return response;
+      });
+
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+
+      String responseString;
+      try {
+        responseString = await networkProvider.get('test');
+      } catch (e) {}
+      expect(responseString, response.body);
     });
 
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+    test('Test response 400', () async {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 400);
 
-    String responseString;
-    try {
-      responseString = await networkProvider.get('test');
-    } catch (e) {}
-    expect(responseString, response.body);
-  });
+      final client = MockClient((request) async {
+        return response;
+      });
 
-  test('Test response 400', () async {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 400);
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
-    final client = MockClient((request) async {
-      return response;
+      expect(
+          networkProvider.get('test'), throwsA(TypeMatcher<BadRequestError>()));
     });
 
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+    test('Test response 401', () {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 401);
 
-    expect(
-        networkProvider.get('test'), throwsA(TypeMatcher<BadRequestError>()));
-  });
+      final client = MockClient((request) async {
+        return response;
+      });
 
-  test('Test response 401', () {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 401);
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
-    final client = MockClient((request) async {
-      return response;
+      expect(networkProvider.get('test'),
+          throwsA(TypeMatcher<UnauthorisedError>()));
     });
 
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+    test('Test response 403', () {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 403);
 
-    expect(
-        networkProvider.get('test'), throwsA(TypeMatcher<UnauthorisedError>()));
-  });
+      final client = MockClient((request) async {
+        return response;
+      });
 
-  test('Test response 403', () {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 403);
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
-    final client = MockClient((request) async {
-      return response;
+      expect(networkProvider.get('test'),
+          throwsA(TypeMatcher<UnauthorisedError>()));
     });
 
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+    test('Test response 500', () {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 500);
 
-    expect(
-        networkProvider.get('test'), throwsA(TypeMatcher<UnauthorisedError>()));
-  });
+      final client = MockClient((request) async {
+        return response;
+      });
 
-  test('Test response 500', () {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 500);
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
-    final client = MockClient((request) async {
-      return response;
+      expect(networkProvider.get('test'), throwsA(TypeMatcher<ServerError>()));
     });
 
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
+    test('Test different response', () {
+      final mockResponse = 'response';
+      http.Response response = http.Response(mockResponse, 999);
 
-    expect(networkProvider.get('test'), throwsA(TypeMatcher<ServerError>()));
-  });
+      final client = MockClient((request) async {
+        return response;
+      });
 
-  test('Test different response', () {
-    final mockResponse = 'response';
-    http.Response response = http.Response(mockResponse, 999);
+      final networkProvider =
+          DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
-    final client = MockClient((request) async {
-      return response;
+      expect(
+          networkProvider.get('test'), throwsA(TypeMatcher<FetchDataError>()));
     });
-
-    final networkProvider =
-        DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
-
-    expect(networkProvider.get('test'), throwsA(TypeMatcher<FetchDataError>()));
   });
 }

@@ -46,12 +46,6 @@ class CardsStore extends InheritedWidget {
     return filteredCards;
   }
 
-  List<ThronesCard> _getCardsWithCodes(List<String> codes) {
-    return cards.where((card) {
-      return codes.contains(card.code) ? true : false;
-    }).toList();
-  }
-
   List<CardQuantity> getCardsQuantityFromSlots(List<Slot> slots) {
     List<String> codes = slots.map((slot) => slot.code).toList();
     codes.sort();
@@ -66,5 +60,11 @@ class CardsStore extends InheritedWidget {
       cardsQuantity.add(cardQuantity);
     }
     return cardsQuantity;
+  }
+
+  List<ThronesCard> _getCardsWithCodes(List<String> codes) {
+    return cards.where((card) {
+      return codes.contains(card.code) ? true : false;
+    }).toList();
   }
 }
