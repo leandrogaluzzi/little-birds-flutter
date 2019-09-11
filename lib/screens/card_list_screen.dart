@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
+import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';
@@ -12,7 +13,7 @@ import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/filter_component.dart';
 import 'package:little_birds/widgets/search_field.dart';
 
-class CardListScreen extends StatefulWidget {
+class CardListScreen extends StatefulWidget with AnalyticsScreen {
   CardListScreen({
     Key key,
     @required this.viewModel,
@@ -20,6 +21,9 @@ class CardListScreen extends StatefulWidget {
         super(key: key);
 
   final CardListScreenViewModel viewModel;
+
+  @override
+  String get screenName => 'CardList';
 
   @override
   _CardListScreenState createState() =>
