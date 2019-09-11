@@ -25,6 +25,10 @@ class DeckHeaderViewModel {
     return deck.name;
   }
 
+  String faction() {
+    return deck.factionName;
+  }
+
   String info() {
     final plotCount = cardsQuantity.fold(0, (total, card) {
       return card.card.cardType() == CardType.plot

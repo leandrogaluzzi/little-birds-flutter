@@ -53,6 +53,20 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
     );
   }
 
+  Widget _faction() {
+    return Container(
+      child: Center(
+        child: Text(
+          viewModel.faction(),
+          style: TextStyle(
+            fontSize: 16.0,
+            color: kColorGrayText,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _info() {
     return Container(
       child: Center(
@@ -75,7 +89,9 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: <Widget>[
           _icon(),
           _name(),
-          Container(height: 10),
+          Container(height: 5),
+          _faction(),
+          Container(height: 3),
           _info(),
         ],
       ),
@@ -83,10 +99,10 @@ class _DeckHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 140;
+  double get maxExtent => 160;
 
   @override
-  double get minExtent => 140;
+  double get minExtent => 160;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
