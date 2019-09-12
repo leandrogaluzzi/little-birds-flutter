@@ -15,6 +15,10 @@ class HomeListItemViewModel {
   final ThronesDeck deck;
   final List<CardQuantity> cardsQuantity;
 
+  List<ThronesCard> _cards() {
+    return cardsQuantity.map((cardQuantity) => cardQuantity.card).toList();
+  }
+
   String name() {
     return deck.name;
   }
@@ -34,10 +38,10 @@ class HomeListItemViewModel {
   }
 
   String agendas() {
+    final cards = _cards();
     List<String> agendas = deck.agendas.map((code) {
-      final cardQuantity = cardsQuantity
-          .firstWhere((cardQuantity) => cardQuantity.card.code == code);
-      return cardQuantity.card.name;
+      final card = cards.firstWhere((card) => card.code == code);
+      return card.name;
     }).toList();
     return agendas.join(', ');
   }
@@ -70,5 +74,14 @@ class HomeListItemViewModel {
     });
 
     return '$characters Characters - $events Events\n$locations Locations - $attachments Attachments ';
+  }
+
+  String imageUrl() {
+    final cards = _cards();
+    final characters =
+        cards.where((card) => card.cardType() == CardType.character).toList();
+    final selected =
+        characters.reduce((curr, next) => curr.cost >= next.cost ? curr : next);
+    return selected.imageUrl;
   }
 }

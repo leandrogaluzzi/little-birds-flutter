@@ -4,8 +4,8 @@ import 'package:little_birds/view_models/home_list_item_view_model.dart';
 const double kSmallPadding = 7.0;
 const double kPadding = 12.0;
 
-final TextStyle _kTextStyleBlackSmall = TextStyle(
-  fontSize: 18.0,
+final TextStyle _kTextStyle = TextStyle(
+  fontSize: 16.0,
   color: Colors.black,
 );
 
@@ -22,45 +22,39 @@ class HomeListItem extends StatelessWidget {
   final VoidCallback onTap;
   final int index;
 
-  Widget _name() {
+  Widget _icon() {
     return Container(
-      child: Row(
-        children: <Widget>[
-          Container(child: Center(child: Image.asset(viewModel.iconName()))),
-          Container(width: kPadding),
-          Flexible(
-            child: Text(
-              viewModel.name(),
-              maxLines: 3,
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
+      child: Center(
+        child: Image.asset(
+          viewModel.iconName(),
+        ),
       ),
     );
   }
 
-  Widget _faction() {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              viewModel.factionName(),
-              style: _kTextStyleBlackSmall,
-            ),
-            Text(
-              viewModel.time(),
-              style: _kTextStyleBlackSmall,
-            ),
-          ],
-        ),
+  Widget _name() {
+    return Text(
+      viewModel.name(),
+      maxLines: 3,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 18.0,
+        fontWeight: FontWeight.bold,
       ),
+    );
+  }
+
+  Widget _date() {
+    return Text(
+      viewModel.time(),
+      style: _kTextStyle,
+    );
+  }
+
+  Widget _faction() {
+    return Text(
+      viewModel.factionName(),
+      style: _kTextStyle,
     );
   }
 
@@ -70,21 +64,54 @@ class HomeListItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Text(
           viewModel.agendas(),
-          style: _kTextStyleBlackSmall,
+          maxLines: 3,
+          style: _kTextStyle,
         ),
       ),
     );
   }
 
-  Widget _info() {
+  Widget _image() {
+    final imageUrl = viewModel.imageUrl();
     return Container(
+      height: 200,
+      child: Image.network(
+        imageUrl,
+        fit: BoxFit.scaleDown,
+      ),
+    );
+  }
+
+  Widget _column() {
+    return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Text(
-          viewModel.details(),
-          textAlign: TextAlign.center,
-          style: _kTextStyleBlackSmall,
+        padding: EdgeInsets.all(kSmallPadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            _icon(),
+            SizedBox(height: kSmallPadding),
+            _name(),
+            SizedBox(height: kSmallPadding),
+            _faction(),
+            SizedBox(height: kSmallPadding),
+            _agenda(),
+            SizedBox(height: kSmallPadding),
+            _date(),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _row() {
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _image(),
+          _column(),
+        ],
       ),
     );
   }
@@ -98,15 +125,8 @@ class HomeListItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(kPadding),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              _name(),
-              SizedBox(height: kPadding),
-              _faction(),
-              SizedBox(height: kSmallPadding),
-              _agenda(),
-              SizedBox(height: kSmallPadding),
-              _info(),
+              _row(),
             ],
           ),
         ),
