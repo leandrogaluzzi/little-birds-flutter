@@ -22,7 +22,7 @@ class HomeListItem extends StatelessWidget {
   final VoidCallback onTap;
   final int index;
 
-  Widget _getRowName() {
+  Widget _name() {
     return Container(
       child: Row(
         children: <Widget>[
@@ -43,7 +43,7 @@ class HomeListItem extends StatelessWidget {
     );
   }
 
-  Widget _getRowFaction() {
+  Widget _faction() {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(0),
@@ -64,7 +64,7 @@ class HomeListItem extends StatelessWidget {
     );
   }
 
-  Widget _getRowAgenda() {
+  Widget _agenda() {
     return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -76,7 +76,7 @@ class HomeListItem extends StatelessWidget {
     );
   }
 
-  Widget _getRowInfo() {
+  Widget _info() {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(0),
@@ -100,13 +100,13 @@ class HomeListItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              _getRowName(),
-              Container(height: kPadding),
-              _getRowFaction(),
-              Container(height: kSmallPadding),
-              _getRowAgenda(),
-              Container(height: kSmallPadding),
-              _getRowInfo(),
+              _name(),
+              SizedBox(height: kPadding),
+              _faction(),
+              SizedBox(height: kSmallPadding),
+              _agenda(),
+              SizedBox(height: kSmallPadding),
+              _info(),
             ],
           ),
         ),

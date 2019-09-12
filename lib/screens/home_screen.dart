@@ -121,9 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetListItem({BuildContext context, int index}) {
-    final cards = CardsStore.of(context).getCardsAlphabetically();
     final deck = this.viewModel.decks[index];
-    final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
+    final cardsQuantity = CardsStore.of(context).getCardsQuantityFromSlots(deck.slots);
+    final viewModel = HomeListItemViewModel(deck: deck, cardsQuantity: cardsQuantity);
     return HomeListItem(
       key: Key(deck.faction().toCode()),
       viewModel: viewModel,

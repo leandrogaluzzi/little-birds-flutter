@@ -1,3 +1,4 @@
+import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_deck.dart';
@@ -7,12 +8,12 @@ import 'package:little_birds/utils/utils.dart';
 class HomeListItemViewModel {
   HomeListItemViewModel({
     this.deck,
-    this.cards,
+    this.cardsQuantity,
   })  : assert(deck != null),
-        assert(cards != null);
+        assert(cardsQuantity != null);
 
   final ThronesDeck deck;
-  final List<ThronesCard> cards;
+  final List<CardQuantity> cardsQuantity;
 
   String name() {
     return deck.name;
@@ -34,8 +35,9 @@ class HomeListItemViewModel {
 
   String agendas() {
     List<String> agendas = deck.agendas.map((code) {
-      final card = cards.firstWhere((card) => card.code == code);
-      return card.name;
+      final cardQuantity = cardsQuantity
+          .firstWhere((cardQuantity) => cardQuantity.card.code == code);
+      return cardQuantity.card.name;
     }).toList();
     return agendas.join(', ');
   }
@@ -47,8 +49,9 @@ class HomeListItemViewModel {
     int events = 0;
 
     deck.slots.forEach((slot) {
-      final card = cards.firstWhere((card) => card.code == slot.code);
-      switch (card.cardType()) {
+      final cardQuantity = cardsQuantity
+          .firstWhere((cardQuantity) => cardQuantity.card.code == slot.code);
+      switch (cardQuantity.card.cardType()) {
         case CardType.character:
           characters = characters + slot.quantity;
           break;
