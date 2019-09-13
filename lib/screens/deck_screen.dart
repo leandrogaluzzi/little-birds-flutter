@@ -13,6 +13,7 @@ import 'package:little_birds/widgets/card_list_item.dart';
 import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
 import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/widgets/separator.dart';
 
 class DeckScreen extends StatelessWidget with AnalyticsScreen {
   DeckScreen({
@@ -73,14 +74,19 @@ class DeckScreen extends StatelessWidget with AnalyticsScreen {
   }
 
   Widget _sectionItem({BuildContext context, CardQuantity card, int index}) {
-    return CardListItem(
-      index: index,
-      mode: CardListItemMode.deck,
-      card: card.card,
-      count: card.quantity,
-      onTap: (card) {
-        _onCardSelected(context: context, card: card);
-      },
+    return Column(
+      children: <Widget>[
+        CardListItem(
+          index: index,
+          mode: CardListItemMode.deck,
+          card: card.card,
+          count: card.quantity,
+          onTap: (card) {
+            _onCardSelected(context: context, card: card);
+          },
+        ),
+        Separator(),
+      ],
     );
   }
 
