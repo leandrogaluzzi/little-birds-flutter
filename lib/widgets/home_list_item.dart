@@ -6,7 +6,7 @@ const double kSmallPadding = 7.0;
 const double kPadding = 12.0;
 
 final TextStyle _kTextStyle = TextStyle(
-  fontSize: 16.0,
+  fontSize: 14.0,
   color: kColorGrayText,
 );
 
@@ -46,9 +46,16 @@ class HomeListItem extends StatelessWidget {
   }
 
   Widget _date() {
-    return Text(
-      viewModel.time(),
-      style: _kTextStyle,
+    return Positioned(
+      right: kSmallPadding,
+      bottom: kPadding,
+      child: Text(
+        viewModel.time(),
+        style: TextStyle(
+          fontSize: 12.0,
+          color: kColorGrayText,
+        ),
+      ),
     );
   }
 
@@ -120,13 +127,22 @@ class HomeListItem extends StatelessWidget {
     );
   }
 
+  Widget _stack() {
+    return Stack(
+      children: <Widget>[
+        _row(),
+        _date(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onTap,
       child: Container(
         color: Colors.white,
-        child: _row(),
+        child: _stack(),
       ),
     );
   }
