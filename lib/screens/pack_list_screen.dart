@@ -9,6 +9,7 @@ import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/widgets/separator.dart';
 
 class PackListScreen extends StatefulWidget with AnalyticsScreen {
   @override
@@ -66,7 +67,7 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   Widget _widgetList({@required List<ThronesPack> packs}) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: packs.length,
       itemBuilder: (BuildContext context, int index) {
         final pack = packs[index];
@@ -77,6 +78,9 @@ class _PackListScreenState extends State<PackListScreen> {
             _onPackSelected(context: context, pack: pack);
           },
         );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Separator();
       },
     );
   }

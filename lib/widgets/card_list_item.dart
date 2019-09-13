@@ -95,7 +95,7 @@ class CardListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 55.0,
-      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
+      color: Colors.white,
       child: RawMaterialButton(
         onPressed: () {
           onTap(card);

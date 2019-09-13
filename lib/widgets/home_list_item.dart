@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/utils/constants.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 
 const double kSmallPadding = 7.0;
@@ -6,7 +7,7 @@ const double kPadding = 12.0;
 
 final TextStyle _kTextStyle = TextStyle(
   fontSize: 16.0,
-  color: Colors.black,
+  color: kColorGrayText,
 );
 
 class HomeListItem extends StatelessWidget {
@@ -38,7 +39,7 @@ class HomeListItem extends StatelessWidget {
       maxLines: 3,
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 18.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -73,11 +74,18 @@ class HomeListItem extends StatelessWidget {
 
   Widget _image() {
     final imageUrl = viewModel.imageUrl();
-    return Container(
-      height: 200,
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.scaleDown,
+    return Padding(
+      padding: EdgeInsets.only(
+        left: kSmallPadding,
+        top: kPadding,
+        bottom: kPadding,
+      ),
+      child: Container(
+        height: 200,
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.scaleDown,
+        ),
       ),
     );
   }
@@ -87,7 +95,6 @@ class HomeListItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(kSmallPadding),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             _icon(),
             SizedBox(height: kSmallPadding),
@@ -96,8 +103,8 @@ class HomeListItem extends StatelessWidget {
             _faction(),
             SizedBox(height: kSmallPadding),
             _agenda(),
-            SizedBox(height: kSmallPadding),
-            _date(),
+            //SizedBox(height: kSmallPadding),
+            //_date(),
           ],
         ),
       ),
@@ -105,14 +112,11 @@ class HomeListItem extends StatelessWidget {
   }
 
   Widget _row() {
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _image(),
-          _column(),
-        ],
-      ),
+    return Row(
+      children: <Widget>[
+        _image(),
+        _column(),
+      ],
     );
   }
 
@@ -121,15 +125,8 @@ class HomeListItem extends StatelessWidget {
     return RawMaterialButton(
       onPressed: onTap,
       child: Container(
-        color: index % 2 == 0 ? Colors.white : Colors.grey[200],
-        child: Padding(
-          padding: const EdgeInsets.all(kPadding),
-          child: Column(
-            children: <Widget>[
-              _row(),
-            ],
-          ),
-        ),
+        color: Colors.white,
+        child: _row(),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
+import 'package:little_birds/widgets/separator.dart';
 
 class CardList extends StatelessWidget {
   CardList({
@@ -15,7 +16,7 @@ class CardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: cards.length,
       itemBuilder: (BuildContext context, int index) {
         final card = cards[index];
@@ -25,6 +26,9 @@ class CardList extends StatelessWidget {
           index: index,
           onTap: onTap,
         );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Separator();
       },
     );
   }

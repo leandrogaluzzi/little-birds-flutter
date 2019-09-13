@@ -13,6 +13,7 @@ import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/widgets/separator.dart';
 
 double _heightLoading = 75;
 
@@ -152,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final count = viewModel.decks.length;
     return RefreshIndicator(
       onRefresh: _refreshDecks,
-      child: ListView.builder(
+      child: ListView.separated(
         key: Keys.homeList,
         controller: _controller,
         itemCount: count + 1,
@@ -162,6 +163,9 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             return _widgetListItem(context: context, index: index);
           }
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Separator();
         },
       ),
     );

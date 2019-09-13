@@ -46,36 +46,6 @@ class HomeListItemViewModel {
     return agendas.join(', ');
   }
 
-  String details() {
-    int characters = 0;
-    int locations = 0;
-    int attachments = 0;
-    int events = 0;
-
-    deck.slots.forEach((slot) {
-      final cardQuantity = cardsQuantity
-          .firstWhere((cardQuantity) => cardQuantity.card.code == slot.code);
-      switch (cardQuantity.card.cardType()) {
-        case CardType.character:
-          characters = characters + slot.quantity;
-          break;
-        case CardType.location:
-          locations = locations + slot.quantity;
-          break;
-        case CardType.attachment:
-          attachments = attachments + slot.quantity;
-          break;
-        case CardType.event:
-          events = events + slot.quantity;
-          break;
-        default:
-          break;
-      }
-    });
-
-    return '$characters Characters - $events Events\n$locations Locations - $attachments Attachments ';
-  }
-
   String imageUrl() {
     final cards = _cards();
     final characters =

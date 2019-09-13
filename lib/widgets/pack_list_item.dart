@@ -67,7 +67,7 @@ class PackListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
+      color: Colors.white,
       height: 60.0,
       child: RawMaterialButton(
         onPressed: onTap,
