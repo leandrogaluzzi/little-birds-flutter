@@ -80,11 +80,11 @@ class CardListItem extends StatelessWidget {
 
   String _subtitle() {
     switch (mode) {
-      case CardListItemMode.list:
-        return '${card.typeName} - ${card.packName}';
-        break;
       case CardListItemMode.deck:
         return _info();
+        break;
+      default:
+        return '${card.typeName} - ${card.packName}';
         break;
     }
   }
