@@ -12,9 +12,9 @@ import 'package:little_birds/utils/themes.dart';
 /*
 TODO:
 
+- Create CardListItem view model
 - Image Screen animation
 - Transitions
-- Show pack in card cell
 - Error can't open url
 - Test NoConnectionError
 - Test TimeoutError

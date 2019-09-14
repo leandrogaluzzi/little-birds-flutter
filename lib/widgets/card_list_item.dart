@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/utils/constants.dart';
 
@@ -58,7 +59,38 @@ class CardListItem extends StatelessWidget {
     );
   }
 
+  String _info() {
+    switch (card.cardType()) {
+      case CardType.plot:
+        return 'Income: ${card.income ?? 0}. Initiative: ${card.initiative ?? 0} Claim: ${card.claim ?? 0}';
+        break;
+      case CardType.character:
+        return 'Cost: ${card.cost ?? 0}. STR: ${card.strength ?? 0}';
+        break;
+      case CardType.attachment:
+      case CardType.location:
+      case CardType.event:
+        return 'Cost: ${card.cost ?? 0}';
+        break;
+      default:
+        return card.packName;
+        break;
+    }
+  }
+
+  String _subtitle() {
+    switch (mode) {
+      case CardListItemMode.list:
+        return '${card.typeName} - ${card.packName}';
+        break;
+      case CardListItemMode.deck:
+        return _info();
+        break;
+    }
+  }
+
   Widget _widgetMiddle() {
+    final subtitle = _subtitle();
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -70,9 +102,11 @@ class CardListItem extends StatelessWidget {
               style: _textStyleName,
             ),
           ),
-          Text(
-            card.typeName,
-            style: kTextStyleType,
+          FittedBox(
+            child: Text(
+              subtitle,
+              style: kTextStyleType,
+            ),
           ),
         ],
       ),
