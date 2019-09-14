@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:little_birds/api/thrones_constants.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/network/network_exception.dart';
 import 'package:little_birds/network/network_provider.dart';
-
-const _cardsURL = '/api/public/cards/';
-const _packsURL = '/api/public/packs/';
-const _decksURL = '/api/public/decklists/by_date/';
 
 class ThronesError extends NetworkError {
   ThronesError([message]) : super(message);
@@ -29,7 +26,7 @@ class DefaultThrones {
 
   Future<List<ThronesCard>> getCards() async {
     try {
-      String responseString = await network.get(_cardsURL);
+      String responseString = await network.get(ThronesConstants.cardsURL);
       List<dynamic> list = await json.decode(responseString);
       List<ThronesCard> cards =
           list.map((item) => ThronesCard.fromJson(item)).toList();
@@ -41,7 +38,7 @@ class DefaultThrones {
 
   Future<List<ThronesPack>> getPacks() async {
     try {
-      String responseString = await network.get(_packsURL);
+      String responseString = await network.get(ThronesConstants.packsURL);
       List<dynamic> list = await json.decode(responseString);
       List<ThronesPack> packs =
           list.map((item) => ThronesPack.fromJson(item)).toList();
@@ -58,7 +55,7 @@ class DefaultThrones {
 
     String dateString = '$year-$month-$day';
 
-    String url = _decksURL + dateString;
+    String url = ThronesConstants.decksURL + dateString;
 
     try {
       String responseString = await network.get(url);
