@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/networking/network_exception.dart';
-import 'package:little_birds/networking/network_provider.dart';
+import 'package:little_birds/network/network_exception.dart';
+import 'package:little_birds/network/network_provider.dart';
 
 const _cardsURL = '/api/public/cards/';
 const _packsURL = '/api/public/packs/';
