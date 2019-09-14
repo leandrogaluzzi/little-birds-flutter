@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/screens/user_screen.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
@@ -10,9 +11,10 @@ import 'package:little_birds/view_models/home_screen_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [
-    TabBarItem.buildItem('Home', 'assets/icons/home.png'),
-    TabBarItem.buildItem('Packs', 'assets/icons/packs.png'),
-    TabBarItem.buildItem('Cards', 'assets/icons/cards.png'),
+    TabBarItem.buildItem(name: TabBarName.home),
+    TabBarItem.buildItem(name: TabBarName.packs),
+    TabBarItem.buildItem(name: TabBarName.cards),
+    TabBarItem.buildItem(name: TabBarName.decks),
   ];
 
   HomeScreen _homeScreen() {
@@ -29,11 +31,16 @@ class TabBarComponent extends StatelessWidget {
     );
   }
 
+  UserScreen _userScreen() {
+    return UserScreen();
+  }
+
   List<Widget> _tabs(BuildContext context) {
     return [
       _homeScreen(),
       _packListScreen(),
       _cardListScreen(context),
+      _userScreen(),
     ];
   }
 
