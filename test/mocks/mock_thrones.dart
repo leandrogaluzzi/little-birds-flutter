@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/networking/thrones_api.dart';
+import 'package:little_birds/api/thrones_api.dart';
 
 class MockThrones extends Thrones {
   @override

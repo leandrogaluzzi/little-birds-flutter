@@ -4,7 +4,7 @@ import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/networking/thrones_service.dart';
+import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';

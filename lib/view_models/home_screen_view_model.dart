@@ -1,5 +1,5 @@
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/networking/thrones_service.dart';
+import 'package:little_birds/api/thrones_service.dart';
 
 class HomeScreenViewModel {
   ThronesService _thronesService = ThronesService();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/networking/thrones_service.dart';
+import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/screens/request_loading_screen.dart';

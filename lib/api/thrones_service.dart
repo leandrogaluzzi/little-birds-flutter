@@ -1,4 +1,4 @@
-import 'network_provider.dart';
+import 'package:little_birds/networking/network_provider.dart';
 import 'thrones_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_birds/model/thrones_card.dart';
