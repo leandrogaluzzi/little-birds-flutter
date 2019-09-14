@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/api/thrones_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserScreen extends StatefulWidget {
   @override
@@ -6,7 +8,13 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  _onPressed() {}
+  _openAuth() async {
+    final url = ThronesConstants.authURL();
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +23,11 @@ class _UserScreenState extends State<UserScreen> {
         title: Text('My Decks'),
       ),
       body: Center(
-        child: RaisedButton(
-          child: Text('Login'),
-          onPressed: _onPressed(),
-        ),
+        child: RawMaterialButton(
+            child: Text('Login'),
+            onPressed: () {
+              _openAuth();
+            }),
       ),
     );
   }

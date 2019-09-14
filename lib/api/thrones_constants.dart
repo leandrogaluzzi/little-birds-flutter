@@ -11,4 +11,9 @@ class ThronesConstants {
   static const clientID = YOUR_CLIENT_ID;
   static const secretID = YOUR_SECRET_ID;
   static const redirect = 'littlebirds://thronesdb';
+
+  static authURL() {
+    return baseURL +
+        '/oauth/v2/auth?client_id=$clientID&response_type=code&redirect_uri=$redirect';
+  }
 }
