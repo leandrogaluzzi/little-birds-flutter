@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
-import 'package:little_birds/api/thrones_api.dart';
+import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/api/thrones_constants.dart';
 import 'package:little_birds/network/network_provider.dart';
 import 'package:little_birds/screens/main_screen.dart';
@@ -46,8 +46,8 @@ class LittleBirdsApp extends StatelessWidget {
     );
   }
 
-  Thrones _thrones() {
-    return DefaultThrones(network: _networkProvider());
+  ThronesService _thrones() {
+    return DefaultThronesService(network: _networkProvider());
   }
 
   @override

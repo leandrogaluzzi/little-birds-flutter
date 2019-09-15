@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:little_birds/api/thrones_api.dart';
+import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/screens/user_screen.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
@@ -16,7 +16,7 @@ class TabBarComponent extends StatelessWidget {
     @required this.thrones,
   });
 
-  final Thrones thrones;
+  final ThronesService thrones;
 
   final List<BottomNavigationBarItem> _items = [
     TabBarItem.buildItem(name: TabBarName.home),

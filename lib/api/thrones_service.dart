@@ -11,14 +11,14 @@ class ThronesError extends NetworkError {
   ThronesError([message]) : super(message);
 }
 
-abstract class Thrones {
+abstract class ThronesService {
   Future<List<ThronesCard>> cards();
   Future<List<ThronesPack>> packs();
   Future<List<ThronesDeck>> decks({DateTime date});
 }
 
-class DefaultThrones implements Thrones {
-  DefaultThrones({
+class DefaultThronesService implements ThronesService {
+  DefaultThronesService({
     @required this.network,
   }) : assert(network != null);
 

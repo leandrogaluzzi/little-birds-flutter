@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/api/thrones_api.dart';
+import 'package:little_birds/api/thrones_service.dart';
 
-class MockThrones implements Thrones {
+class MockThrones implements ThronesService {
   @override
   Future<List<ThronesCard>> cards() async {
     final file = new File('test/jsons/cards.json');

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/api/thrones_api.dart';
+import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
 class HomeScreenViewModel {
@@ -7,7 +7,7 @@ class HomeScreenViewModel {
     @required this.thrones,
   }) : assert(thrones != null);
 
-  final Thrones thrones;
+  final ThronesService thrones;
 
   DateTime _date = DateTime.now();
   List<ThronesDeck> decks = [];
