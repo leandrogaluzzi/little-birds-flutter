@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:little_birds/api/thrones_service.dart';
+import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/model/auth.dart';
 
 class UserDecksViewModel {

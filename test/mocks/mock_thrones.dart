@@ -4,7 +4,7 @@ import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/auth.dart';
-import 'package:little_birds/api/thrones_service.dart';
+import 'package:little_birds/core/api/thrones_service.dart';
 
 class MockThrones implements ThronesService {
   @override

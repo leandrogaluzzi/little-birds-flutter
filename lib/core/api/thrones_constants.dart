@@ -1,4 +1,4 @@
-import 'package:little_birds/api/credentials.dart';
+import 'credentials.dart';
 
 class ThronesConstants {
   //static const baseURL = 'https://thronesdb.com';

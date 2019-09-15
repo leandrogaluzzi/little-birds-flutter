@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:little_birds/ads/ads.dart';
-import 'package:little_birds/analytics/analytics.dart';
-import 'package:little_birds/analytics/analytics_screen.dart';
+import 'package:little_birds/core/ads/ads.dart';
+import 'package:little_birds/core/analytics/analytics.dart';
+import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/card_screen.dart';

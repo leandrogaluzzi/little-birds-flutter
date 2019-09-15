@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:little_birds/api/thrones_constants.dart';
+import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';

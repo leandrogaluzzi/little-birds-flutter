@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:little_birds/api/thrones_constants.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/network/network_exception.dart';
-import 'package:little_birds/network/network_provider.dart';
+import 'package:little_birds/core/network/network_exception.dart';
+import 'package:little_birds/core/network/network_provider.dart';
+import 'thrones_constants.dart';
 
 class ThronesError extends NetworkError {
   ThronesError([message]) : super(message);
