@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics.dart';
 import 'package:little_birds/analytics/analytics_screen.dart';
-import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/api/thrones_service.dart';
+import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
@@ -12,6 +12,13 @@ import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 class PackListScreen extends StatefulWidget with AnalyticsScreen {
+  PackListScreen({
+    Key key,
+    @required this.thrones,
+  }) : assert(thrones != null);
+
+  final ThronesService thrones;
+
   @override
   String get screenName => 'PackList';
 
@@ -21,11 +28,10 @@ class PackListScreen extends StatefulWidget with AnalyticsScreen {
 
 class _PackListScreenState extends State<PackListScreen> {
   Future _packs;
-  final ThronesService thronesService = ThronesService();
 
   @override
   void initState() {
-    _packs = thronesService.getPacks();
+    _packs = widget.thrones.packs();
     super.initState();
   }
 
@@ -60,7 +66,7 @@ class _PackListScreenState extends State<PackListScreen> {
       title: 'Error loading packs',
       onPressed: () {
         setState(() {
-          _packs = thronesService.getPacks();
+          _packs = widget.thrones.packs();
         });
       },
     );

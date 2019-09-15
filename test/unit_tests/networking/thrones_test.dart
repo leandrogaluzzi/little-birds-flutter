@@ -8,7 +8,7 @@ void main() {
   group('Thrones tests', () {
     test('Test get cards', () async {
       final thrones = MockThrones();
-      final List<ThronesCard> cards = await thrones.getCards();
+      final List<ThronesCard> cards = await thrones.cards();
       expect(cards.length, 11);
       expect(cards[0].name, 'The Red Viper');
       expect(cards[1].name, 'Tears of Lys');
@@ -25,7 +25,7 @@ void main() {
 
     test('Test get packs', () async {
       final thrones = MockThrones();
-      final List<ThronesPack> packs = await thrones.getPacks();
+      final List<ThronesPack> packs = await thrones.packs();
       expect(packs.length, 6);
       expect(packs[0].name, 'Core Set');
       expect(packs[1].name, 'Taking the Black');
@@ -37,8 +37,7 @@ void main() {
 
     test('Test get decks', () async {
       final thrones = MockThrones();
-      final List<ThronesDeck> decks =
-          await thrones.getDecks(date: DateTime.now());
+      final List<ThronesDeck> decks = await thrones.decks(date: DateTime.now());
       expect(decks.length, 5);
       expect(decks[0].name,
           '#igofirst - Runner up and 6 top placements @Euros2019');

@@ -45,5 +45,16 @@
 	<false/>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8070624639061262~8541487815</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.leandrogaluzzi.littlebirds</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>littlebirds</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
