@@ -6,8 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:little_birds/ads/ads.dart';
 import 'package:little_birds/analytics/analytics_event.dart';
+import 'package:little_birds/api/thrones_api.dart';
+import 'package:little_birds/api/thrones_constants.dart';
+import 'package:little_birds/network/network_provider.dart';
 import 'package:little_birds/screens/main_screen.dart';
 import 'package:little_birds/utils/themes.dart';
+import 'package:http/http.dart' as http;
 
 /*
 TODO:
@@ -34,6 +38,18 @@ class LittleBirdsApp extends StatelessWidget {
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
 
+  NetworkProvider _networkProvider() {
+    http.Client client = http.Client();
+    return DefaultNetworkProvider(
+      client: client,
+      baseUrl: ThronesConstants.baseURL,
+    );
+  }
+
+  Thrones _thrones() {
+    return DefaultThrones(network: _networkProvider());
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -47,7 +63,9 @@ class LittleBirdsApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+      home: MainScreen(
+        thrones: _thrones(),
+      ),
       theme: Themes.app(),
       navigatorObservers: [
         observer,
