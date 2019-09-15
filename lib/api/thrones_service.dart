@@ -20,14 +20,14 @@ class ThronesService {
   DefaultThrones _thrones;
 
   Future<List<ThronesCard>> getCards() async {
-    return _thrones.getCards();
+    return _thrones.cards();
   }
 
   Future<List<ThronesPack>> getPacks() async {
-    return _thrones.getPacks();
+    return _thrones.packs();
   }
 
   Future<List<ThronesDeck>> getDecks(DateTime date) async {
-    return _thrones.getDecks(date: date);
+    return _thrones.decks(date: date);
   }
 }

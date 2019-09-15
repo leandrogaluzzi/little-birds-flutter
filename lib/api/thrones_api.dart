@@ -12,19 +12,19 @@ class ThronesError extends NetworkError {
 }
 
 abstract class Thrones {
-  Future<List<ThronesCard>> getCards();
-  Future<List<ThronesPack>> getPacks();
-  Future<List<ThronesDeck>> getDecks({DateTime date});
+  Future<List<ThronesCard>> cards();
+  Future<List<ThronesPack>> packs();
+  Future<List<ThronesDeck>> decks({DateTime date});
 }
 
-class DefaultThrones {
+class DefaultThrones implements Thrones {
   DefaultThrones({
     @required this.network,
   }) : assert(network != null);
 
   final NetworkProvider network;
 
-  Future<List<ThronesCard>> getCards() async {
+  Future<List<ThronesCard>> cards() async {
     try {
       String responseString = await network.get(ThronesConstants.cardsURL);
       List<dynamic> list = await json.decode(responseString);
@@ -36,7 +36,7 @@ class DefaultThrones {
     }
   }
 
-  Future<List<ThronesPack>> getPacks() async {
+  Future<List<ThronesPack>> packs() async {
     try {
       String responseString = await network.get(ThronesConstants.packsURL);
       List<dynamic> list = await json.decode(responseString);
@@ -48,7 +48,7 @@ class DefaultThrones {
     }
   }
 
-  Future<List<ThronesDeck>> getDecks({DateTime date}) async {
+  Future<List<ThronesDeck>> decks({DateTime date}) async {
     String year = date.year.toString();
     String month = date.month.toString().padLeft(2, '0');
     String day = date.day.toString().padLeft(2, '0');

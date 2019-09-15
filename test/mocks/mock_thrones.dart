@@ -7,7 +7,7 @@ import 'package:little_birds/api/thrones_api.dart';
 
 class MockThrones extends Thrones {
   @override
-  Future<List<ThronesCard>> getCards() async {
+  Future<List<ThronesCard>> cards() async {
     final file = new File('test/jsons/cards.json');
     final List<dynamic> jsonMap = json.decode(await file.readAsString());
     final List<ThronesCard> cards =
@@ -16,20 +16,20 @@ class MockThrones extends Thrones {
   }
 
   @override
-  Future<List<ThronesDeck>> getDecks({DateTime date}) async {
-    final file = new File('test/jsons/decks.json');
-    final List<dynamic> jsonMap = json.decode(await file.readAsString());
-    final List<ThronesDeck> decks =
-        jsonMap.map((item) => ThronesDeck.fromJson(item)).toList();
-    return decks;
-  }
-
-  @override
-  Future<List<ThronesPack>> getPacks() async {
+  Future<List<ThronesPack>> packs() async {
     final file = new File('test/jsons/packs.json');
     final List<dynamic> jsonMap = json.decode(await file.readAsString());
     final List<ThronesPack> packs =
         jsonMap.map((item) => ThronesPack.fromJson(item)).toList();
     return packs;
+  }
+
+  @override
+  Future<List<ThronesDeck>> decks({DateTime date}) async {
+    final file = new File('test/jsons/decks.json');
+    final List<dynamic> jsonMap = json.decode(await file.readAsString());
+    final List<ThronesDeck> decks =
+        jsonMap.map((item) => ThronesDeck.fromJson(item)).toList();
+    return decks;
   }
 }
