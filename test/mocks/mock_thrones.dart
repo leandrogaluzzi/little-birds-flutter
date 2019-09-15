@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';
+import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/api/thrones_service.dart';
 
 class MockThrones implements ThronesService {
@@ -31,5 +32,13 @@ class MockThrones implements ThronesService {
     final List<ThronesDeck> decks =
         jsonMap.map((item) => ThronesDeck.fromJson(item)).toList();
     return decks;
+  }
+
+  Future<Auth> authToken({String code}) async {
+    return null;
+  }
+
+  Future<Auth> refreshToken(String refreshToken) async {
+    return null;
   }
 }

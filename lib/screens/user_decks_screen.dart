@@ -1,15 +1,23 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:little_birds/api/thrones_constants.dart';
+import 'package:little_birds/view_models/user_decks_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
 
-class UserScreen extends StatefulWidget {
+class UserDecksScreen extends StatefulWidget {
+  UserDecksScreen({
+    Key key,
+    @required this.viewModel,
+  }) : assert(viewModel != null);
+
+  final UserDecksViewModel viewModel;
+
   @override
-  _UserScreenState createState() => _UserScreenState();
+  _UserDecksScreenState createState() => _UserDecksScreenState();
 }
 
-class _UserScreenState extends State<UserScreen> {
+class _UserDecksScreenState extends State<UserDecksScreen> {
   StreamSubscription _sub;
 
   @override
@@ -17,12 +25,9 @@ class _UserScreenState extends State<UserScreen> {
     super.initState();
 
     _sub = getUriLinksStream().listen((Uri uri) {
-      String code = uri.queryParameters['code'];
-      print(code);
-      // Parse the link and warn the user, if it is not correct
-    }, onError: (err) {
-      print(err);
-      // Handle exception by warning the user their action did not succeed
+      _handleUri(uri);
+    }, onError: (error) {
+      _handleError(error);
     });
   }
 
@@ -33,11 +38,21 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   _openAuth() async {
-    final url = ThronesConstants.authURL();
+    final url = ThronesConstants.codeURL();
 
     if (await canLaunch(url)) {
       await launch(url, forceSafariVC: false);
     }
+  }
+
+  _handleUri(Uri uri) async {
+    String code = uri.queryParameters['code'];
+    print(code);
+    await widget.viewModel.auth(code: code);
+  }
+
+  _handleError(dynamic error) {
+    print(error);
   }
 
   @override

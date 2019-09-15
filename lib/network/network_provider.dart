@@ -23,10 +23,10 @@ class DefaultNetworkProvider extends NetworkProvider {
   @override
   Future<String> get(String url,
       {Map<String, String> headers, Map<String, String> parameters}) async {
-    String fullUrl = baseUrl + url;
+    final uri = Uri.https(baseUrl, url, parameters);
     try {
       http.Response response = await client
-          .get(fullUrl, headers: headers)
+          .get(uri, headers: headers)
           .timeout(Duration(seconds: 20));
       return _responseString(response: response);
     } on SocketException {

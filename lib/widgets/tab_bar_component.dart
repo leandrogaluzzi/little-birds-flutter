@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:little_birds/api/thrones_service.dart';
 import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/screens/user_screen.dart';
+import 'package:little_birds/screens/user_decks_screen.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
 import 'package:little_birds/screens/card_list_screen.dart';
 import 'package:little_birds/view_models/card_list_screen_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
+import 'package:little_birds/view_models/user_decks_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
   TabBarComponent({
@@ -37,13 +38,14 @@ class TabBarComponent extends StatelessWidget {
   }
 
   CardListScreen _cardListScreen(BuildContext context) {
-    return CardListScreen(
-      viewModel: CardListScreenViewModel(cardsStore: CardsStore.of(context)),
-    );
+    final viewModel =
+        CardListScreenViewModel(cardsStore: CardsStore.of(context));
+    return CardListScreen(viewModel: viewModel);
   }
 
-  UserScreen _userScreen() {
-    return UserScreen();
+  UserDecksScreen _userDecksScreen() {
+    final viewModel = UserDecksViewModel(thrones: thrones);
+    return UserDecksScreen(viewModel: viewModel);
   }
 
   List<Widget> _tabs(BuildContext context) {
@@ -51,7 +53,7 @@ class TabBarComponent extends StatelessWidget {
       _homeScreen(),
       _packListScreen(),
       _cardListScreen(context),
-      _userScreen(),
+      _userDecksScreen(),
     ];
   }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:little_birds/api/thrones_constants.dart';
+import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
@@ -15,6 +16,9 @@ abstract class ThronesService {
   Future<List<ThronesCard>> cards();
   Future<List<ThronesPack>> packs();
   Future<List<ThronesDeck>> decks({DateTime date});
+
+  Future<Auth> authToken({String code});
+  Future<Auth> refreshToken(String refreshToken);
 }
 
 class DefaultThronesService implements ThronesService {
@@ -68,5 +72,29 @@ class DefaultThronesService implements ThronesService {
     } on NetworkError {
       throw ThronesError();
     }
+  }
+
+  Future<Auth> authToken({String code}) async {
+    String url = ThronesConstants.authURL;
+    Map<String, String> parameters = {
+      'client_id': ThronesConstants.clientID,
+      'client_secret': ThronesConstants.secretID,
+      'redirect_uri': ThronesConstants.redirect,
+      'code': code,
+      'grant_type': 'authorization_code',
+    };
+
+    try {
+      String responseString = await network.get(url, parameters: parameters);
+      dynamic response = json.decode(responseString);
+      Auth auth = Auth.fromJson(response);
+      return auth;
+    } on NetworkError {
+      throw ThronesError();
+    }
+  }
+
+  Future<Auth> refreshToken(String refreshToken) async {
+    return null;
   }
 }
