@@ -6,16 +6,17 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/services.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
-import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 class PackListScreen extends StatefulWidget with AnalyticsScreen {
   PackListScreen({
     Key key,
     @required this.thrones,
-  }) : assert(thrones != null);
+  })  : assert(thrones != null),
+        super(key: key);
 
   final ThronesService thrones;
 
@@ -37,7 +38,9 @@ class _PackListScreenState extends State<PackListScreen> {
 
   void _onPackSelected({BuildContext context, ThronesPack pack}) async {
     Analytics.trackPack(pack);
-    final cards = CardsStore.of(context).getCardsWithPackCode(pack.code);
+    final services = Services.of(context);
+    final cardsStore = services.cardsStore;
+    final cards = cardsStore.getCardsWithPackCode(pack.code);
     await Navigator.push(
       context,
       CupertinoPageRoute(

@@ -7,7 +7,8 @@ class SearchField extends StatelessWidget {
     Key key,
     this.onChanged,
     this.onSubmitted,
-  }) : assert(onSubmitted != null);
+  })  : assert(onSubmitted != null),
+        super(key: key);
 
   final SearchCallback onChanged;
   final VoidCallback onSubmitted;

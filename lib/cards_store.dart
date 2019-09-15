@@ -3,25 +3,12 @@ import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/thrones_card.dart';
 
-class CardsStore extends InheritedWidget {
+class CardsStore {
   CardsStore({
-    Key key,
     @required this.cards,
-    @required Widget child,
-  })  : assert(cards != null),
-        assert(child != null),
-        super(key: key, child: child);
+  }) : assert(cards != null);
 
   final List<ThronesCard> cards;
-
-  static CardsStore of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(CardsStore) as CardsStore;
-  }
-
-  @override
-  bool updateShouldNotify(InheritedWidget oldWidget) {
-    return false;
-  }
 
   List<ThronesCard> getCardsAlphabetically() {
     var sortedCards = cards;

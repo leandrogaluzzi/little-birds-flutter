@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/thrones_card.dart';
@@ -15,7 +14,7 @@ void main() {
       final List<dynamic> jsonMap = json.decode(await file.readAsString());
       final List<ThronesCard> cards =
           jsonMap.map((item) => ThronesCard.fromJson(item)).toList();
-      cardsStore = CardsStore(cards: cards, child: Container());
+      cardsStore = CardsStore(cards: cards);
     });
 
     test('Test get cards alphabetically', () {

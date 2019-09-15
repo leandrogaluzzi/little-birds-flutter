@@ -7,7 +7,8 @@ class DeckFooter extends StatelessWidget {
   DeckFooter({
     Key key,
     @required this.url,
-  }) : assert(url != null);
+  })  : assert(url != null),
+        super(key: key);
 
   final String url;
 

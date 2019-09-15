@@ -7,12 +7,12 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/services.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
-import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 double _heightLoading = 75;
@@ -21,7 +21,8 @@ class HomeScreen extends StatefulWidget with AnalyticsScreen {
   HomeScreen({
     Key key,
     @required this.viewModel,
-  }) : assert(viewModel != null);
+  })  : assert(viewModel != null),
+        super(key: key);
 
   final HomeScreenViewModel viewModel;
 
@@ -86,7 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     Analytics.trackDeck(deck);
-    final cardsStore = CardsStore.of(context);
+    final services = Services.of(context);
+    final cardsStore = services.cardsStore;
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
     await Navigator.push(
       context,
@@ -123,8 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _widgetListItem({BuildContext context, int index}) {
     final deck = this.viewModel.decks[index];
-    final cardsQuantity =
-        CardsStore.of(context).getCardsQuantityFromSlots(deck.slots);
+    final services = Services.of(context);
+    final cardsStore = services.cardsStore;
+    final cardsQuantity = cardsStore.getCardsQuantityFromSlots(deck.slots);
     final viewModel =
         HomeListItemViewModel(deck: deck, cardsQuantity: cardsQuantity);
     return HomeListItem(

@@ -9,7 +9,8 @@ class UserDecksScreen extends StatefulWidget {
   UserDecksScreen({
     Key key,
     @required this.viewModel,
-  }) : assert(viewModel != null);
+  })  : assert(viewModel != null),
+        super(key: key);
 
   final UserDecksViewModel viewModel;
 

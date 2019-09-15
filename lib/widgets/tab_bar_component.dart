@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:little_birds/core/api/thrones_service.dart';
-import 'package:little_birds/cards_store.dart';
-import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/screens/user_decks_screen.dart';
+import 'package:little_birds/services.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
@@ -13,15 +11,6 @@ import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
-  TabBarComponent({
-    Key key,
-    @required this.thrones,
-    @required this.storage,
-  });
-
-  final ThronesService thrones;
-  final SecureStorage storage;
-
   final List<BottomNavigationBarItem> _items = [
     TabBarItem.buildItem(name: TabBarName.home),
     TabBarItem.buildItem(name: TabBarName.packs),
@@ -29,34 +18,40 @@ class TabBarComponent extends StatelessWidget {
     TabBarItem.buildItem(name: TabBarName.decks),
   ];
 
-  HomeScreen _homeScreen() {
+  HomeScreen _homeScreen(BuildContext context) {
+    final services = Services.of(context);
+    final thrones = services.thronesService;
     final viewModel = HomeScreenViewModel(thrones: thrones);
     return HomeScreen(viewModel: viewModel);
   }
 
-  PackListScreen _packListScreen() {
-    return PackListScreen(
-      thrones: thrones,
-    );
+  PackListScreen _packListScreen(BuildContext context) {
+    final services = Services.of(context);
+    final thrones = services.thronesService;
+    return PackListScreen(thrones: thrones);
   }
 
   CardListScreen _cardListScreen(BuildContext context) {
-    final viewModel =
-        CardListScreenViewModel(cardsStore: CardsStore.of(context));
+    final services = Services.of(context);
+    final cardsStore = services.cardsStore;
+    final viewModel = CardListScreenViewModel(cardsStore: cardsStore);
     return CardListScreen(viewModel: viewModel);
   }
 
-  UserDecksScreen _userDecksScreen() {
+  UserDecksScreen _userDecksScreen(BuildContext context) {
+    final services = Services.of(context);
+    final thrones = services.thronesService;
+    final storage = services.secureStorage;
     final viewModel = UserDecksViewModel(thrones: thrones, storage: storage);
     return UserDecksScreen(viewModel: viewModel);
   }
 
   List<Widget> _tabs(BuildContext context) {
     return [
-      _homeScreen(),
-      _packListScreen(),
+      _homeScreen(context),
+      _packListScreen(context),
       _cardListScreen(context),
-      _userDecksScreen(),
+      _userDecksScreen(context),
     ];
   }
 
