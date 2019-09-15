@@ -5,7 +5,7 @@ import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/api/thrones_api.dart';
 
-class MockThrones extends Thrones {
+class MockThrones implements Thrones {
   @override
   Future<List<ThronesCard>> cards() async {
     final file = new File('test/jsons/cards.json');

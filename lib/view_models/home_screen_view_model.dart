@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:little_birds/api/thrones_api.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/api/thrones_service.dart';
 
 class HomeScreenViewModel {
-  ThronesService _thronesService = ThronesService();
+  HomeScreenViewModel({
+    @required this.thrones,
+  }) : assert(thrones != null);
+
+  final Thrones thrones;
+
   DateTime _date = DateTime.now();
   List<ThronesDeck> decks = [];
 
@@ -32,7 +38,7 @@ class HomeScreenViewModel {
     if (decks.length > 10) {
       return decks;
     }
-    List<ThronesDeck> newDecks = await _thronesService.getDecks(date);
+    List<ThronesDeck> newDecks = await thrones.decks(date: date);
     decks.addAll(newDecks);
     DateTime newDate = _previousDay(fromDate: date);
     _date = newDate;

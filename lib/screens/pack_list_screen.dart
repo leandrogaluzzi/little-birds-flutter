@@ -13,6 +13,7 @@ import 'package:little_birds/widgets/separator.dart';
 
 class PackListScreen extends StatefulWidget with AnalyticsScreen {
   PackListScreen({
+    Key key,
     @required this.thrones,
   }) : assert(thrones != null);
 

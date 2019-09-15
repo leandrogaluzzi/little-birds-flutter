@@ -26,7 +26,8 @@ class TabBarComponent extends StatelessWidget {
   ];
 
   HomeScreen _homeScreen() {
-    return HomeScreen(viewModel: HomeScreenViewModel());
+    final viewModel = HomeScreenViewModel(thrones: thrones);
+    return HomeScreen(viewModel: viewModel);
   }
 
   PackListScreen _packListScreen() {
