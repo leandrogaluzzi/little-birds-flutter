@@ -9,6 +9,7 @@ import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/network/network_provider.dart';
+import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/screens/main_screen.dart';
 import 'package:little_birds/utils/themes.dart';
 import 'package:http/http.dart' as http;
@@ -50,21 +51,28 @@ class LittleBirdsApp extends StatelessWidget {
     return DefaultThronesService(network: _networkProvider());
   }
 
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SecureStorage _storage() {
+    return SecureStorage();
+  }
 
-    analytics.logEvent(name: AnalyticsEvent.filter.toString());
-
+  _configAdMob(BuildContext context) {
     final appId = Theme.of(context).platform == TargetPlatform.iOS
         ? Ads.appIdIOS
         : Ads.appIdAndroid;
     FirebaseAdMob.instance.initialize(appId: appId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    _configAdMob(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainScreen(
         thrones: _thrones(),
+        storage: _storage(),
       ),
       theme: Themes.app(),
       navigatorObservers: [

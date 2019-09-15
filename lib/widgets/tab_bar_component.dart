@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/screens/user_decks_screen.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
@@ -15,9 +16,11 @@ class TabBarComponent extends StatelessWidget {
   TabBarComponent({
     Key key,
     @required this.thrones,
+    @required this.storage,
   });
 
   final ThronesService thrones;
+  final SecureStorage storage;
 
   final List<BottomNavigationBarItem> _items = [
     TabBarItem.buildItem(name: TabBarName.home),
@@ -44,7 +47,7 @@ class TabBarComponent extends StatelessWidget {
   }
 
   UserDecksScreen _userDecksScreen() {
-    final viewModel = UserDecksViewModel(thrones: thrones);
+    final viewModel = UserDecksViewModel(thrones: thrones, storage: storage);
     return UserDecksScreen(viewModel: viewModel);
   }
 

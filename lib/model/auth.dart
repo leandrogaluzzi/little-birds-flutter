@@ -1,4 +1,10 @@
 class Auth {
+  Auth({
+    this.accessToken,
+    this.refreshToken,
+  })  : assert(accessToken != null),
+        assert(refreshToken != null);
+
   final String accessToken;
   final String refreshToken;
 
