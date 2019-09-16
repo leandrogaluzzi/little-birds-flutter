@@ -24,6 +24,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   Future _cards;
 
+  @override
+  void initState() {
+    super.initState();
+    _cards = widget.thronesService.cards();
+  }
+
   Widget _widgetLoading() {
     return RequestLoadingScreen(
       title: 'Loading cards ...',
@@ -55,7 +61,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _cards = widget.thronesService.cards();
     return FutureBuilder<List<ThronesCard>>(
       future: _cards,
       builder:

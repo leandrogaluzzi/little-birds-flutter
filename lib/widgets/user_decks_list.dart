@@ -30,6 +30,12 @@ class UserDecksList extends StatefulWidget {
 class _UserDecksListState extends State<UserDecksList> {
   Future _userDecks;
 
+  @override
+  void initState() {
+    super.initState();
+    _userDecks = widget.thrones.userDecks(accessToken: widget.auth.accessToken);
+  }
+
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     final services = Services.of(context);
     final cardsStore = services.cardsStore;
@@ -104,7 +110,6 @@ class _UserDecksListState extends State<UserDecksList> {
 
   @override
   Widget build(BuildContext context) {
-    _userDecks = widget.thrones.userDecks(accessToken: widget.auth.accessToken);
     return FutureBuilder<List<ThronesDeck>>(
       future: _userDecks,
       builder:
