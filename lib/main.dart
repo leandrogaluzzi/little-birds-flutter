@@ -15,6 +15,8 @@ import 'package:http/http.dart' as http;
 /*
 TODO:
 
+- Add test for cardsStore getCardsFromSlots
+- Remove zebra from loading more
 - Create CardListItem view model
 - Image Screen animation
 - Transitions

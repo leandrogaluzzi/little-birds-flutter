@@ -33,6 +33,14 @@ class CardsStore {
     return filteredCards;
   }
 
+  List<ThronesCard> getCardsFromSlots(List<Slot> slots) {
+    List<String> codes = slots.map((slot) => slot.code).toList();
+    //codes.sort();
+    final cards = _getCardsWithCodes(codes);
+    //cards.sort((a, b) => a.code.compareTo(b.code));
+    return cards;
+  }
+
   List<CardQuantity> getCardsQuantityFromSlots(List<Slot> slots) {
     List<String> codes = slots.map((slot) => slot.code).toList();
     codes.sort();

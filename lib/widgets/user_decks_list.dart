@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/services.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/view_models/user_decks_list_item_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'package:little_birds/widgets/user_decks_list_item.dart';
 
 class UserDecksList extends StatefulWidget {
   UserDecksList({
@@ -29,6 +32,17 @@ class _UserDecksListState extends State<UserDecksList> {
     //setState(() {});
   }
 
+  Widget _listItem({ThronesDeck deck}) {
+    final services = Services.of(context);
+    final cardsStore = services.cardsStore;
+    final cards = cardsStore.getCardsFromSlots(deck.slots);
+    final viewModel = UserDecksListItemViewModel(deck: deck, cards: cards);
+    return UserDecksListItem(
+      viewModel: viewModel,
+      onTap: () {},
+    );
+  }
+
   Widget _loading() {
     return Center(
       child: CircularProgressIndicator(
@@ -46,16 +60,6 @@ class _UserDecksListState extends State<UserDecksList> {
               widget.thrones.userDecks(accessToken: widget.auth.accessToken);
         });
       },
-    );
-  }
-
-  Widget _listItem({ThronesDeck deck}) {
-    return Container(
-      height: 100,
-      color: Colors.green,
-      child: Center(
-        child: Text(deck.name),
-      ),
     );
   }
 

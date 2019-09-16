@@ -127,13 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final deck = this.viewModel.decks[index];
     final services = Services.of(context);
     final cardsStore = services.cardsStore;
-    final cardsQuantity = cardsStore.getCardsQuantityFromSlots(deck.slots);
-    final viewModel =
-        HomeListItemViewModel(deck: deck, cardsQuantity: cardsQuantity);
+    final cards = cardsStore.getCardsFromSlots(deck.slots);
+    final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
     return HomeListItem(
       key: Key(deck.faction().toCode()),
       viewModel: viewModel,
-      index: index,
       onTap: () {
         _onDeckSelected(context: context, deck: deck);
       },

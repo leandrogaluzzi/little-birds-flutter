@@ -14,14 +14,12 @@ class HomeListItem extends StatelessWidget {
   HomeListItem({
     Key key,
     @required this.viewModel,
-    @required this.index,
     @required this.onTap,
   })  : assert(viewModel != null),
         super(key: key);
 
   final HomeListItemViewModel viewModel;
   final VoidCallback onTap;
-  final int index;
 
   Widget _icon() {
     return Container(
