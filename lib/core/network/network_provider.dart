@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'network_exception.dart';
+import 'network_error.dart';
 
 abstract class NetworkProvider {
   Future<String> get(String url,

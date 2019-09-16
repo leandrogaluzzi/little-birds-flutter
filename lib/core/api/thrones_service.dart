@@ -4,13 +4,10 @@ import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/core/network/network_exception.dart';
+import 'package:little_birds/core/network/network_error.dart';
 import 'package:little_birds/core/network/network_provider.dart';
 import 'thrones_constants.dart';
-
-class ThronesError extends NetworkError {
-  ThronesError([message]) : super(message);
-}
+import 'thrones_error.dart';
 
 abstract class ThronesService {
   Future<List<ThronesCard>> cards();
@@ -88,6 +85,8 @@ class DefaultThronesService implements ThronesService {
       List<ThronesDeck> decks =
           list.map((item) => ThronesDeck.fromJson(item)).toList();
       return decks;
+    } on UnauthorisedError {
+      throw ThronesAuthorizationError();
     } on NetworkError {
       throw ThronesError();
     }

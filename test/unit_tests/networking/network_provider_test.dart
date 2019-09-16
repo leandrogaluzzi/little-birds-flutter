@@ -1,5 +1,5 @@
 import 'package:http/testing.dart';
-import 'package:little_birds/core/network/network_exception.dart';
+import 'package:little_birds/core/network/network_error.dart';
 import 'package:little_birds/core/network/network_provider.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
