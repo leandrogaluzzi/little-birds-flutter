@@ -1,11 +1,21 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
+import 'package:little_birds/core/api/thrones_error.dart';
 import 'package:little_birds/model/auth.dart';
+import 'package:little_birds/model/thrones_deck.dart';
+import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
 import 'package:little_birds/widgets/user_decks_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
+
+enum UserDecksState {
+  loading,
+  error,
+  list,
+  login,
+}
 
 class UserDecksScreen extends StatefulWidget {
   UserDecksScreen({
@@ -22,8 +32,8 @@ class UserDecksScreen extends StatefulWidget {
 
 class _UserDecksScreenState extends State<UserDecksScreen> {
   StreamSubscription _sub;
-  bool _isLoading = true;
-  bool _isAuthenticated = false;
+  UserDecksState _state = UserDecksState.loading;
+  List<ThronesDeck> decks = [];
   Auth _auth;
 
   @override
@@ -47,10 +57,39 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
 
   _checkAuthentication() async {
     _auth = await widget.viewModel.getAuth();
-    setState(() {
-      _isLoading = false;
-      _isAuthenticated = _auth != null;
-    });
+    if (_auth == null) {
+      setState(() {
+        _state = UserDecksState.login;
+      });
+    } else {
+      _loadUserDecks();
+    }
+  }
+
+  _loadUserDecks() async {
+    try {
+      decks = await widget.viewModel.userDecks();
+      setState(() {
+        _state = UserDecksState.list;
+      });
+    } on ThronesAuthorizationError {
+      _refreshAuth();
+    } on ThronesError {
+      setState(() {
+        _state = UserDecksState.error;
+      });
+    }
+  }
+
+  _refreshAuth() async {
+    try {
+      await widget.viewModel.refreshAuth();
+      _loadUserDecks();
+    } on ThronesError {
+      setState(() {
+        _state = UserDecksState.login;
+      });
+    }
   }
 
   _openAuth() async {
@@ -63,11 +102,17 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
 
   _handleUri(Uri uri) async {
     await widget.viewModel.auth(uri: uri);
-    setState(() {});
+    _loadUserDecks();
   }
 
   _handleError(dynamic error) {
-    print(error);
+    setState(() {
+      _state = UserDecksState.error;
+    });
+  }
+
+  Future<void> _refreshDecks() async {
+    _loadUserDecks();
   }
 
   Widget _login() {
@@ -89,15 +134,18 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     );
   }
 
-  Widget _list({Auth auth}) {
-    return UserDecksList(
-      thrones: widget.viewModel.thrones,
-      auth: auth,
+  Widget _error() {
+    return RequestErrorScreen(
+      title: 'Error loading decks',
+      onPressed: () {},
     );
   }
 
-  Widget _body() {
-    return _isAuthenticated ? _list(auth: _auth) : _login();
+  Widget _list() {
+    return RefreshIndicator(
+      child: UserDecksList(decks: decks),
+      onRefresh: _refreshDecks,
+    );
   }
 
   Widget _add(BuildContext context) {
@@ -107,6 +155,23 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     );
   }
 
+  Widget _body() {
+    switch (_state) {
+      case UserDecksState.login:
+        return _login();
+        break;
+      case UserDecksState.list:
+        return _list();
+        break;
+      case UserDecksState.error:
+        return _error();
+        break;
+      case UserDecksState.loading:
+      default:
+        return _loading();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +179,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
         title: Text('My Decks'),
         actions: <Widget>[_add(context)],
       ),
-      body: _isLoading ? _loading() : _body(),
+      body: _body(),
     );
   }
 }

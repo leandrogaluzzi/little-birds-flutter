@@ -19,6 +19,9 @@ class SecureStorage {
   Future<Auth> getAuth() async {
     String accessToken = await _storage.read(key: _keyAcessToken);
     String refreshToken = await _storage.read(key: _keyRefreshToken);
+    if (accessToken == null || refreshToken == null) {
+      return null;
+    }
     return Auth(accessToken: accessToken, refreshToken: refreshToken);
   }
 }

@@ -85,7 +85,7 @@ class DefaultThronesService implements ThronesService {
       List<ThronesDeck> decks =
           list.map((item) => ThronesDeck.fromJson(item)).toList();
       return decks;
-    } on UnauthorisedError {
+    } on UnauthorizedError {
       throw ThronesAuthorizationError();
     } on NetworkError {
       throw ThronesError();

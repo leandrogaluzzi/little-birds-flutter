@@ -21,8 +21,8 @@ class BadRequestError extends NetworkError {
   BadRequestError([message]) : super(message, "Invalid Request: ");
 }
 
-class UnauthorisedError extends NetworkError {
-  UnauthorisedError([message]) : super(message, "Unauthorised: ");
+class UnauthorizedError extends NetworkError {
+  UnauthorizedError([message]) : super(message, "Unauthorized: ");
 }
 
 class ServerError extends NetworkError {

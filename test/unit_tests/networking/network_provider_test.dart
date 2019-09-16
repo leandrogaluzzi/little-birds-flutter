@@ -53,7 +53,7 @@ void main() {
           DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
       expect(networkProvider.get('test'),
-          throwsA(TypeMatcher<UnauthorisedError>()));
+          throwsA(TypeMatcher<UnauthorizedError>()));
     });
 
     test('Test response 403', () {
@@ -68,7 +68,7 @@ void main() {
           DefaultNetworkProvider(baseUrl: _baseUrl, client: client);
 
       expect(networkProvider.get('test'),
-          throwsA(TypeMatcher<UnauthorisedError>()));
+          throwsA(TypeMatcher<UnauthorizedError>()));
     });
 
     test('Test response 500', () {

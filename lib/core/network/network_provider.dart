@@ -44,7 +44,7 @@ class DefaultNetworkProvider extends NetworkProvider {
         throw BadRequestError(response.body.toString());
       case 401:
       case 403:
-        throw UnauthorisedError(response.body.toString());
+        throw UnauthorizedError(response.body.toString());
       case 500:
         throw ServerError(response.body.toString());
       default:

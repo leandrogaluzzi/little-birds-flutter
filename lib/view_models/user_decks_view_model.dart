@@ -26,6 +26,12 @@ class UserDecksViewModel {
     return decks;
   }
 
+  refreshAuth() async {
+    Auth auth = await storage.getAuth();
+    final newAuth = await thrones.refreshToken(auth.refreshToken);
+    storage.saveAuth(newAuth);
+  }
+
   Future<Auth> getAuth() async {
     Auth auth = await storage.getAuth();
     return auth;
