@@ -114,6 +114,21 @@ class DefaultThronesService implements ThronesService {
   }
 
   Future<Auth> refreshToken(String refreshToken) async {
-    return null;
+    String url = ThronesConstants.authURL;
+    Map<String, String> parameters = {
+      'client_id': ThronesConstants.clientID,
+      'client_secret': ThronesConstants.secretID,
+      'refresh_token': refreshToken,
+      'grant_type': 'refresh_token',
+    };
+
+    try {
+      String responseString = await network.get(url, parameters: parameters);
+      dynamic response = json.decode(responseString);
+      Auth auth = Auth.fromJson(response);
+      return auth;
+    } on NetworkError {
+      throw ThronesError();
+    }
   }
 }
