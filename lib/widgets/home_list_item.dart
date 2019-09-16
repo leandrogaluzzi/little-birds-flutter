@@ -110,8 +110,6 @@ class HomeListItem extends StatelessWidget {
             _faction(),
             SizedBox(height: kSmallPadding),
             _agenda(),
-            //SizedBox(height: kSmallPadding),
-            //_date(),
           ],
         ),
       ),

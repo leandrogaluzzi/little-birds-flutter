@@ -4,6 +4,7 @@ import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
+import 'package:little_birds/widgets/separator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -58,6 +59,11 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     print(error);
   }
 
+  Future<void> _refresh() async {
+    //await viewModel.
+    //setState(() {});
+  }
+
   Widget _login() {
     return Center(
       child: RawMaterialButton(
@@ -88,11 +94,34 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     );
   }
 
-  Widget _list({List<ThronesDeck> decks}) {
-    return Container(color: Colors.blue);
+  Widget _listItem({ThronesDeck deck}) {
+    return Container(
+      height: 100,
+      color: Colors.green,
+      child: Center(
+        child: Text(deck.name),
+      ),
+    );
   }
 
-  Widget _widgetUserDecks() {
+  Widget _list({List<ThronesDeck> decks}) {
+    final count = decks.length;
+    return RefreshIndicator(
+      onRefresh: _refresh,
+      child: ListView.separated(
+        itemCount: count,
+        itemBuilder: (BuildContext context, int index) {
+          final deck = decks[index];
+          return _listItem(deck: deck);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Separator();
+        },
+      ),
+    );
+  }
+
+  Widget _futureBuilder() {
     _userDecks = widget.viewModel.userDecks();
     return FutureBuilder<List<ThronesDeck>>(
       future: _userDecks,
@@ -112,8 +141,15 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     );
   }
 
-  _body() {
-    return widget.viewModel.isAuthenticated() ? _widgetUserDecks() : _login();
+  Widget _body() {
+    return widget.viewModel.isAuthenticated() ? _futureBuilder() : _login();
+  }
+
+  Widget _add(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.add_circle_outline),
+      onPressed: () {},
+    );
   }
 
   @override
@@ -121,6 +157,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Decks'),
+        actions: <Widget>[_add(context)],
       ),
       body: _body(),
     );
