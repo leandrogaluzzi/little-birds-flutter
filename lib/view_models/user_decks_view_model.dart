@@ -14,10 +14,6 @@ class UserDecksViewModel {
   final ThronesService thrones;
   final SecureStorage storage;
 
-  bool isAuthenticated() {
-    return true;
-  }
-
   auth({Uri uri}) async {
     String code = uri.queryParameters['code'];
     final auth = await thrones.authToken(code: code);
@@ -28,5 +24,10 @@ class UserDecksViewModel {
     Auth auth = await storage.getAuth();
     final decks = await thrones.userDecks(accessToken: auth.accessToken);
     return decks;
+  }
+
+  Future<Auth> getAuth() async {
+    Auth auth = await storage.getAuth();
+    return auth;
   }
 }
