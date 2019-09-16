@@ -12,7 +12,8 @@ import 'package:uni_links/uni_links.dart';
 
 enum UserDecksState {
   loading,
-  error,
+  errorList,
+  errorLogin,
   list,
   login,
 }
@@ -40,12 +41,6 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
   void initState() {
     super.initState();
 
-    _sub = getUriLinksStream().listen((Uri uri) {
-      _handleUri(uri);
-    }, onError: (error) {
-      _handleError(error);
-    });
-
     _checkAuthentication();
   }
 
@@ -58,9 +53,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
   _checkAuthentication() async {
     _auth = await widget.viewModel.getAuth();
     if (_auth == null) {
-      setState(() {
-        _state = UserDecksState.login;
-      });
+      _setLoginState();
     } else {
       _loadUserDecks();
     }
@@ -76,7 +69,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
       _refreshAuth();
     } on ThronesError {
       setState(() {
-        _state = UserDecksState.error;
+        _state = UserDecksState.errorList;
       });
     }
   }
@@ -86,9 +79,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
       await widget.viewModel.refreshAuth();
       _loadUserDecks();
     } on ThronesError {
-      setState(() {
-        _state = UserDecksState.login;
-      });
+      _setLoginState();
     }
   }
 
@@ -107,7 +98,18 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
 
   _handleError(dynamic error) {
     setState(() {
-      _state = UserDecksState.error;
+      _state = UserDecksState.errorLogin;
+    });
+  }
+
+  _setLoginState() {
+    _sub = getUriLinksStream().listen((Uri uri) {
+      _handleUri(uri);
+    }, onError: (error) {
+      _handleError(error);
+    });
+    setState(() {
+      _state = UserDecksState.login;
     });
   }
 
@@ -134,10 +136,23 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
     );
   }
 
-  Widget _error() {
+  Widget _errorList() {
     return RequestErrorScreen(
       title: 'Error loading decks',
-      onPressed: () {},
+      onPressed: () {
+        _loadUserDecks();
+      },
+    );
+  }
+
+  Widget _errorLogin() {
+    return RequestErrorScreen(
+      title: 'Error logging in',
+      onPressed: () {
+        setState(() {
+          _state = UserDecksState.login;
+        });
+      },
     );
   }
 
@@ -163,8 +178,11 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
       case UserDecksState.list:
         return _list();
         break;
-      case UserDecksState.error:
-        return _error();
+      case UserDecksState.errorList:
+        return _errorList();
+        break;
+      case UserDecksState.errorLogin:
+        return _errorLogin();
         break;
       case UserDecksState.loading:
       default:
