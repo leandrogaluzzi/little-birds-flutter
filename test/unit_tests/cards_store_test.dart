@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:test/test.dart';

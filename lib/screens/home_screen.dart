@@ -7,7 +7,7 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
-import 'package:little_birds/services.dart';
+import 'package:little_birds/core/services.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';

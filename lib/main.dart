@@ -4,14 +4,11 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:little_birds/cards_store.dart';
 import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/network/network_provider.dart';
-import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/screens/main_screen.dart';
-import 'package:little_birds/services.dart';
 import 'package:little_birds/utils/themes.dart';
 import 'package:http/http.dart' as http;
 

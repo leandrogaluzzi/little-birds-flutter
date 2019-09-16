@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/cards_store.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/screens/request_loading_screen.dart';
-import 'package:little_birds/services.dart';
+import 'package:little_birds/core/services.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
