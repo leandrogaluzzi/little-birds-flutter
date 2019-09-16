@@ -79,14 +79,17 @@ class UserDecksListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 85,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          _icon(),
-          _column(),
-        ],
+    return RawMaterialButton(
+      onPressed: onTap,
+      child: Container(
+        height: 85,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _icon(),
+            _column(),
+          ],
+        ),
       ),
     );
   }
