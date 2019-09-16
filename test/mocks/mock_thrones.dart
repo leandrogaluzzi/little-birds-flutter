@@ -34,6 +34,10 @@ class MockThrones implements ThronesService {
     return decks;
   }
 
+  Future<List<ThronesDeck>> userDecks({String accessToken}) async {
+    return [];
+  }
+
   Future<Auth> authToken({String code}) async {
     return null;
   }

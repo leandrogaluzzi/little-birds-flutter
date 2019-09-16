@@ -17,6 +17,8 @@ abstract class ThronesService {
   Future<List<ThronesPack>> packs();
   Future<List<ThronesDeck>> decks({DateTime date});
 
+  Future<List<ThronesDeck>> userDecks({String accessToken});
+
   Future<Auth> authToken({String code});
   Future<Auth> refreshToken(String refreshToken);
 }
@@ -69,6 +71,23 @@ class DefaultThronesService implements ThronesService {
       return decks;
     } on ServerError {
       return [];
+    } on NetworkError {
+      throw ThronesError();
+    }
+  }
+
+  Future<List<ThronesDeck>> userDecks({String accessToken}) async {
+    String url = ThronesConstants.userDecksURL;
+    Map<String, String> headers = {
+      'Authorization': 'Bearer $accessToken',
+    };
+
+    try {
+      String responseString = await network.get(url, headers: headers);
+      List<dynamic> list = await json.decode(responseString);
+      List<ThronesDeck> decks =
+          list.map((item) => ThronesDeck.fromJson(item)).toList();
+      return decks;
     } on NetworkError {
       throw ThronesError();
     }

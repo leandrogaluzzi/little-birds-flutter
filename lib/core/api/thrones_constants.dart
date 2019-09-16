@@ -7,6 +7,9 @@ class ThronesConstants {
   static const cardsURL = '/api/public/cards/';
   static const packsURL = '/api/public/packs/';
   static const decksURL = '/api/public/decklists/by_date/';
+
+  static const userDecksURL = '/api/oauth2/decks';
+
   static const authURL = '/oauth/v2/token';
 
   static const clientID = YOUR_CLIENT_ID;
