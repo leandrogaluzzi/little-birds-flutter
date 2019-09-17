@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
+import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/network/network_provider.dart';
 import 'package:little_birds/screens/main_screen.dart';
 import 'package:little_birds/utils/themes.dart';
@@ -15,6 +16,9 @@ import 'package:http/http.dart' as http;
 /*
 TODO:
 
+- Add credentials for production
+- Fix Home Screen view model injection
+- Improve filter logic with InheritedWidget
 - Create a separated widget for the login screen that also handles the redirect
 - Remove Authentication logic from UserDecksScreen
 - Fix admob/firebase plits
@@ -61,9 +65,10 @@ class LittleBirdsApp extends StatelessWidget {
     FirebaseAdMob.instance.initialize(appId: appId);
   }
 
-  MainScreen _mainScreen() {
-    return MainScreen(
+  Widget _home() {
+    return ThronesServiceContainer(
       thronesService: _thronesService(),
+      child: MainScreen(),
     );
   }
 
@@ -77,7 +82,7 @@ class LittleBirdsApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: _mainScreen(),
+      home: _home(),
       theme: Themes.app(),
       navigatorObservers: [
         observer,

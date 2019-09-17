@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/services.dart';
+import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
@@ -18,8 +18,7 @@ class UserDecksList extends StatelessWidget {
   final List<ThronesDeck> decks;
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
     Navigator.push(
       context,
@@ -35,8 +34,7 @@ class UserDecksList extends StatelessWidget {
   }
 
   Widget _listItem({BuildContext context, ThronesDeck deck}) {
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = UserDecksListItemViewModel(deck: deck, cards: cards);
     return UserDecksListItem(

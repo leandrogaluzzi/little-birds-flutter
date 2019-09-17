@@ -3,23 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
-import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/api/thrones_service_container.dart';
+import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
-import 'package:little_birds/core/services.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
 import 'package:little_birds/screens/pack_screen.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 class PackListScreen extends StatefulWidget with AnalyticsScreen {
-  PackListScreen({
-    Key key,
-    @required this.thrones,
-  })  : assert(thrones != null),
-        super(key: key);
-
-  final ThronesService thrones;
-
   @override
   String get screenName => 'PackList';
 
@@ -28,18 +20,9 @@ class PackListScreen extends StatefulWidget with AnalyticsScreen {
 }
 
 class _PackListScreenState extends State<PackListScreen> {
-  Future _packs;
-
-  @override
-  void initState() {
-    _packs = widget.thrones.packs();
-    super.initState();
-  }
-
   void _onPackSelected({BuildContext context, ThronesPack pack}) async {
     Analytics.trackPack(pack);
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsWithPackCode(pack.code);
     await Navigator.push(
       context,
@@ -68,9 +51,7 @@ class _PackListScreenState extends State<PackListScreen> {
     return RequestErrorScreen(
       title: 'Error loading packs',
       onPressed: () {
-        setState(() {
-          _packs = widget.thrones.packs();
-        });
+        setState(() {});
       },
     );
   }
@@ -113,7 +94,7 @@ class _PackListScreenState extends State<PackListScreen> {
         title: Text('Packs'),
       ),
       body: FutureBuilder<List<ThronesPack>>(
-        future: _packs,
+        future: ThronesServiceContainer.of(context).thronesService.packs(),
         builder:
             (BuildContext context, AsyncSnapshot<List<ThronesPack>> snapshot) {
           switch (snapshot.connectionState) {

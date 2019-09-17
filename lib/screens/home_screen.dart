@@ -4,10 +4,10 @@ import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
+import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/screens/deck_screen.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
-import 'package:little_birds/core/services.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
@@ -87,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     Analytics.trackDeck(deck);
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
     await Navigator.push(
       context,
@@ -125,8 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _widgetListItem({BuildContext context, int index}) {
     final deck = this.viewModel.decks[index];
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
     return HomeListItem(

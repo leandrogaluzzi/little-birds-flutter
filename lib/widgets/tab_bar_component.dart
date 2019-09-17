@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:little_birds/core/api/thrones_service_container.dart';
+import 'package:little_birds/core/cards_store/cards_store_container.dart';
+import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/screens/user_decks_screen.dart';
-import 'package:little_birds/core/services.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/screens/home_screen.dart';
 import 'package:little_birds/screens/pack_list_screen.dart';
@@ -19,29 +21,24 @@ class TabBarComponent extends StatelessWidget {
   ];
 
   HomeScreen _homeScreen(BuildContext context) {
-    final services = Services.of(context);
-    final thrones = services.thronesService;
+    final thrones = ThronesServiceContainer.of(context).thronesService;
     final viewModel = HomeScreenViewModel(thrones: thrones);
     return HomeScreen(viewModel: viewModel);
   }
 
   PackListScreen _packListScreen(BuildContext context) {
-    final services = Services.of(context);
-    final thrones = services.thronesService;
-    return PackListScreen(thrones: thrones);
+    return PackListScreen();
   }
 
   CardListScreen _cardListScreen(BuildContext context) {
-    final services = Services.of(context);
-    final cardsStore = services.cardsStore;
+    final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final viewModel = CardListScreenViewModel(cardsStore: cardsStore);
     return CardListScreen(viewModel: viewModel);
   }
 
   UserDecksScreen _userDecksScreen(BuildContext context) {
-    final services = Services.of(context);
-    final thrones = services.thronesService;
-    final storage = services.secureStorage;
+    final thrones = ThronesServiceContainer.of(context).thronesService;
+    final storage = SecureStorageContainer.of(context).secureStorage;
     final viewModel = UserDecksViewModel(thrones: thrones, storage: storage);
     return UserDecksScreen(viewModel: viewModel);
   }

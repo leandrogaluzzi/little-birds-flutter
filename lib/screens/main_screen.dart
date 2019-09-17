@@ -1,48 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/cards_store.dart';
-import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/api/thrones_service_container.dart';
+import 'package:little_birds/core/cards_store/cards_store.dart';
+import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
+import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/screens/request_error_screen.dart';
 import 'package:little_birds/screens/request_loading_screen.dart';
-import 'package:little_birds/core/services.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({
-    Key key,
-    @required this.thronesService,
-  })  : assert(thronesService != null),
-        super(key: key);
-
-  final ThronesService thronesService;
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Future _cards;
-
-  @override
-  void initState() {
-    super.initState();
-    _cards = widget.thronesService.cards();
-  }
-
   Widget _widgetLoading() {
     return RequestLoadingScreen(
       title: 'Loading cards ...',
     );
   }
 
-  Widget _widgetError({Error error}) {
+  Widget _widgetError({BuildContext context, Error error}) {
     return RequestErrorScreen(
       title: 'Error loading cards.',
       onPressed: () {
-        setState(() {
-          _cards = widget.thronesService.cards();
-        });
+        setState(() {});
       },
     );
   }
@@ -50,19 +33,20 @@ class _MainScreenState extends State<MainScreen> {
   Widget _widgetTabs({List<ThronesCard> cards}) {
     final cardsStore = CardsStore(cards: cards);
     final secureStorage = SecureStorage();
-    final tabs = TabBarComponent();
-    return Services(
-      thronesService: widget.thronesService,
+
+    return CardsStoreContainer(
       cardsStore: cardsStore,
-      secureStorage: secureStorage,
-      child: tabs,
+      child: SecureStorageContainer(
+        secureStorage: secureStorage,
+        child: TabBarComponent(),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ThronesCard>>(
-      future: _cards,
+      future: ThronesServiceContainer.of(context).thronesService.cards(),
       builder:
           (BuildContext context, AsyncSnapshot<List<ThronesCard>> snapshot) {
         switch (snapshot.connectionState) {
