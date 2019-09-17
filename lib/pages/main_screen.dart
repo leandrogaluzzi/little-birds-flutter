@@ -5,8 +5,8 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/screens/request_error_screen.dart';
-import 'package:little_birds/screens/request_loading_screen.dart';
+import 'package:little_birds/pages/request_error_screen.dart';
+import 'package:little_birds/pages/request_loading_screen.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainScreen extends StatefulWidget {

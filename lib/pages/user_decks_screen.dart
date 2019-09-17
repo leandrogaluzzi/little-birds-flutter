@@ -4,7 +4,7 @@ import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/api/thrones_error.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/screens/request_error_screen.dart';
+import 'package:little_birds/pages/request_error_screen.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
 import 'package:little_birds/widgets/user_decks_list.dart';
 import 'package:url_launcher/url_launcher.dart';

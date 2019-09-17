@@ -4,7 +4,7 @@ import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/screens/card_screen.dart';
+import 'package:little_birds/pages/card_screen.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';

@@ -9,7 +9,7 @@ import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/network/network_provider.dart';
-import 'package:little_birds/screens/main_screen.dart';
+import 'package:little_birds/pages/main_screen.dart';
 import 'package:little_birds/utils/themes.dart';
 import 'package:http/http.dart' as http;
 

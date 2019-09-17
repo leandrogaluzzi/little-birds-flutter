@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/screens/deck_screen.dart';
+import 'package:little_birds/pages/deck_screen.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/user_decks_list_item_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
