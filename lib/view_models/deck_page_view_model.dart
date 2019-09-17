@@ -3,8 +3,8 @@ import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/card_type.dart';
 
-class DeckScreenViewModel {
-  DeckScreenViewModel({
+class DeckPageViewModel {
+  DeckPageViewModel({
     this.deck,
     this.cardsStore,
   })  : assert(deck != null),

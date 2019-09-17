@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck_page.dart';
-import 'package:little_birds/view_models/deck_screen_view_model.dart';
+import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/view_models/user_decks_list_item_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
 import 'package:little_birds/widgets/user_decks_list_item.dart';
@@ -19,7 +19,7 @@ class UserDecksList extends StatelessWidget {
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
-    final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
+    final viewModel = DeckPageViewModel(deck: deck, cardsStore: cardsStore);
     Navigator.push(
       context,
       CupertinoPageRoute(

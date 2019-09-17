@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/view_models/card_screen_view_model.dart';
+import 'package:little_birds/view_models/card_page_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 import 'card_page.dart';
 
@@ -26,7 +26,7 @@ class PackPage extends StatelessWidget with AnalyticsScreen {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (BuildContext context) {
-        final viewModel = CardScreenViewModel(card: card);
+        final viewModel = CardPageViewModel(card: card);
         return CardPage(viewModel: viewModel);
       }),
     );

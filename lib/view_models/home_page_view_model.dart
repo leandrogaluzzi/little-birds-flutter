@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
-class HomeScreenViewModel {
-  HomeScreenViewModel({
+class HomePageViewModel {
+  HomePageViewModel({
     @required this.thrones,
   }) : assert(thrones != null);
 

@@ -1,8 +1,8 @@
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_card.dart';
 
-class CardScreenViewModel {
-  CardScreenViewModel({
+class CardPageViewModel {
+  CardPageViewModel({
     this.card,
   }) : assert(card != null);
 

@@ -4,8 +4,8 @@ import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
-class UserDecksViewModel {
-  UserDecksViewModel({
+class UserDecksPageViewModel {
+  UserDecksPageViewModel({
     @required this.thrones,
     @required this.storage,
   })  : assert(thrones != null),

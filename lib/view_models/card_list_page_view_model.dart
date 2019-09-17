@@ -5,8 +5,8 @@ import 'package:little_birds/model/faction.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
 
-class CardListScreenViewModel {
-  CardListScreenViewModel({
+class CardListPageViewModel {
+  CardListPageViewModel({
     @required this.cardsStore,
   }) : assert(cardsStore != null);
 

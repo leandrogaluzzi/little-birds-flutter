@@ -5,9 +5,9 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/utils/keys.dart';
-import 'package:little_birds/view_models/card_screen_view_model.dart';
+import 'package:little_birds/view_models/card_page_view_model.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';
-import 'package:little_birds/view_models/deck_screen_view_model.dart';
+import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
 import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
@@ -23,7 +23,7 @@ class DeckPage extends StatelessWidget with AnalyticsScreen {
   })  : assert(viewModel != null),
         super(key: key);
 
-  final DeckScreenViewModel viewModel;
+  final DeckPageViewModel viewModel;
 
   @override
   String get screenName => 'Deck';
@@ -35,7 +35,7 @@ class DeckPage extends StatelessWidget with AnalyticsScreen {
       CupertinoPageRoute(
         fullscreenDialog: true,
         builder: (BuildContext context) {
-          final viewModel = CardScreenViewModel(card: card);
+          final viewModel = CardPageViewModel(card: card);
           return CardPage(viewModel: viewModel);
         },
       ),

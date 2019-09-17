@@ -8,9 +8,9 @@ import 'package:little_birds/pages/home_page.dart';
 import 'package:little_birds/pages/pack_list_page.dart';
 import 'package:little_birds/pages/card_list_page.dart';
 import 'package:little_birds/pages/user_decks_page.dart';
-import 'package:little_birds/view_models/card_list_screen_view_model.dart';
-import 'package:little_birds/view_models/home_screen_view_model.dart';
-import 'package:little_birds/view_models/user_decks_view_model.dart';
+import 'package:little_birds/view_models/card_list_page_view_model.dart';
+import 'package:little_birds/view_models/home_page_view_model.dart';
+import 'package:little_birds/view_models/user_decks_page_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [
@@ -22,7 +22,7 @@ class TabBarComponent extends StatelessWidget {
 
   HomePage _homeScreen(BuildContext context) {
     final thrones = ThronesServiceContainer.of(context).thronesService;
-    final viewModel = HomeScreenViewModel(thrones: thrones);
+    final viewModel = HomePageViewModel(thrones: thrones);
     return HomePage(viewModel: viewModel);
   }
 
@@ -32,14 +32,15 @@ class TabBarComponent extends StatelessWidget {
 
   CardListPage _cardListScreen(BuildContext context) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
-    final viewModel = CardListScreenViewModel(cardsStore: cardsStore);
+    final viewModel = CardListPageViewModel(cardsStore: cardsStore);
     return CardListPage(viewModel: viewModel);
   }
 
   UserDecksPage _userDecksScreen(BuildContext context) {
     final thrones = ThronesServiceContainer.of(context).thronesService;
     final storage = SecureStorageContainer.of(context).secureStorage;
-    final viewModel = UserDecksViewModel(thrones: thrones, storage: storage);
+    final viewModel =
+        UserDecksPageViewModel(thrones: thrones, storage: storage);
     return UserDecksPage(viewModel: viewModel);
   }
 

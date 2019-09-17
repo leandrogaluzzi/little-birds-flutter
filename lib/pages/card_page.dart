@@ -6,7 +6,7 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/model/card_type.dart';
-import 'package:little_birds/view_models/card_screen_view_model.dart';
+import 'package:little_birds/view_models/card_page_view_model.dart';
 import 'image_page.dart';
 
 class CardPage extends StatelessWidget with AnalyticsScreen {
@@ -16,7 +16,7 @@ class CardPage extends StatelessWidget with AnalyticsScreen {
   })  : assert(viewModel != null),
         super(key: key);
 
-  final CardScreenViewModel viewModel;
+  final CardPageViewModel viewModel;
 
   @override
   String get screenName => 'Card';

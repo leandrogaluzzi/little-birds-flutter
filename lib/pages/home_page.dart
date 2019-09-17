@@ -7,9 +7,9 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/utils/keys.dart';
-import 'package:little_birds/view_models/deck_screen_view_model.dart';
+import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
-import 'package:little_birds/view_models/home_screen_view_model.dart';
+import 'package:little_birds/view_models/home_page_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/widgets/separator.dart';
 import 'deck_page.dart';
@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget with AnalyticsScreen {
   })  : assert(viewModel != null),
         super(key: key);
 
-  final HomeScreenViewModel viewModel;
+  final HomePageViewModel viewModel;
 
   @override
   String get screenName => 'Home';
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     @required this.viewModel,
   }) : assert(viewModel != null);
 
-  final HomeScreenViewModel viewModel;
+  final HomePageViewModel viewModel;
   Future<void> _decksFuture;
   ScrollController _controller;
   bool _isLoading = false;
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     Analytics.trackDeck(deck);
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
-    final viewModel = DeckScreenViewModel(deck: deck, cardsStore: cardsStore);
+    final viewModel = DeckPageViewModel(deck: deck, cardsStore: cardsStore);
     await Navigator.push(
       context,
       CupertinoPageRoute(
