@@ -10,7 +10,7 @@ class DeckHeaderViewModel {
     @required this.cardsStore,
   })  : assert(deck != null),
         assert(cardsStore != null) {
-    cardsQuantity = cardsStore.getCardsQuantityFromSlots(deck.slots);
+    cardsQuantity = cardsStore.cardsQuantityFromSlots(deck.slots);
   }
 
   ThronesDeck deck;

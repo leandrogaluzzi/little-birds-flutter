@@ -16,9 +16,9 @@ class CardListScreenViewModel {
     List<ThronesCard> cards = [];
 
     if (query == null || query == '') {
-      cards = cardsStore.getCardsAlphabetically();
+      cards = cardsStore.cardsAlphabetically();
     } else {
-      cards = cardsStore.getCardsWithQuery(query);
+      cards = cardsStore.cardsWithQuery(query);
     }
 
     if (filter.isActive()) {

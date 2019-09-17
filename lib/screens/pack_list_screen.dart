@@ -40,7 +40,7 @@ class _PackListScreenState extends State<PackListScreen> {
     Analytics.trackPack(pack);
     final services = Services.of(context);
     final cardsStore = services.cardsStore;
-    final cards = cardsStore.getCardsWithPackCode(pack.code);
+    final cards = cardsStore.cardsWithPackCode(pack.code);
     await Navigator.push(
       context,
       CupertinoPageRoute(

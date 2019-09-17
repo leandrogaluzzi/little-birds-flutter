@@ -40,7 +40,6 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
   @override
   void initState() {
     super.initState();
-
     _checkAuthentication();
   }
 

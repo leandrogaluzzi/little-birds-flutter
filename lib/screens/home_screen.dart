@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final deck = this.viewModel.decks[index];
     final services = Services.of(context);
     final cardsStore = services.cardsStore;
-    final cards = cardsStore.getCardsFromSlots(deck.slots);
+    final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
     return HomeListItem(
       key: Key(deck.faction().toCode()),

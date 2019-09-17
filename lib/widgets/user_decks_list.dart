@@ -37,7 +37,7 @@ class UserDecksList extends StatelessWidget {
   Widget _listItem({BuildContext context, ThronesDeck deck}) {
     final services = Services.of(context);
     final cardsStore = services.cardsStore;
-    final cards = cardsStore.getCardsFromSlots(deck.slots);
+    final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = UserDecksListItemViewModel(deck: deck, cards: cards);
     return UserDecksListItem(
       viewModel: viewModel,

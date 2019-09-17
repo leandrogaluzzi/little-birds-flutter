@@ -15,6 +15,8 @@ import 'package:http/http.dart' as http;
 /*
 TODO:
 
+- Create a separated widget for the login screen that also handles the redirect
+- Remove Authentication logic from UserDecksScreen
 - Fix admob/firebase plits
 - Add test for cardsStore getCardsFromSlots
 - Remove zebra from loading more
@@ -22,8 +24,8 @@ TODO:
 - Image Screen animation
 - Transitions
 - Error can't open url
-- Test NoConnectionError
-- Test TimeoutError
+- Add test for NoConnectionError
+- Add test for TimeoutError
 - Widget Tests
 - Local DB for cards
 - Send crash logs to email
@@ -67,7 +69,9 @@ class LittleBirdsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
     _configAdMob(context);
 

@@ -41,7 +41,7 @@ class DeckScreenViewModel {
   }
 
   List<CardQuantity> cards({CardType type}) {
-    final cardsQuantity = cardsStore.getCardsQuantityFromSlots(deck.slots);
+    final cardsQuantity = cardsStore.cardsQuantityFromSlots(deck.slots);
     final filteredCardsQuantity =
         cardsQuantity.where((card) => card.card.cardType() == type).toList();
     filteredCardsQuantity.sort((a, b) => a.card.name.compareTo(b.card.name));

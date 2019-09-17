@@ -18,7 +18,7 @@ void main() {
     });
 
     test('Test get cards alphabetically', () {
-      final cards = cardsStore.getCardsAlphabetically();
+      final cards = cardsStore.cardsAlphabetically();
       expect(cards.length, 11);
       expect(cards[0].name, 'Balon Greyjoy');
       expect(cards[1].name, 'Daenerys Targaryen');
@@ -34,14 +34,14 @@ void main() {
     });
 
     test('Test get cards with pack code', () {
-      final cards = cardsStore.getCardsWithPackCode('TRW');
+      final cards = cardsStore.cardsWithPackCode('TRW');
       expect(cards.length, 2);
       expect(cards[0].name, 'The Red Wedding');
       expect(cards[1].name, 'Walder Frey');
     });
 
     test('Test get cards with query', () {
-      final cards = cardsStore.getCardsWithQuery('tar');
+      final cards = cardsStore.cardsWithQuery('tar');
       expect(cards.length, 2);
       expect(cards[0].name, 'Daenerys Targaryen');
       expect(cards[1].name, 'Eddard Stark');
@@ -53,7 +53,7 @@ void main() {
         Slot(code: '01137', quantity: 2),
         Slot(code: '01186', quantity: 1),
       ];
-      final cardsQuantity = cardsStore.getCardsQuantityFromSlots(slots);
+      final cardsQuantity = cardsStore.cardsQuantityFromSlots(slots);
       expect(cardsQuantity.length, 3);
       expect(cardsQuantity[0].card.name, 'Tears of Lys');
       expect(cardsQuantity[0].quantity, 3);
