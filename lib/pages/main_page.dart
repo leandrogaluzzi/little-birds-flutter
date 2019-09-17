@@ -5,24 +5,24 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/pages/request_error_screen.dart';
-import 'package:little_birds/pages/request_loading_screen.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
+import 'request_error_page.dart';
+import 'request_loading_page.dart';
 
-class MainScreen extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainPageState extends State<MainPage> {
   Widget _widgetLoading() {
-    return RequestLoadingScreen(
+    return RequestLoadingPage(
       title: 'Loading cards ...',
     );
   }
 
   Widget _widgetError({BuildContext context, Error error}) {
-    return RequestErrorScreen(
+    return RequestErrorPage(
       title: 'Error loading cards.',
       onPressed: () {
         setState(() {});

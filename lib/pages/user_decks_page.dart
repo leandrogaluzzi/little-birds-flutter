@@ -4,11 +4,12 @@ import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/api/thrones_error.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/pages/request_error_screen.dart';
 import 'package:little_birds/view_models/user_decks_view_model.dart';
 import 'package:little_birds/widgets/user_decks_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
+
+import 'request_error_page.dart';
 
 enum UserDecksState {
   loading,
@@ -18,8 +19,8 @@ enum UserDecksState {
   login,
 }
 
-class UserDecksScreen extends StatefulWidget {
-  UserDecksScreen({
+class UserDecksPage extends StatefulWidget {
+  UserDecksPage({
     Key key,
     @required this.viewModel,
   })  : assert(viewModel != null),
@@ -28,10 +29,10 @@ class UserDecksScreen extends StatefulWidget {
   final UserDecksViewModel viewModel;
 
   @override
-  _UserDecksScreenState createState() => _UserDecksScreenState();
+  _UserDecksPageState createState() => _UserDecksPageState();
 }
 
-class _UserDecksScreenState extends State<UserDecksScreen> {
+class _UserDecksPageState extends State<UserDecksPage> {
   StreamSubscription _sub;
   UserDecksState _state = UserDecksState.loading;
   List<ThronesDeck> decks = [];
@@ -136,7 +137,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
   }
 
   Widget _errorList() {
-    return RequestErrorScreen(
+    return RequestErrorPage(
       title: 'Error loading decks',
       onPressed: () {
         _loadUserDecks();
@@ -145,7 +146,7 @@ class _UserDecksScreenState extends State<UserDecksScreen> {
   }
 
   Widget _errorLogin() {
-    return RequestErrorScreen(
+    return RequestErrorPage(
       title: 'Error logging in',
       onPressed: () {
         setState(() {

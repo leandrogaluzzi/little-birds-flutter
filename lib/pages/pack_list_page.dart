@@ -6,20 +6,20 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/pages/request_error_screen.dart';
 import 'package:little_birds/widgets/pack_list_item.dart';
-import 'package:little_birds/pages/pack_screen.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'pack_page.dart';
+import 'request_error_page.dart';
 
-class PackListScreen extends StatefulWidget with AnalyticsScreen {
+class PackListPage extends StatefulWidget with AnalyticsScreen {
   @override
   String get screenName => 'PackList';
 
   @override
-  _PackListScreenState createState() => _PackListScreenState();
+  _PackListPageState createState() => _PackListPageState();
 }
 
-class _PackListScreenState extends State<PackListScreen> {
+class _PackListPageState extends State<PackListPage> {
   void _onPackSelected({BuildContext context, ThronesPack pack}) async {
     Analytics.trackPack(pack);
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
@@ -29,7 +29,7 @@ class _PackListScreenState extends State<PackListScreen> {
       CupertinoPageRoute(
         fullscreenDialog: true,
         builder: (BuildContext context) {
-          return PackScreen(
+          return PackPage(
             title: pack.name,
             cards: cards,
           );
@@ -48,7 +48,7 @@ class _PackListScreenState extends State<PackListScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    return RequestErrorScreen(
+    return RequestErrorPage(
       title: 'Error loading packs',
       onPressed: () {
         setState(() {});

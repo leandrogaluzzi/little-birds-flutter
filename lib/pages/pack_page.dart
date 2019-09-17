@@ -4,10 +4,10 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/view_models/card_screen_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
-import 'card_screen.dart';
+import 'card_page.dart';
 
-class PackScreen extends StatelessWidget with AnalyticsScreen {
-  PackScreen({
+class PackPage extends StatelessWidget with AnalyticsScreen {
+  PackPage({
     Key key,
     @required this.title,
     @required this.cards,
@@ -27,7 +27,7 @@ class PackScreen extends StatelessWidget with AnalyticsScreen {
       context,
       MaterialPageRoute(builder: (BuildContext context) {
         final viewModel = CardScreenViewModel(card: card);
-        return CardScreen(viewModel: viewModel);
+        return CardPage(viewModel: viewModel);
       }),
     );
   }

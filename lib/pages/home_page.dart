@@ -6,19 +6,19 @@ import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/pages/deck_screen.dart';
-import 'package:little_birds/pages/request_error_screen.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_screen_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
 import 'package:little_birds/view_models/home_screen_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'deck_page.dart';
+import 'request_error_page.dart';
 
 double _heightLoading = 75;
 
-class HomeScreen extends StatefulWidget with AnalyticsScreen {
-  HomeScreen({
+class HomePage extends StatefulWidget with AnalyticsScreen {
+  HomePage({
     Key key,
     @required this.viewModel,
   })  : assert(viewModel != null),
@@ -30,11 +30,11 @@ class HomeScreen extends StatefulWidget with AnalyticsScreen {
   String get screenName => 'Home';
 
   @override
-  _HomeScreenState createState() => _HomeScreenState(viewModel: viewModel);
+  _HomePageState createState() => _HomePageState(viewModel: viewModel);
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  _HomeScreenState({
+class _HomePageState extends State<HomePage> {
+  _HomePageState({
     @required this.viewModel,
   }) : assert(viewModel != null);
 
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
       CupertinoPageRoute(
         fullscreenDialog: true,
         builder: (BuildContext context) {
-          return DeckScreen(
+          return DeckPage(
             viewModel: viewModel,
           );
         },
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _widgetError({Error error}) {
-    return RequestErrorScreen(
+    return RequestErrorPage(
       title: 'Error loading decks',
       onPressed: () {
         setState(() {

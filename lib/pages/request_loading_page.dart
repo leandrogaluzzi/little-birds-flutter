@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:little_birds/utils/keys.dart';
 
-class RequestLoadingScreen extends StatelessWidget {
-  const RequestLoadingScreen({
+class RequestLoadingPage extends StatelessWidget {
+  const RequestLoadingPage({
     Key key,
     this.title,
     this.backgroundColor,
@@ -15,7 +14,6 @@ class RequestLoadingScreen extends StatelessWidget {
   Widget _text() {
     return Text(
       title,
-      //key: Keys.loading,
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 18),
     );

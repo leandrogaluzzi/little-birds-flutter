@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RequestErrorScreen extends StatelessWidget {
-  const RequestErrorScreen({
+class RequestErrorPage extends StatelessWidget {
+  const RequestErrorPage({
     Key key,
     this.title,
     this.onPressed,
