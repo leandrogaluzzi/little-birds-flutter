@@ -4,8 +4,8 @@ import 'package:little_birds/model/thrones_deck.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:little_birds/utils/utils.dart';
 
-class HomeListItemViewModel {
-  HomeListItemViewModel({
+class HomeCellViewModel {
+  HomeCellViewModel({
     this.deck,
     this.cards,
   })  : assert(deck != null),

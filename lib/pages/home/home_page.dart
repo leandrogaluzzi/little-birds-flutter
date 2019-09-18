@@ -9,13 +9,13 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck_page.dart';
+import 'package:little_birds/pages/home/home_cell/home_cell.dart';
+import 'package:little_birds/pages/home/home_cell/home_list_item_view_model.dart';
 import 'package:little_birds/pages/home/home_provider.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
 import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_page_view_model.dart';
-import 'package:little_birds/view_models/home_list_item_view_model.dart';
-import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 double _heightLoading = 75;
@@ -114,8 +114,8 @@ class _HomePageState extends State<HomePage> {
   Widget _widgetListItem({BuildContext context, ThronesDeck deck}) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsFromSlots(deck.slots);
-    final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
-    return HomeListItem(
+    final viewModel = HomeCellViewModel(deck: deck, cards: cards);
+    return HomeCell(
       key: Key(deck.faction().toCode()),
       viewModel: viewModel,
       onTap: () {

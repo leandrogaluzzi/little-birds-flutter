@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/pages/home/home_cell/home_list_item_view_model.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/view_models/home_list_item_view_model.dart';
 
 const double kSmallPadding = 7.0;
 const double kPadding = 12.0;
@@ -10,15 +10,15 @@ final TextStyle _kTextStyle = TextStyle(
   color: kColorGrayText,
 );
 
-class HomeListItem extends StatelessWidget {
-  HomeListItem({
+class HomeCell extends StatelessWidget {
+  HomeCell({
     Key key,
     @required this.viewModel,
     @required this.onTap,
   })  : assert(viewModel != null),
         super(key: key);
 
-  final HomeListItemViewModel viewModel;
+  final HomeCellViewModel viewModel;
   final VoidCallback onTap;
 
   Widget _icon() {
