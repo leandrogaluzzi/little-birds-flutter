@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/pages/home/home_cell/home_list_item_view_model.dart';
+import 'package:little_birds/pages/home/home_cell/home_cell_view_model.dart';
 import 'package:little_birds/utils/constants.dart';
 
 const double kSmallPadding = 7.0;

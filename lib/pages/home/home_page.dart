@@ -10,7 +10,7 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck_page.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell.dart';
-import 'package:little_birds/pages/home/home_cell/home_list_item_view_model.dart';
+import 'package:little_birds/pages/home/home_cell/home_cell_view_model.dart';
 import 'package:little_birds/pages/home/home_provider.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
 import 'package:little_birds/pages/request_error_page.dart';
