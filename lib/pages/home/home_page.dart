@@ -1,53 +1,46 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
+import 'package:little_birds/pages/deck_page.dart';
+import 'package:little_birds/pages/home/home_provider.dart';
+import 'package:little_birds/pages/home/home_view_model.dart';
+import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/view_models/home_list_item_view_model.dart';
-import 'package:little_birds/view_models/home_page_view_model.dart';
 import 'package:little_birds/widgets/home_list_item.dart';
 import 'package:little_birds/widgets/separator.dart';
-import 'deck_page.dart';
-import 'request_error_page.dart';
 
 double _heightLoading = 75;
 
 class HomePage extends StatefulWidget with AnalyticsScreen {
-  HomePage({
-    Key key,
-    @required this.viewModel,
-  })  : assert(viewModel != null),
-        super(key: key);
-
-  final HomePageViewModel viewModel;
-
   @override
   String get screenName => 'Home';
 
   @override
-  _HomePageState createState() => _HomePageState(viewModel: viewModel);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  _HomePageState({
-    @required this.viewModel,
-  }) : assert(viewModel != null);
-
-  final HomePageViewModel viewModel;
-  Future<void> _decksFuture;
   ScrollController _controller;
   bool _isLoading = false;
+  HomeViewModel _viewModel;
 
   @override
   void initState() {
-    _decksFuture = viewModel.loadDecks();
-    _startScrollController();
     super.initState();
+    _startScrollController();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _viewModel = HomeProvider.of(context).viewModel;
+      _viewModel.loadDecks();
+    });
   }
 
   @override
@@ -75,14 +68,12 @@ class _HomePageState extends State<HomePage> {
   void _loadMoreDecks() async {
     Analytics.track(event: AnalyticsEvent.home_load_more);
     _isLoading = true;
-    await viewModel.moreDecks();
-    setState(() {});
+    await _viewModel.moreDecks();
   }
 
   Future<void> _refreshDecks() async {
     Analytics.track(event: AnalyticsEvent.home_refresh);
-    await viewModel.loadDecks();
-    setState(() {});
+    await _viewModel.loadDecks();
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
@@ -115,15 +106,12 @@ class _HomePageState extends State<HomePage> {
     return RequestErrorPage(
       title: 'Error loading decks',
       onPressed: () {
-        setState(() {
-          _decksFuture = viewModel.loadDecks();
-        });
+        setState(() {});
       },
     );
   }
 
-  Widget _widgetListItem({BuildContext context, int index}) {
-    final deck = this.viewModel.decks[index];
+  Widget _widgetListItem({BuildContext context, ThronesDeck deck}) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = HomeListItemViewModel(deck: deck, cards: cards);
@@ -139,7 +127,6 @@ class _HomePageState extends State<HomePage> {
   Widget _widgetLoadingMore({int index}) {
     return Container(
       height: _heightLoading,
-      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
       child: Center(
         child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
@@ -148,8 +135,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _widgetList() {
-    final count = viewModel.decks.length;
+  Widget _widgetList({List<ThronesDeck> decks}) {
+    final count = decks.length;
     return RefreshIndicator(
       onRefresh: _refreshDecks,
       child: ListView.separated(
@@ -160,7 +147,8 @@ class _HomePageState extends State<HomePage> {
           if (index == count) {
             return _widgetLoadingMore(index: index);
           } else {
-            return _widgetListItem(context: context, index: index);
+            final deck = decks[index];
+            return _widgetListItem(context: context, deck: deck);
           }
         },
         separatorBuilder: (BuildContext context, int index) {
@@ -174,6 +162,24 @@ class _HomePageState extends State<HomePage> {
     return Image.asset('assets/icons/littlebirds.png');
   }
 
+  Widget _body() {
+    return StreamBuilder<List<ThronesDeck>>(
+      stream: HomeProvider.of(context).viewModel.stream,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return _widgetLoading();
+          case ConnectionState.active:
+          case ConnectionState.done:
+            if (snapshot.hasError) return _widgetError(error: snapshot.error);
+            return _widgetList(decks: snapshot.data);
+        }
+        return null;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _isLoading = false;
@@ -181,21 +187,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: _title(),
       ),
-      body: FutureBuilder<void>(
-        future: _decksFuture,
-        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.active:
-            case ConnectionState.waiting:
-              return _widgetLoading();
-            case ConnectionState.done:
-              if (snapshot.hasError) return _widgetError(error: snapshot.error);
-              return _widgetList();
-          }
-          return null;
-        },
-      ),
+      body: _body(),
     );
   }
 }

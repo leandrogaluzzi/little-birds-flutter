@@ -16,8 +16,10 @@ import 'package:http/http.dart' as http;
 /*
 TODO:
 
-- Add credentials for production
 - Fix Home Screen view model injection
+- Load ads before showing
+- Add title to home
+- Add credentials for production
 - Improve filter logic with InheritedWidget
 - Create a separated widget for the login screen that also handles the redirect
 - Remove Authentication logic from UserDecksScreen

@@ -1,8 +1,8 @@
 import 'credentials.dart';
 
 class ThronesConstants {
-  //static const baseURL = 'https://thronesdb.com';
-  static const baseURL = 'sandbox.thronesdb.com';
+  static const baseURL = 'thronesdb.com';
+  //static const baseURL = 'sandbox.thronesdb.com';
 
   static const cardsURL = '/api/public/cards/';
   static const packsURL = '/api/public/packs/';

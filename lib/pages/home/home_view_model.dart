@@ -1,30 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
-class HomePageViewModel {
-  HomePageViewModel({
+class HomeViewModel {
+  HomeViewModel({
     @required this.thrones,
   }) : assert(thrones != null);
 
   final ThronesService thrones;
 
-  DateTime _date = DateTime.now();
-  List<ThronesDeck> decks = [];
+  final StreamController<List<ThronesDeck>> _controller =
+      StreamController<List<ThronesDeck>>();
+  Stream<List<ThronesDeck>> get stream => _controller.stream;
 
-  Future<void> loadDecks() async {
+  List<ThronesDeck> _decks = [];
+  DateTime _date = DateTime.now();
+
+  void dispose() => _controller.close();
+
+  void loadDecks() async {
     _date = DateTime.now();
-    decks = await _getDecks([], _date);
-    _sort(deck: decks);
-    return;
+    _decks = await _getDecks([], _date);
+    _sort(deck: _decks);
+    _controller.sink.add(_decks);
   }
 
-  Future<void> moreDecks() async {
+  void moreDecks() async {
     final newDate = _previousDay(fromDate: _date);
     final newDecks = await _getDecks([], newDate);
     _sort(deck: newDecks);
-    decks.addAll(newDecks);
-    return;
+    _decks.addAll(newDecks);
+    _controller.sink.add(_decks);
   }
 
   void _sort({List<ThronesDeck> deck}) {
