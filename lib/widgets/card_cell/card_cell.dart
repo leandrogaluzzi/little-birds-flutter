@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/utils/constants.dart';
+import 'package:little_birds/widgets/card_cell/card_cell_view_model.dart';
 
-enum CardListItemMode {
+enum CardCellMode {
   list,
   deck,
 }
 
 typedef CardCallback = void Function(ThronesCard card);
 
-class CardListItem extends StatelessWidget {
-  CardListItem({
+class CardCell extends StatelessWidget {
+  CardCell({
     Key key,
-    @required this.card,
+    @required this.viewModel,
     @required this.mode,
-    @required this.index,
     @required this.onTap,
     this.count,
-  })  : assert(card != null),
+  })  : assert(viewModel != null),
         assert(mode != null),
-        assert(index != null),
         assert(onTap != null),
         super(key: key);
 
-  final ThronesCard card;
-  final CardListItemMode mode;
-  final int index;
+  final CardCellViewModel viewModel;
+  final CardCellMode mode;
   final CardCallback onTap;
   final int count;
 
@@ -52,45 +49,16 @@ class CardListItem extends StatelessWidget {
       width: 55.0,
       child: Center(
         child: Image.asset(
-          card.cardIconName(),
+          viewModel.iconName(),
           height: 25.0,
         ),
       ),
     );
   }
 
-  String _info() {
-    switch (card.cardType()) {
-      case CardType.plot:
-        return 'Income: ${card.income ?? 0}. Initiative: ${card.initiative ?? 0} Claim: ${card.claim ?? 0}';
-        break;
-      case CardType.character:
-        return 'Cost: ${card.cost ?? 0}. STR: ${card.strength ?? 0}';
-        break;
-      case CardType.attachment:
-      case CardType.location:
-      case CardType.event:
-        return 'Cost: ${card.cost ?? 0}';
-        break;
-      default:
-        return card.packName;
-        break;
-    }
-  }
-
-  String _subtitle() {
-    switch (mode) {
-      case CardListItemMode.deck:
-        return _info();
-        break;
-      default:
-        return '${card.typeName} - ${card.packName}';
-        break;
-    }
-  }
-
   Widget _widgetMiddle() {
-    final subtitle = _subtitle();
+    final subtitle =
+        mode == CardCellMode.deck ? viewModel.info() : viewModel.type();
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +66,7 @@ class CardListItem extends StatelessWidget {
         children: <Widget>[
           FittedBox(
             child: Text(
-              card.name,
+              viewModel.name(),
               style: _textStyleName,
             ),
           ),
@@ -132,14 +100,14 @@ class CardListItem extends StatelessWidget {
       color: Colors.white,
       child: RawMaterialButton(
         onPressed: () {
-          onTap(card);
+          onTap(viewModel.card);
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _widgetLeft(),
             _widgetMiddle(),
-            if (mode == CardListItemMode.deck) _widgetRight(),
+            if (mode == CardCellMode.deck) _widgetRight(),
           ],
         ),
       ),

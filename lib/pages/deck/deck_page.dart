@@ -11,8 +11,9 @@ import 'package:little_birds/pages/deck/deck_header/deck_header.dart';
 import 'package:little_birds/pages/deck/deck_header/deck_header_view_model.dart';
 import 'package:little_birds/pages/deck/deck_page_view_model.dart';
 import 'package:little_birds/utils/keys.dart';
-import 'package:little_birds/widgets/card_list_item.dart';
 import 'package:little_birds/model/card_type.dart';
+import 'package:little_birds/widgets/card_cell/card_cell.dart';
+import 'package:little_birds/widgets/card_cell/card_cell_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 class DeckPage extends StatelessWidget with AnalyticsScreen {
@@ -73,13 +74,13 @@ class DeckPage extends StatelessWidget with AnalyticsScreen {
     );
   }
 
-  Widget _sectionItem({BuildContext context, CardQuantity card, int index}) {
+  Widget _sectionItem({BuildContext context, CardQuantity card}) {
+    final viewModel = CardCellViewModel(card: card.card);
     return Column(
       children: <Widget>[
-        CardListItem(
-          index: index,
-          mode: CardListItemMode.deck,
-          card: card.card,
+        CardCell(
+          viewModel: viewModel,
+          mode: CardCellMode.deck,
           count: card.quantity,
           onTap: (card) {
             _onCardSelected(context: context, card: card);
@@ -100,8 +101,7 @@ class DeckPage extends StatelessWidget with AnalyticsScreen {
           } else {
             int correctIndex = index - 1;
             final card = cards[correctIndex];
-            return _sectionItem(
-                context: context, card: card, index: correctIndex);
+            return _sectionItem(context: context, card: card);
           }
         },
         childCount: cards.length + 1,

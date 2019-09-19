@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class ImagePage extends StatelessWidget {
-  ImagePage({
+class CardImagePage extends StatelessWidget {
+  CardImagePage({
     Key key,
     @required this.url,
   })  : assert(url != null),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/widgets/card_list_item.dart';
+import 'package:little_birds/widgets/card_cell/card_cell.dart';
+import 'package:little_birds/widgets/card_cell/card_cell_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 class CardList extends StatelessWidget {
@@ -20,10 +21,10 @@ class CardList extends StatelessWidget {
       itemCount: cards.length,
       itemBuilder: (BuildContext context, int index) {
         final card = cards[index];
-        return CardListItem(
-          card: card,
-          mode: CardListItemMode.list,
-          index: index,
+        final viewModel = CardCellViewModel(card: card);
+        return CardCell(
+          viewModel: viewModel,
+          mode: CardCellMode.list,
           onTap: onTap,
         );
       },

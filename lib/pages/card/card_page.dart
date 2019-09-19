@@ -4,7 +4,7 @@ import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/pages/card/card_page_view_model.dart';
-import 'package:little_birds/pages/image_page.dart';
+import 'package:little_birds/pages/card_image/card_image_page.dart';
 import 'package:little_birds/utils/constants.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:little_birds/model/card_type.dart';
@@ -28,7 +28,7 @@ class CardPage extends StatelessWidget with AnalyticsScreen {
       CupertinoPageRoute(
         fullscreenDialog: true,
         builder: (BuildContext context) {
-          final imageScreen = ImagePage(url: viewModel.card.imageUrl);
+          final imageScreen = CardImagePage(url: viewModel.card.imageUrl);
           return imageScreen;
         },
       ),
@@ -60,7 +60,7 @@ class CardPage extends StatelessWidget with AnalyticsScreen {
             child: Padding(
               padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0),
               child: Image.asset(
-                viewModel.card.cardIconName(),
+                viewModel.card.iconName(),
               ),
             ),
           ),

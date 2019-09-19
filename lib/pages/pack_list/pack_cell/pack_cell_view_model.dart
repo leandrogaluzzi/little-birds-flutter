@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 
 class PackCellViewModel {
   final ThronesPack pack;
 
   PackCellViewModel({
-    this.pack,
+    @required this.pack,
   }) : assert(pack != null);
 
   String name() {

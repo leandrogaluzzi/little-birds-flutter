@@ -65,7 +65,7 @@ class ThronesCard {
     return Faction.code(factionCode);
   }
 
-  String cardIconName() {
+  String iconName() {
     return 'assets/icons/$factionCode.png';
   }
 }
