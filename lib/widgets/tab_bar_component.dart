@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
-import 'package:little_birds/pages/home/home_provider.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/pages/home/home_page.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
@@ -24,10 +23,7 @@ class TabBarComponent extends StatelessWidget {
   Widget _homeScreen(BuildContext context) {
     final thrones = ThronesServiceContainer.of(context).thronesService;
     final viewModel = HomeViewModel(thrones: thrones);
-    return HomeProvider(
-      viewModel: viewModel,
-      child: HomePage(),
-    );
+    return HomePage(viewModel: viewModel);
   }
 
   Widget _packListScreen(BuildContext context) {

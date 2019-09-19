@@ -11,7 +11,6 @@ import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck_page.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell_view_model.dart';
-import 'package:little_birds/pages/home/home_provider.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
 import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/utils/keys.dart';
@@ -21,6 +20,14 @@ import 'package:little_birds/widgets/separator.dart';
 double _heightLoading = 75;
 
 class HomePage extends StatefulWidget with AnalyticsScreen {
+  final HomeViewModel viewModel;
+
+  HomePage({
+    Key key,
+    this.viewModel,
+  })  : assert(viewModel != null),
+        super(key: key);
+
   @override
   String get screenName => 'Home';
 
@@ -31,16 +38,12 @@ class HomePage extends StatefulWidget with AnalyticsScreen {
 class _HomePageState extends State<HomePage> {
   ScrollController _controller;
   bool _isLoading = false;
-  HomeViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
     _startScrollController();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      _viewModel = HomeProvider.of(context).viewModel;
-      _viewModel.loadDecks();
-    });
+    widget.viewModel.loadDecks();
   }
 
   @override
@@ -68,12 +71,12 @@ class _HomePageState extends State<HomePage> {
   void _loadMoreDecks() async {
     Analytics.track(event: AnalyticsEvent.home_load_more);
     _isLoading = true;
-    await _viewModel.moreDecks();
+    widget.viewModel.moreDecks();
   }
 
   Future<void> _refreshDecks() async {
     Analytics.track(event: AnalyticsEvent.home_refresh);
-    await _viewModel.loadDecks();
+    widget.viewModel.loadDecks();
   }
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
@@ -164,7 +167,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _body() {
     return StreamBuilder<List<ThronesDeck>>(
-      stream: HomeProvider.of(context).viewModel.stream,
+      stream: widget.viewModel.stream,
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
