@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
+import 'package:little_birds/core/filter_handler/filter_manager.dart';
+import 'package:little_birds/core/filter_handler/filter_manager_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
+import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/pages/cards/cards_page.dart';
 import 'package:little_birds/pages/cards/cards_page_view_model.dart';
 import 'package:little_birds/pages/pack_list/pack_list_page.dart';
@@ -12,7 +15,7 @@ import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/pages/home/home_page.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
 
-class TabBarComponent extends StatelessWidget {
+class Tabs extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [
     TabBarItem.buildItem(name: TabBarName.home),
     TabBarItem.buildItem(name: TabBarName.packs),
@@ -33,7 +36,11 @@ class TabBarComponent extends StatelessWidget {
   Widget _cardList(BuildContext context) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final viewModel = CardsPageViewModel(cardsStore: cardsStore);
-    return CardsPage(viewModel: viewModel);
+    final filterManager = FilterManager();
+    return FilterManagerContainer(
+      filterManager: filterManager,
+      child: CardsPage(viewModel: viewModel),
+    );
   }
 
   Widget _userDecks(BuildContext context) {

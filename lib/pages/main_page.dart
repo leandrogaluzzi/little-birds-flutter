@@ -5,9 +5,9 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/pages/tabs.dart';
 import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/request_loading_view.dart';
-import 'package:little_birds/widgets/tab_bar_component.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
       cardsStore: cardsStore,
       child: SecureStorageContainer(
         secureStorage: secureStorage,
-        child: TabBarComponent(),
+        child: Tabs(),
       ),
     );
   }
