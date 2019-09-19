@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
@@ -13,8 +12,8 @@ import 'package:little_birds/pages/deck/deck_page_view_model.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell_view_model.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
-import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/utils/keys.dart';
+import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 double _heightLoading = 75;
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _widgetError({Error error}) {
-    return RequestErrorPage(
+    return RequestErrorView(
       title: 'Error loading decks',
       onPressed: () {
         setState(() {});

@@ -4,9 +4,9 @@ import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/api/thrones_error.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/pages/user_decks/user_decks_list/user_decks_list.dart';
 import 'package:little_birds/pages/user_decks/user_decks_page_view_model.dart';
+import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -136,7 +136,7 @@ class _UserDecksPageState extends State<UserDecksPage> {
   }
 
   Widget _errorList() {
-    return RequestErrorPage(
+    return RequestErrorView(
       title: 'Error loading decks',
       onPressed: () {
         _loadUserDecks();
@@ -145,7 +145,7 @@ class _UserDecksPageState extends State<UserDecksPage> {
   }
 
   Widget _errorLogin() {
-    return RequestErrorPage(
+    return RequestErrorView(
       title: 'Error logging in',
       onPressed: () {
         setState(() {

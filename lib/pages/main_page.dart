@@ -5,9 +5,9 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/widgets/request_error_view.dart';
+import 'package:little_birds/widgets/request_loading_view.dart';
 import 'package:little_birds/widgets/tab_bar_component.dart';
-import 'request_error_page.dart';
-import 'request_loading_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -16,13 +16,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   Widget _widgetLoading() {
-    return RequestLoadingPage(
+    return RequestLoadingView(
       title: 'Loading cards ...',
     );
   }
 
   Widget _widgetError({BuildContext context, Error error}) {
-    return RequestErrorPage(
+    return RequestErrorView(
       title: 'Error loading cards.',
       onPressed: () {
         setState(() {});

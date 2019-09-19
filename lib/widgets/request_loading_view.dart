@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RequestLoadingPage extends StatelessWidget {
-  const RequestLoadingPage({
+class RequestLoadingView extends StatelessWidget {
+  const RequestLoadingView({
     Key key,
     this.title,
     this.backgroundColor,
