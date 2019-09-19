@@ -4,8 +4,9 @@ import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_card.dart';
+import 'package:little_birds/pages/card/card_page.dart';
+import 'package:little_birds/pages/card/card_page_view_model.dart';
 import 'package:little_birds/utils/keys.dart';
-import 'package:little_birds/view_models/card_page_view_model.dart';
 import 'package:little_birds/view_models/deck_header_view_model.dart';
 import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/widgets/card_list_item.dart';
@@ -13,8 +14,6 @@ import 'package:little_birds/widgets/deck_footer.dart';
 import 'package:little_birds/widgets/deck_header.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/widgets/separator.dart';
-
-import 'card_page.dart';
 
 class DeckPage extends StatelessWidget with AnalyticsScreen {
   DeckPage({
