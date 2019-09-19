@@ -4,9 +4,9 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck/deck_page.dart';
 import 'package:little_birds/pages/deck/deck_page_view_model.dart';
-import 'package:little_birds/view_models/user_decks_list_item_view_model.dart';
+import 'package:little_birds/pages/user_decks/user_decks_cell/user_decks_cell.dart';
+import 'package:little_birds/pages/user_decks/user_decks_cell/user_decks_cell_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
-import 'package:little_birds/widgets/user_decks_list_item.dart';
 
 class UserDecksList extends StatelessWidget {
   UserDecksList({
@@ -36,8 +36,8 @@ class UserDecksList extends StatelessWidget {
   Widget _listItem({BuildContext context, ThronesDeck deck}) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final cards = cardsStore.cardsFromSlots(deck.slots);
-    final viewModel = UserDecksListItemViewModel(deck: deck, cards: cards);
-    return UserDecksListItem(
+    final viewModel = UserDecksCellViewModel(deck: deck, cards: cards);
+    return UserDecksCell(
       viewModel: viewModel,
       onTap: () {
         _onDeckSelected(context: context, deck: deck);

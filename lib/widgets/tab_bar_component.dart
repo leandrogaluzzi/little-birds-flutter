@@ -6,11 +6,11 @@ import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
 import 'package:little_birds/pages/cards/cards_page.dart';
 import 'package:little_birds/pages/cards/cards_page_view_model.dart';
 import 'package:little_birds/pages/pack_list/pack_list_page.dart';
+import 'package:little_birds/pages/user_decks/user_decks_page.dart';
+import 'package:little_birds/pages/user_decks/user_decks_page_view_model.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/pages/home/home_page.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
-import 'package:little_birds/pages/user_decks_page.dart';
-import 'package:little_birds/view_models/user_decks_page_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> _items = [

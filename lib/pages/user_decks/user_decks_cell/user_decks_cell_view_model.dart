@@ -1,8 +1,8 @@
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 
-class UserDecksListItemViewModel {
-  UserDecksListItemViewModel({
+class UserDecksCellViewModel {
+  UserDecksCellViewModel({
     this.deck,
     this.cards,
   })  : assert(deck != null),

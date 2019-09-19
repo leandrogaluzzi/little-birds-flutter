@@ -4,12 +4,11 @@ import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/api/thrones_error.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/view_models/user_decks_page_view_model.dart';
-import 'package:little_birds/widgets/user_decks_list.dart';
+import 'package:little_birds/pages/request_error_page.dart';
+import 'package:little_birds/pages/user_decks/user_decks_list/user_decks_list.dart';
+import 'package:little_birds/pages/user_decks/user_decks_page_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uni_links/uni_links.dart';
-
-import 'request_error_page.dart';
 
 enum UserDecksState {
   loading,

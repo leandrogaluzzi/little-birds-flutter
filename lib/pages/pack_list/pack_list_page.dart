@@ -8,7 +8,7 @@ import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/pages/pack_list/pack_cell/pack_cell.dart';
 import 'package:little_birds/pages/pack_list/pack_cell/pack_cell_view_model.dart';
-import 'package:little_birds/pages/pack_page.dart';
+import 'package:little_birds/pages/pack/pack_page.dart';
 import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/widgets/separator.dart';
 

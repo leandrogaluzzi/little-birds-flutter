@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/pages/user_decks/user_decks_cell/user_decks_cell_view_model.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/view_models/user_decks_list_item_view_model.dart';
 
 const double kSmallPadding = 7.0;
 
@@ -9,15 +9,15 @@ final TextStyle _kTextStyle = TextStyle(
   color: kColorGrayText,
 );
 
-class UserDecksListItem extends StatelessWidget {
-  UserDecksListItem({
+class UserDecksCell extends StatelessWidget {
+  UserDecksCell({
     Key key,
     @required this.viewModel,
     @required this.onTap,
   })  : assert(viewModel != null),
         super(key: key);
 
-  final UserDecksListItemViewModel viewModel;
+  final UserDecksCellViewModel viewModel;
   final VoidCallback onTap;
 
   Widget _icon() {
