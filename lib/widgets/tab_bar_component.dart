@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
+import 'package:little_birds/pages/cards/cards_page.dart';
+import 'package:little_birds/pages/cards/cards_page_view_model.dart';
 import 'package:little_birds/pages/pack_list/pack_list_page.dart';
 import 'package:little_birds/utils/tab_bar_item.dart';
 import 'package:little_birds/pages/home/home_page.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
-import 'package:little_birds/pages/card_list_page.dart';
 import 'package:little_birds/pages/user_decks_page.dart';
-import 'package:little_birds/view_models/card_list_page_view_model.dart';
 import 'package:little_birds/view_models/user_decks_page_view_model.dart';
 
 class TabBarComponent extends StatelessWidget {
@@ -32,8 +32,8 @@ class TabBarComponent extends StatelessWidget {
 
   Widget _cardList(BuildContext context) {
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
-    final viewModel = CardListPageViewModel(cardsStore: cardsStore);
-    return CardListPage(viewModel: viewModel);
+    final viewModel = CardsPageViewModel(cardsStore: cardsStore);
+    return CardsPage(viewModel: viewModel);
   }
 
   Widget _userDecks(BuildContext context) {

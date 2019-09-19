@@ -6,35 +6,35 @@ import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/model/filter.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/view_models/card_list_page_view_model.dart';
+import 'package:little_birds/pages/cards/cards_page_view_model.dart';
+import 'package:little_birds/pages/card_page.dart';
 import 'package:little_birds/view_models/card_page_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/filter_component.dart';
 import 'package:little_birds/widgets/search_field.dart';
-import 'card_page.dart';
 
-class CardListPage extends StatefulWidget with AnalyticsScreen {
-  CardListPage({
+class CardsPage extends StatefulWidget with AnalyticsScreen {
+  CardsPage({
     Key key,
     @required this.viewModel,
   })  : assert(viewModel != null),
         super(key: key);
 
-  final CardListPageViewModel viewModel;
+  final CardsPageViewModel viewModel;
 
   @override
   String get screenName => 'CardList';
 
   @override
-  _CardListPageState createState() => _CardListPageState(viewModel: viewModel);
+  _CardsPageState createState() => _CardsPageState(viewModel: viewModel);
 }
 
-class _CardListPageState extends State<CardListPage> {
-  _CardListPageState({
+class _CardsPageState extends State<CardsPage> {
+  _CardsPageState({
     @required this.viewModel,
   }) : assert(viewModel != null);
 
-  final CardListPageViewModel viewModel;
+  final CardsPageViewModel viewModel;
   String _query;
   bool _isKeyboardVisible = false;
   Filter _filter = Filter(factions: [], types: []);
