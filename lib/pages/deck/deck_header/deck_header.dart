@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_birds/pages/deck/deck_header/deck_header_view_model.dart';
 import 'package:little_birds/utils/constants.dart';
-import 'package:little_birds/view_models/deck_header_view_model.dart';
 
 class DeckHeader extends StatelessWidget {
   DeckHeader({

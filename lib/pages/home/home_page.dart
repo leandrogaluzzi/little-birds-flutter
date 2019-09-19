@@ -8,13 +8,13 @@ import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_deck.dart';
-import 'package:little_birds/pages/deck_page.dart';
+import 'package:little_birds/pages/deck/deck_page.dart';
+import 'package:little_birds/pages/deck/deck_page_view_model.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell.dart';
 import 'package:little_birds/pages/home/home_cell/home_cell_view_model.dart';
 import 'package:little_birds/pages/home/home_view_model.dart';
 import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/utils/keys.dart';
-import 'package:little_birds/view_models/deck_page_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
 
 double _heightLoading = 75;
