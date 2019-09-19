@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/model/thrones_pack.dart';
+import 'package:little_birds/pages/pack_list/pack_cell/pack_cell_view_model.dart';
 import 'package:little_birds/utils/constants.dart';
 
-class PackListItem extends StatelessWidget {
-  PackListItem({
+class PackCell extends StatelessWidget {
+  PackCell({
     Key key,
-    @required this.pack,
-    @required this.index,
+    @required this.viewModel,
     @required this.onTap,
-  })  : assert(pack != null),
-        assert(index != null),
+  })  : assert(viewModel != null),
         super(key: key);
 
-  final ThronesPack pack;
-  final int index;
+  final PackCellViewModel viewModel;
   final VoidCallback onTap;
 
   final TextStyle _textStyleName = TextStyle(
@@ -30,7 +27,7 @@ class PackListItem extends StatelessWidget {
           vertical: 8.0,
         ),
         child: Text(
-          pack.name,
+          viewModel.name(),
           style: _textStyleName,
         ),
       ),
@@ -54,16 +51,6 @@ class PackListItem extends StatelessWidget {
     );
   }
 
-  String _getStringCycle() {
-    return 'Cycle: ${pack.cyclePosition} - ${pack.position}';
-  }
-
-  String _getStringNumber() {
-    return pack.known < pack.total
-        ? '${pack.known}/${pack.total} cards'
-        : '${pack.total} cards';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,8 +65,8 @@ class PackListItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _widgetText(_getStringCycle()),
-                _widgetText(_getStringNumber()),
+                _widgetText(viewModel.cycle()),
+                _widgetText(viewModel.number()),
               ],
             )
           ],

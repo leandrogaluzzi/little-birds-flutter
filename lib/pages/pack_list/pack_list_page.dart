@@ -6,10 +6,11 @@ import 'package:little_birds/core/analytics/analytics_screen.dart';
 import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/cards_store/cards_store_container.dart';
 import 'package:little_birds/model/thrones_pack.dart';
-import 'package:little_birds/widgets/pack_list_item.dart';
+import 'package:little_birds/pages/pack_list/pack_cell/pack_cell.dart';
+import 'package:little_birds/pages/pack_list/pack_cell/pack_cell_view_model.dart';
+import 'package:little_birds/pages/pack_page.dart';
+import 'package:little_birds/pages/request_error_page.dart';
 import 'package:little_birds/widgets/separator.dart';
-import 'pack_page.dart';
-import 'request_error_page.dart';
 
 class PackListPage extends StatefulWidget with AnalyticsScreen {
   @override
@@ -61,9 +62,9 @@ class _PackListPageState extends State<PackListPage> {
       itemCount: packs.length,
       itemBuilder: (BuildContext context, int index) {
         final pack = packs[index];
-        return PackListItem(
-          pack: pack,
-          index: index,
+        final viewModel = PackCellViewModel(pack: pack);
+        return PackCell(
+          viewModel: viewModel,
           onTap: () {
             _onPackSelected(context: context, pack: pack);
           },
