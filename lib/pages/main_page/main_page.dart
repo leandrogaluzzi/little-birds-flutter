@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/cards_store.dart';
-import 'package:little_birds/core/secure_storage.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/pages/tabs.dart';
+import 'package:little_birds/pages/tabs/tabs.dart';
 import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/request_loading_view.dart';
 import 'package:provider/provider.dart';
@@ -30,15 +29,8 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _widgetTabs({List<ThronesCard> cards}) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CardsStore>(
-          builder: (context) => CardsStore(cards: cards),
-        ),
-        ChangeNotifierProvider<SecureStorage>(
-          builder: (context) => SecureStorage(),
-        ),
-      ],
+    return ChangeNotifierProvider<CardsStore>(
+      builder: (_) => CardsStore(cards: cards),
       child: Tabs(),
     );
   }

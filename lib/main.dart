@@ -8,7 +8,8 @@ import 'package:little_birds/core/ads.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
 import 'package:little_birds/core/network/network_provider.dart';
-import 'package:little_birds/pages/main_page.dart';
+import 'package:little_birds/core/secure_storage.dart';
+import 'package:little_birds/pages/main_page/main_page.dart';
 import 'package:little_birds/utils/themes.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -68,8 +69,15 @@ class LittleBirdsApp extends StatelessWidget {
   }
 
   Widget _home() {
-    return ChangeNotifierProvider<DefaultThronesService>(
-      builder: (_) => _thronesService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DefaultThronesService>(
+          builder: (_) => _thronesService(),
+        ),
+        ChangeNotifierProvider<SecureStorage>(
+          builder: (context) => SecureStorage(),
+        ),
+      ],
       child: MainPage(),
     );
   }

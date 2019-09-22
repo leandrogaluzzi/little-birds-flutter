@@ -144,7 +144,6 @@ class _CardsPageState extends State<CardsPage> {
   Widget build(BuildContext context) {
     final filterManager = Provider.of<FilterManager>(context);
     final cards = filterManager.cards();
-    print(cards.length);
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 5.0,
