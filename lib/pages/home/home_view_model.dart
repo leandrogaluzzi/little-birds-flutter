@@ -11,8 +11,7 @@ class HomeViewModel {
 
   final ThronesService thrones;
 
-  final StreamController<List<ThronesDeck>> _controller =
-      StreamController<List<ThronesDeck>>();
+  final _controller = StreamController<List<ThronesDeck>>();
   Stream<List<ThronesDeck>> get stream => _controller.stream;
 
   List<ThronesDeck> _decks = [];

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
@@ -82,7 +81,8 @@ class _HomePageState extends State<HomePage> {
     Analytics.trackDeck(deck);
     final cardsStore = CardsStoreContainer.of(context).cardsStore;
     final viewModel = DeckPageViewModel(deck: deck, cardsStore: cardsStore);
-    await Navigator.push(
+    //await
+    Navigator.push(
       context,
       CupertinoPageRoute(
         fullscreenDialog: true,
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
-    Ads.showInterestial(context);
+    //Ads.showInterestial(context);
   }
 
   Widget _widgetLoading() {

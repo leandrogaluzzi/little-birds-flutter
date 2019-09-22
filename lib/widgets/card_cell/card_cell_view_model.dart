@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/thrones_card.dart';
-import 'package:little_birds/widgets/card_cell/card_cell.dart';
 
 class CardCellViewModel {
   final ThronesCard card;

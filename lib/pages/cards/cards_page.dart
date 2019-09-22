@@ -1,44 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:little_birds/core/ads/ads.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
-import 'package:little_birds/model/filter.dart';
+import 'package:little_birds/core/filter_manager/filter_manager.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/pages/card/card_page.dart';
 import 'package:little_birds/pages/card/card_page_view_model.dart';
-import 'package:little_birds/pages/cards/cards_page_view_model.dart';
 import 'package:little_birds/widgets/card_list.dart';
 import 'package:little_birds/widgets/filter_component.dart';
 import 'package:little_birds/widgets/search_field.dart';
+import 'package:provider/provider.dart';
 
 class CardsPage extends StatefulWidget with AnalyticsScreen {
-  CardsPage({
-    Key key,
-    @required this.viewModel,
-  })  : assert(viewModel != null),
-        super(key: key);
-
-  final CardsPageViewModel viewModel;
-
   @override
   String get screenName => 'CardList';
 
   @override
-  _CardsPageState createState() => _CardsPageState(viewModel: viewModel);
+  _CardsPageState createState() => _CardsPageState();
 }
 
 class _CardsPageState extends State<CardsPage> {
-  _CardsPageState({
-    @required this.viewModel,
-  }) : assert(viewModel != null);
-
-  final CardsPageViewModel viewModel;
-  String _query;
   bool _isKeyboardVisible = false;
-  Filter _filter = Filter(factions: [], types: []);
-  FilterComponent _filterComponent = FilterComponent();
 
   @override
   void initState() {
@@ -54,7 +37,8 @@ class _CardsPageState extends State<CardsPage> {
 
   void _onCardSelected({BuildContext context, card: ThronesCard}) async {
     Analytics.trackCard(card);
-    await Navigator.push(
+    //await
+    Navigator.push(
       context,
       CupertinoPageRoute(
         fullscreenDialog: true,
@@ -64,23 +48,21 @@ class _CardsPageState extends State<CardsPage> {
         },
       ),
     );
-    Ads.showInterestial(context);
+    //Ads.showInterestial(context);
   }
 
-  void _showFilterWidget(BuildContext context) {
-    Future<Filter> future = showModalBottomSheet(
+  void _showFilterWidget() {
+    final filterManager = Provider.of<FilterManager>(context);
+    showModalBottomSheet(
       context: context,
       builder: (context) {
-        return _filterComponent;
+        return ChangeNotifierProvider.value(
+          value: filterManager,
+          child: FilterComponent(),
+        );
       },
       isScrollControlled: true,
     );
-
-    future.then((value) {
-      _filter.factions = _filterComponent.selectedFactions;
-      _filter.types = _filterComponent.selectedTypes;
-      setState(() {});
-    });
   }
 
   void _onTextSubmitted({BuildContext context}) {
@@ -88,8 +70,8 @@ class _CardsPageState extends State<CardsPage> {
   }
 
   void _onTextChanged({String text}) {
-    _query = text;
-    setState(() {});
+    final filterManager = Provider.of<FilterManager>(context);
+    filterManager.search(query: text);
   }
 
   Widget _searchField({BuildContext context}) {
@@ -103,11 +85,11 @@ class _CardsPageState extends State<CardsPage> {
     );
   }
 
-  Widget _filterButton(BuildContext context) {
+  Widget _filterButton() {
     return IconButton(
       icon: Icon(Icons.filter_list),
       onPressed: () {
-        _showFilterWidget(context);
+        _showFilterWidget();
       },
     );
   }
@@ -127,7 +109,7 @@ class _CardsPageState extends State<CardsPage> {
     );
   }
 
-  Widget _cardList(BuildContext context, List<ThronesCard> cards) {
+  Widget _cardList({List<ThronesCard> cards}) {
     return CardList(
       cards: cards,
       onTap: (ThronesCard card) {
@@ -158,22 +140,20 @@ class _CardsPageState extends State<CardsPage> {
     );
   }
 
-  Widget _body(BuildContext context) {
-    final cards = viewModel.cards(query: _query, filter: _filter);
-    return cards.length > 0 ? _cardList(context, cards) : _emptyList();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final filterManager = Provider.of<FilterManager>(context);
+    final cards = filterManager.cards();
+    print(cards.length);
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 5.0,
         title: _searchField(context: context),
         actions: <Widget>[
-          _isKeyboardVisible ? _cancelButton() : _filterButton(context),
+          _isKeyboardVisible ? _cancelButton() : _filterButton(),
         ],
       ),
-      body: _body(context),
+      body: cards.length > 0 ? _cardList(cards: cards) : _emptyList(),
     );
   }
 }
