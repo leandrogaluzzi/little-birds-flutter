@@ -20,7 +20,7 @@ abstract class ThronesService {
   Future<Auth> refreshToken(String refreshToken);
 }
 
-class DefaultThronesService implements ThronesService {
+class DefaultThronesService with ChangeNotifier implements ThronesService {
   DefaultThronesService({
     @required this.network,
   }) : assert(network != null);

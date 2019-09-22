@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
-import 'package:little_birds/core/filter_manager/filter_manager.dart';
+import 'package:little_birds/core/filter_manager.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/pages/card/card_page.dart';
 import 'package:little_birds/pages/card/card_page_view_model.dart';

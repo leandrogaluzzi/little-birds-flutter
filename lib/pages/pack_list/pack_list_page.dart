@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
-import 'package:little_birds/core/api/thrones_service_container.dart';
-import 'package:little_birds/core/cards_store/cards_store_container.dart';
+import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/thrones_pack.dart';
 import 'package:little_birds/pages/pack_list/pack_cell/pack_cell.dart';
 import 'package:little_birds/pages/pack_list/pack_cell/pack_cell_view_model.dart';
 import 'package:little_birds/pages/pack/pack_page.dart';
 import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'package:provider/provider.dart';
 
 class PackListPage extends StatefulWidget with AnalyticsScreen {
   @override
@@ -22,7 +23,7 @@ class PackListPage extends StatefulWidget with AnalyticsScreen {
 class _PackListPageState extends State<PackListPage> {
   void _onPackSelected({BuildContext context, ThronesPack pack}) async {
     Analytics.trackPack(pack);
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     final cards = cardsStore.cardsWithPackCode(pack.code);
     //await
     Navigator.push(
@@ -95,7 +96,7 @@ class _PackListPageState extends State<PackListPage> {
         title: Text('Packs'),
       ),
       body: FutureBuilder<List<ThronesPack>>(
-        future: ThronesServiceContainer.of(context).thronesService.packs(),
+        future: Provider.of<DefaultThronesService>(context).packs(),
         builder:
             (BuildContext context, AsyncSnapshot<List<ThronesPack>> snapshot) {
           switch (snapshot.connectionState) {

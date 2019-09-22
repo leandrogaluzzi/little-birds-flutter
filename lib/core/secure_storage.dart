@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:little_birds/model/auth.dart';
 
 String _keyAcessToken = 'keyAccessToken';
 String _keyRefreshToken = 'keyRefreshToken';
 
-class SecureStorage {
+class SecureStorage with ChangeNotifier {
   SecureStorage() {
     _storage = FlutterSecureStorage();
   }

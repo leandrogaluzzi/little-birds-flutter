@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:little_birds/core/analytics/analytics.dart';
 import 'package:little_birds/core/analytics/analytics_event.dart';
 import 'package:little_birds/core/analytics/analytics_screen.dart';
-import 'package:little_birds/core/cards_store/cards_store_container.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck/deck_page.dart';
 import 'package:little_birds/pages/deck/deck_page_view_model.dart';
@@ -14,6 +14,7 @@ import 'package:little_birds/pages/home/home_view_model.dart';
 import 'package:little_birds/utils/keys.dart';
 import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'package:provider/provider.dart';
 
 double _heightLoading = 75;
 
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
     Analytics.trackDeck(deck);
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     final viewModel = DeckPageViewModel(deck: deck, cardsStore: cardsStore);
     //await
     Navigator.push(
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _widgetListItem({BuildContext context, ThronesDeck deck}) {
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = HomeCellViewModel(deck: deck, cards: cards);
     return HomeCell(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/filter_manager/filter_manager.dart';
+import 'package:little_birds/core/filter_manager.dart';
 import 'package:little_birds/model/faction.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/utils/constants.dart';

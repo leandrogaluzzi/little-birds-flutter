@@ -1,4 +1,4 @@
-import 'package:little_birds/core/cards_store/cards_store.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/model/card_type.dart';

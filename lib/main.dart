@@ -4,14 +4,14 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:little_birds/core/ads/ads.dart';
+import 'package:little_birds/core/ads.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
 import 'package:little_birds/core/api/thrones_constants.dart';
-import 'package:little_birds/core/api/thrones_service_container.dart';
 import 'package:little_birds/core/network/network_provider.dart';
 import 'package:little_birds/pages/main_page.dart';
 import 'package:little_birds/utils/themes.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 /*
 TODO:
@@ -68,8 +68,8 @@ class LittleBirdsApp extends StatelessWidget {
   }
 
   Widget _home() {
-    return ThronesServiceContainer(
-      thronesService: _thronesService(),
+    return ChangeNotifierProvider<DefaultThronesService>(
+      builder: (_) => _thronesService(),
       child: MainPage(),
     );
   }

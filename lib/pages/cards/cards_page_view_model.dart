@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:little_birds/core/cards_store/cards_store.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/card_type.dart';
 import 'package:little_birds/model/faction.dart';
 import 'package:little_birds/model/filter.dart';

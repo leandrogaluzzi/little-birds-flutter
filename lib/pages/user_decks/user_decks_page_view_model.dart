@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:little_birds/core/api/thrones_service.dart';
-import 'package:little_birds/core/secure_storage/secure_storage.dart';
+import 'package:little_birds/core/secure_storage.dart';
 import 'package:little_birds/model/auth.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 

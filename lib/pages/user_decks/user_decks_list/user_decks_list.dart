@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/cards_store/cards_store_container.dart';
+import 'package:little_birds/core/cards_store.dart';
 import 'package:little_birds/model/thrones_deck.dart';
 import 'package:little_birds/pages/deck/deck_page.dart';
 import 'package:little_birds/pages/deck/deck_page_view_model.dart';
 import 'package:little_birds/pages/user_decks/user_decks_cell/user_decks_cell.dart';
 import 'package:little_birds/pages/user_decks/user_decks_cell/user_decks_cell_view_model.dart';
 import 'package:little_birds/widgets/separator.dart';
+import 'package:provider/provider.dart';
 
 class UserDecksList extends StatelessWidget {
   UserDecksList({
@@ -18,7 +19,7 @@ class UserDecksList extends StatelessWidget {
   final List<ThronesDeck> decks;
 
   void _onDeckSelected({BuildContext context, ThronesDeck deck}) async {
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     final viewModel = DeckPageViewModel(deck: deck, cardsStore: cardsStore);
     Navigator.push(
       context,
@@ -34,7 +35,7 @@ class UserDecksList extends StatelessWidget {
   }
 
   Widget _listItem({BuildContext context, ThronesDeck deck}) {
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     final cards = cardsStore.cardsFromSlots(deck.slots);
     final viewModel = UserDecksCellViewModel(deck: deck, cards: cards);
     return UserDecksCell(

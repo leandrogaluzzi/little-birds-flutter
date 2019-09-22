@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:little_birds/core/api/thrones_service_container.dart';
-import 'package:little_birds/core/cards_store/cards_store_container.dart';
-import 'package:little_birds/core/filter_manager/filter_manager.dart';
-import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
+import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/cards_store.dart';
+import 'package:little_birds/core/filter_manager.dart';
+import 'package:little_birds/core/secure_storage.dart';
 import 'package:little_birds/pages/cards/cards_page.dart';
 import 'package:little_birds/pages/pack_list/pack_list_page.dart';
 import 'package:little_birds/pages/user_decks/user_decks_page.dart';
@@ -22,7 +22,7 @@ class Tabs extends StatelessWidget {
   ];
 
   Widget _home(BuildContext context) {
-    final thrones = ThronesServiceContainer.of(context).thronesService;
+    final thrones = Provider.of<DefaultThronesService>(context);
     final viewModel = HomeViewModel(thrones: thrones);
     return HomePage(viewModel: viewModel);
   }
@@ -32,7 +32,7 @@ class Tabs extends StatelessWidget {
   }
 
   Widget _cardList(BuildContext context) {
-    final cardsStore = CardsStoreContainer.of(context).cardsStore;
+    final cardsStore = Provider.of<CardsStore>(context);
     return ChangeNotifierProvider<FilterManager>(
       builder: (_) => FilterManager(cardsStore: cardsStore),
       child: CardsPage(),
@@ -40,8 +40,8 @@ class Tabs extends StatelessWidget {
   }
 
   Widget _userDecks(BuildContext context) {
-    final thrones = ThronesServiceContainer.of(context).thronesService;
-    final storage = SecureStorageContainer.of(context).secureStorage;
+    final thrones = Provider.of<DefaultThronesService>(context);
+    final storage = Provider.of<SecureStorage>(context);
     final viewModel =
         UserDecksPageViewModel(thrones: thrones, storage: storage);
     return UserDecksPage(viewModel: viewModel);

@@ -3,7 +3,7 @@ import 'package:little_birds/model/card_quantity.dart';
 import 'package:little_birds/model/slot.dart';
 import 'package:little_birds/model/thrones_card.dart';
 
-class CardsStore {
+class CardsStore with ChangeNotifier {
   final List<ThronesCard> cards;
 
   CardsStore({

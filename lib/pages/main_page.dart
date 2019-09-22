@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:little_birds/core/api/thrones_service_container.dart';
-import 'package:little_birds/core/cards_store/cards_store.dart';
-import 'package:little_birds/core/cards_store/cards_store_container.dart';
-import 'package:little_birds/core/secure_storage/secure_storage.dart';
-import 'package:little_birds/core/secure_storage/secure_storage_container.dart';
+import 'package:little_birds/core/api/thrones_service.dart';
+import 'package:little_birds/core/cards_store.dart';
+import 'package:little_birds/core/secure_storage.dart';
 import 'package:little_birds/model/thrones_card.dart';
 import 'package:little_birds/pages/tabs.dart';
 import 'package:little_birds/widgets/request_error_view.dart';
 import 'package:little_birds/widgets/request_loading_view.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -31,22 +30,23 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _widgetTabs({List<ThronesCard> cards}) {
-    final cardsStore = CardsStore(cards: cards);
-    final secureStorage = SecureStorage();
-
-    return CardsStoreContainer(
-      cardsStore: cardsStore,
-      child: SecureStorageContainer(
-        secureStorage: secureStorage,
-        child: Tabs(),
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CardsStore>(
+          builder: (context) => CardsStore(cards: cards),
+        ),
+        ChangeNotifierProvider<SecureStorage>(
+          builder: (context) => SecureStorage(),
+        ),
+      ],
+      child: Tabs(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ThronesCard>>(
-      future: ThronesServiceContainer.of(context).thronesService.cards(),
+      future: Provider.of<DefaultThronesService>(context).cards(),
       builder:
           (BuildContext context, AsyncSnapshot<List<ThronesCard>> snapshot) {
         switch (snapshot.connectionState) {
